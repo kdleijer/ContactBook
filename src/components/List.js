@@ -7,6 +7,7 @@ class List extends React.Component{
         this.state={
             data:[],
             selectedForDeletion: null,
+            selectedForEdit: null,
         };
     }
 
@@ -42,20 +43,72 @@ class List extends React.Component{
         }
     }
 
+    editData(id){
+        if (this.state.selectedForEdit === id) {
+            fetch('http://127.0.0.1:8000/contact/' + id + '/', {
+                method: 'PUT',
+                body: JSON.stringify(this.state),
+            })
+            .then(response => response)
+            .then((data) => {
+                if(data) {
+                    this.setState({ selectedForEdit: null });
+                    this.fetchData();
+                }
+            });
+        } else {
+            this.setState({ selectedForEdit: id });
+        }
+    }
+
     render(){
         const contactData=this.state.data;
         const rows=contactData.map((contact)=>
             <tr key={contact.id}>
-                <td>{contact.id1}</td>
-                <td>{contact.first_name}</td>
-                <td>{contact.last_name}</td>
-                <td>{contact.email}</td>
-                <td>{contact.work_phone}</td>
-                <td>{contact.personal_phone}</td>
-                <td>{contact.address}</td>
-                <td>{contact.birthday}</td>
                 <td>
-                    <Link to={"/update/" + contact.id} className="btn btn-info mr-2">Update</Link>
+                    {this.state.selectedForEdit === contact.id ?
+                        <input type="text" defaultValue={contact.id1} /> :
+                        contact.id1}
+                </td>
+                <td>
+                    {this.state.selectedForEdit === contact.id ?
+                        <input type="text" defaultValue={contact.first_name} /> :
+                        contact.first_name}
+                </td>
+                <td>
+                    {this.state.selectedForEdit === contact.id ?
+                        <input type="text" defaultValue={contact.last_name} /> :
+                        contact.last_name}
+                </td>
+                <td>
+                    {this.state.selectedForEdit === contact.id ?
+                        <input type="text" defaultValue={contact.email} /> :
+                        contact.email}
+                </td>
+                <td>
+                    {this.state.selectedForEdit === contact.id ?
+                        <input type="text" defaultValue={contact.work_phone} /> :
+                        contact.work_phone}
+                </td>
+                <td>
+                    {this.state.selectedForEdit === contact.id ?
+                        <input type="text" defaultValue={contact.personal_phone} /> :
+                        contact.personal_phone}
+                </td>
+                <td>
+                    {this.state.selectedForEdit === contact.id ?
+                        <input type="text" defaultValue={contact.address} /> :
+                        contact.address}
+                </td>
+                <td>
+                    {this.state.selectedForEdit === contact.id ?
+                        <input type="text" defaultValue={contact.birthday} /> :
+                        contact.birthday}
+                </td>
+                <td>
+                    <button className="btn btn-info mr-2" onClick={()=>this.editData(contact.id)}>
+                        {this.state.selectedForEdit === contact.id ? 'Save' : 'Edit'}
+                    </button>
                     <button onClick={() => this.deleteData(contact.id)} className="btn btn-danger">
                         {this.state.selectedForDeletion === contact.id ? "For sure?" : "Delete"}
                     </button>
