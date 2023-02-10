@@ -43,11 +43,25 @@ class List extends React.Component{
         }
     }
 
-    editData(id){
+editData(id){
         if (this.state.selectedForEdit === id) {
+            const updatedContact = {
+                id1: document.querySelector(`#id1-${id}`).value,
+                first_name: document.querySelector(`#first_name-${id}`).value,
+                last_name: document.querySelector(`#last_name-${id}`).value,
+                email: document.querySelector(`#email-${id}`).value,
+                work_phone: document.querySelector(`#work_phone-${id}`).value,
+                personal_phone: document.querySelector(`#personal_phone-${id}`).value,
+                address: document.querySelector(`#address-${id}`).value,
+                birthday: document.querySelector(`#birthday-${id}`).value,
+            }
+
             fetch('http://127.0.0.1:8000/contact/' + id + '/', {
                 method: 'PUT',
-                body: JSON.stringify(this.state),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedContact),
             })
             .then(response => response)
             .then((data) => {
@@ -60,49 +74,48 @@ class List extends React.Component{
             this.setState({ selectedForEdit: id });
         }
     }
-
     render(){
         const contactData=this.state.data;
         const rows=contactData.map((contact)=>
             <tr key={contact.id}>
                 <td>
                     {this.state.selectedForEdit === contact.id ?
-                        <input type="text" defaultValue={contact.id1} /> :
+                        <input type="text" id={`id1-${contact.id}`} defaultValue={contact.id1} /> :
                         contact.id1}
                 </td>
                 <td>
                     {this.state.selectedForEdit === contact.id ?
-                        <input type="text" defaultValue={contact.first_name} /> :
+                        <input type="text" id={`first_name-${contact.id}`} defaultValue={contact.first_name} /> :
                         contact.first_name}
                 </td>
                 <td>
                     {this.state.selectedForEdit === contact.id ?
-                        <input type="text" defaultValue={contact.last_name} /> :
+                        <input type="text" id={`last_name-${contact.id}`} defaultValue={contact.last_name} /> :
                         contact.last_name}
                 </td>
                 <td>
                     {this.state.selectedForEdit === contact.id ?
-                        <input type="text" defaultValue={contact.email} /> :
+                        <input type="text" id={`email-${contact.id}`} defaultValue={contact.email} /> :
                         contact.email}
                 </td>
                 <td>
                     {this.state.selectedForEdit === contact.id ?
-                        <input type="text" defaultValue={contact.work_phone} /> :
+                        <input type="text" id={`work_phone-${contact.id}`} defaultValue={contact.work_phone} /> :
                         contact.work_phone}
                 </td>
                 <td>
                     {this.state.selectedForEdit === contact.id ?
-                        <input type="text" defaultValue={contact.personal_phone} /> :
+                        <input type="text" id={`personal_phone-${contact.id}`} defaultValue={contact.personal_phone} /> :
                         contact.personal_phone}
                 </td>
                 <td>
                     {this.state.selectedForEdit === contact.id ?
-                        <input type="text" defaultValue={contact.address} /> :
+                        <input type="text" id={`address-${contact.id}`} defaultValue={contact.address} /> :
                         contact.address}
                 </td>
                 <td>
                     {this.state.selectedForEdit === contact.id ?
-                        <input type="text" defaultValue={contact.birthday} /> :
+                        <input type="text" id={`birthday-${contact.id}`} defaultValue={contact.birthday} /> :
                         contact.birthday}
                 </td>
                 <td>
