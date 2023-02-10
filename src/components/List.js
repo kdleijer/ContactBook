@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class List extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
-            data:[]
+            data:[],
+            selectedForDeletion: null,
         };
     }
 
@@ -23,6 +24,24 @@ class List extends React.Component{
         this.fetchData();
     }
 
+    deleteData(id){
+        if (this.state.selectedForDeletion === id) {
+            fetch('http://127.0.0.1:8000/contact/' + id + '/', {
+                method: 'DELETE',
+                body: JSON.stringify(this.state),
+            })
+            .then(response => response)
+            .then((data) => {
+                if(data) {
+                    this.setState({ selectedForDeletion: null });
+                    this.fetchData();
+                }
+            });
+        } else {
+            this.setState({ selectedForDeletion: id });
+        }
+    }
+
     render(){
         const contactData=this.state.data;
         const rows=contactData.map((contact)=>
@@ -36,10 +55,13 @@ class List extends React.Component{
                 <td>{contact.address}</td>
                 <td>{contact.birthday}</td>
                 <td>
-                    <Link to={"/update/"+contact.id} className="btn btn-info mr-2">Update</Link>
-                    <button className="btn btn-danger">Delete</button>
+                    <Link to={"/update/" + contact.id} className="btn btn-info mr-2">Update</Link>
+                    <button onClick={() => this.deleteData(contact.id)} className="btn btn-danger">
+                        {this.state.selectedForDeletion === contact.id ? "For sure?" : "Delete"}
+                    </button>
                 </td>
             </tr>
+
         );
         return (
             <table className="table table-bordered">
