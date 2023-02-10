@@ -25,9 +25,16 @@ class Add extends React.Component{
 
     // Form
     submitForm(){
+        let data = {...this.state};
+        Object.keys(data).forEach(key => {
+          if (!data[key]) {
+            data[key] = '-';
+          }
+        });
+
         fetch('http://127.0.0.1:8000/contact/',{
             method:'POST',
-            body:JSON.stringify(this.state),
+            body:JSON.stringify(data),
             headers:{
                 'Content-type': 'application/json; charset=UTF-8',
             },
