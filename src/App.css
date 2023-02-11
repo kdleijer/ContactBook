@@ -1,12 +1,17 @@
+html,body {
+    min-width: 1050px;
+    max-width: 2000px;
+
+}
 .container-fluid{
-  padding: 0;
+    width: 100%;
+    padding: 0;
 }
 .navbar{
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 .table-bordered{
-  width: 98%;
-  margin-left: auto;
-  margin-right: auto;
+    width: 98%;
 }
+
 
