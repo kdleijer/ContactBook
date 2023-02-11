@@ -3,7 +3,7 @@ class Add extends React.Component{
     constructor(){
         super();
         this.state={
-            id1:'',
+            contact_id:'',
             first_name:'',
             last_name:'',
             email:'',
@@ -43,7 +43,7 @@ class Add extends React.Component{
         .then((data)=>console.log(data));
 
         this.setState({
-            id1:'',
+            contact_id:'',
             first_name:'',
             last_name:'',
             email:'',
@@ -62,7 +62,7 @@ class Add extends React.Component{
                     <tr>
                         <th>ID</th>
                         <td>
-                            <input value={this.state.id1} name="id1" onChange={this.changeHandler} type="text" className="form-control" />
+                            <input value={this.state.contact_id} name="contact_id" onChange={this.changeHandler} type="text" className="form-control" />
                         </td>
                     </tr>
                     <tr>

@@ -4,7 +4,6 @@ import './App.css';
 
 import List from './components/List';
 import Add from './components/Add';
-import Update from './components/Update';
 
 import {Routes, Route,Link} from 'react-router-dom';
 
@@ -30,7 +29,6 @@ function App(){
       <Routes>
         <Route path="/" element={<List/>} exact />
         <Route path="/add" element={<Add/>} />
-        <Route path="/update/:id" element={<Update/>} />
       </Routes>
     </div>
   );

@@ -8,10 +8,15 @@ html,body {
     padding: 0;
 }
 .navbar{
+    min-width: 1600px;
     margin-bottom: 20px;
 }
 .table-bordered{
     width: 98%;
+    white-space: nowrap;
+    table-layout:fixed;
 }
-
+td{
+    overflow: hidden;
+}
 

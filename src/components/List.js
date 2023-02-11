@@ -45,7 +45,7 @@ class List extends React.Component{
     editData(id){
         if (this.state.selectedForEdit === id) {
             const updatedContact = {
-                id1: document.querySelector(`#id1-${id}`).value,
+                contact_id: document.querySelector(`#contact_id-${id}`).value,
                 first_name: document.querySelector(`#first_name-${id}`).value,
                 last_name: document.querySelector(`#last_name-${id}`).value,
                 email: document.querySelector(`#email-${id}`).value,
@@ -85,8 +85,8 @@ class List extends React.Component{
             <tr key={contact.id}>
                 <td>
                     {this.state.selectedForEdit === contact.id ?
-                        <input type="text" id={`id1-${contact.id}`} defaultValue={contact.id1} style={{width: 53, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
-                        contact.id1}
+                        <input type="text" id={`contact_id-${contact.id}`} defaultValue={contact.contact_id} style={{width: 53, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
+                        contact.contact_id}
                 </td>
                 <td>
                     {this.state.selectedForEdit === contact.id ?
@@ -113,7 +113,7 @@ class List extends React.Component{
                         <input type="text" id={`personal_phone-${contact.id}`} defaultValue={contact.personal_phone} style={{width: 133, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
                         contact.personal_phone}
                 </td>
-                <td>
+                <td style={{textOverflow: 'ellipsis'}}>
                     {this.state.selectedForEdit === contact.id ?
                         <input type="text" id={`address-${contact.id}`} defaultValue={contact.address} style={{width: 283, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
                         contact.address}
@@ -141,7 +141,7 @@ class List extends React.Component{
         );
 
         return (
-            <table className="table table-bordered" style={{ width: 'auto', marginLeft: 15, marginRight: 15 }}>
+            <table className="table table-bordered" style={{minWidth: 1570, marginLeft: 15, marginRight: 15}}>
                 <thead>
                     <tr>
                         <th style={{ width: 70 }}>ID</th>
@@ -152,7 +152,7 @@ class List extends React.Component{
                         <th style={{ width: 150 }}>Personal phone</th>
                         <th style={{ width: 300 }}>Address</th>
                         <th style={{ width: 100 }}>Birthday</th>
-                        <th style={{ width: 200 }}>Actions</th>
+                        <th style={{ width: 200 }}><button onClick={this.addContact} class="btn btn-success">Add contact</button></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -161,7 +161,6 @@ class List extends React.Component{
             </table>
         );
     }
-
 }
 
 export default List;
