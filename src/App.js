@@ -3,8 +3,6 @@ import './bootstrap.min.css';
 import './App.css';
 
 import List from './components/List';
-import Add from './components/Add';
-
 import {Routes, Route,Link} from 'react-router-dom';
 
 function App(){
@@ -20,15 +18,11 @@ function App(){
             <li className="nav-item">
               <Link className="nav-link" to="/">List</Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/add">Add</Link>
-            </li>
           </ul>
         </div>
       </nav>
       <Routes>
         <Route path="/" element={<List/>} exact />
-        <Route path="/add" element={<Add/>} />
       </Routes>
     </div>
   );

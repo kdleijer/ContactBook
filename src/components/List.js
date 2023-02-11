@@ -4,6 +4,14 @@ class List extends React.Component{
     constructor(props){
         super(props);
         this.state={
+            contact_id:'',
+            first_name:'',
+            last_name:'',
+            email:'',
+            work_phone:'',
+            personal_phone:'',
+            address:'',
+            birthday:'',
             data:[],
             selectedForDeletion: null,
             selectedForEdit: null,
@@ -79,6 +87,31 @@ class List extends React.Component{
         this.setState({ selectedForDeletion: null });
     };
 
+    addContact = () => {
+        this.setState({
+            contact_id: '',
+            first_name: '',
+            last_name: '',
+            email: '',
+            work_phone: '',
+            personal_phone: '',
+            address: '',
+            birthday: ''
+        }, () => {
+            let data = {...this.state};
+            fetch('http://127.0.0.1:8000/contact/', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+            .then(response => response.json())
+            .then((data) => {
+                this.fetchData()
+            });
+        });
+    }
     render(){
         const contactData=this.state.data;
         const rows=contactData.map((contact)=>
@@ -152,7 +185,7 @@ class List extends React.Component{
                         <th style={{ width: 150 }}>Personal phone</th>
                         <th style={{ width: 300 }}>Address</th>
                         <th style={{ width: 100 }}>Birthday</th>
-                        <th style={{ width: 200 }}><button onClick={this.addContact} class="btn btn-success">Add contact</button></th>
+                        <th style={{ width: 200 }}><button onClick={this.addContact} className="btn btn-success">Add contact</button></th>
                     </tr>
                 </thead>
                 <tbody>
