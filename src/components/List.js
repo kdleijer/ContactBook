@@ -5,6 +5,7 @@ class List extends React.Component{
     constructor(props){
         super(props);
         this.state={
+            contact_group:'',
             contact_id:'',
             first_name:'',
             last_name:'',
@@ -202,7 +203,7 @@ class List extends React.Component{
                     </div>
                     </nav>
                     {/* MOVED NAVBAR FROM APP.JS */}
-                    <h3 style={{ position: "absolute", top: 110, left: 65, fontSize: 35}}>No group</h3>
+                    <h3 style={{ position: "absolute", top: 110, left: 65, fontSize: 35}}>{this.state.contact_group}</h3>
                     <table className="table table-bordered" style={{ width: "100%",minWidth: 1470, maxWidth: 1470, marginLeft: 60, marginRight: 60}}>
                         <thead>
                             <tr>
@@ -229,7 +230,8 @@ class List extends React.Component{
                             </div>
                             <div style={{ display: 'flex', marginLeft: 39 + '%' }}>
                                 <h2>No&nbsp;</h2>
-                                <h2 onClick={this.addContact} style={{ color:'blue', cursor: 'pointer' }}>contacts</h2>
+                                <h2 onClick={() => { this.addContact(); this.setState({ contact_group: "Initial group" });
+                                }} style={{ color:'blue', cursor: 'pointer' }}>contacts</h2>
                                 <h2>&nbsp;in list!</h2>
                             </div>
                         </div>)}
