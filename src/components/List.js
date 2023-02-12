@@ -199,7 +199,7 @@ class List extends React.Component{
                     </div>
                     </nav>
                     {/* MOVED NAVBAR FROM APP.JS */}
-                    <h2 style={{ position: "absolute", top: 110, left: 65 }}>No group</h2>
+                    <h3 style={{ position: "absolute", top: 110, left: 65, fontSize: 35}}>No group</h3>
                     <table className="table table-bordered" style={{ width: "100%",minWidth: 1470, maxWidth: 1470, marginLeft: 60, marginRight: 60}}>
                         <thead>
                             <tr>
@@ -219,10 +219,16 @@ class List extends React.Component{
                         </tbody>
                     </table>
                 </div>) : (
-                        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 15 + '%'}}>
-                            <h1>No&nbsp;</h1>
-                            <h1 onClick={this.addContact} style={{color:'blue', cursor: 'pointer'}}>contacts</h1>
-                            <h1>&nbsp;in list!</h1>
+                        <div>
+                            <div style={{display: 'flex'}}>
+                                <h1>ContactBook</h1>
+                                <h6 style={{position: 'relative', top: 155, left: -20}}>by SzymCode</h6>
+                            </div>
+                            <div style={{ display: 'flex', marginLeft: 39 + '%' }}>
+                                <h2>No&nbsp;</h2>
+                                <h2 onClick={this.addContact} style={{ color:'blue', cursor: 'pointer' }}>contacts</h2>
+                                <h2>&nbsp;in list!</h2>
+                            </div>
                         </div>)}
             </div>
         );
