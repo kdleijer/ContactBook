@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 class List extends React.Component{
     constructor(props){
@@ -17,6 +18,7 @@ class List extends React.Component{
             selectedForEdit: null,
         };
     }
+
 
     fetchData(){
         fetch('http://127.0.0.1:8000/contact/')
@@ -113,7 +115,11 @@ class List extends React.Component{
             });
         });
     }
+
+
+
     render(){
+        const { data } = this.state;
         const contactData=this.state.data;
         const rows=contactData.map((contact)=>
             <tr key={contact.id}>
@@ -132,7 +138,7 @@ class List extends React.Component{
                         <input type="text" id={`last_name-${contact.id}`} defaultValue={contact.last_name} style={{width: 142, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
                         contact.last_name}
                 </td>
-                <td>
+                <td style={{textOverflow: 'ellipsis'}}>
                     {this.state.selectedForEdit === contact.id ?
                         <input type="text" id={`email-${contact.id}`} defaultValue={contact.email} style={{width: 219, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
                         contact.email}
@@ -175,26 +181,49 @@ class List extends React.Component{
         );
 
         return (
-            <div style={{maxHeight: 500, overflow: "auto" }} className="contactGroup">
-                <h2 style={{  position: "absolute", top: 110, left: 65}}>No group</h2>
-            <table className="table table-bordered" style={{ width: "100%",minWidth: 1470, maxWidth: 1470, marginLeft: 60, marginRight: 60}}>
-                <thead >
-                    <tr>
-                        <th style={{ width: 58 }}>ID</th>
-                        <th style={{ width: 120 }}>First name</th>
-                        <th style={{ width: 155 }}>Last name</th>
-                        <th style={{ width: 230 }}>Email</th>
-                        <th style={{ width: 140 }}>Work phone</th>
-                        <th style={{ width: 140 }}>Personal phone</th>
-                        <th style={{ width: 280 }}>Address</th>
-                        <th style={{ width: 100 }}>Birthday</th>
-                        <th style={{ width: 200 }}><button onClick={this.addContact} className="btn btn-success">Add</button></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {rows}
-                </tbody>
-            </table>
+            <div>
+                {(data && data.length > 0) ? (
+                <div style={{maxHeight: 500, overflow: "auto" }} className="contactGroup">
+                    {/* MOVED NAVBAR FROM APP.JS */}
+                    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <Link className="navbar-brand" to="/">YourBrand</Link>
+                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                      <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarNav">
+                      <ul className="navbar-nav">
+                        <li className="nav-item">
+                          <Link className="nav-link" to="/">List</Link>
+                        </li>
+                      </ul>
+                    </div>
+                    </nav>
+                    {/* MOVED NAVBAR FROM APP.JS */}
+                    <h2 style={{ position: "absolute", top: 110, left: 65 }}>No group</h2>
+                    <table className="table table-bordered" style={{ width: "100%",minWidth: 1470, maxWidth: 1470, marginLeft: 60, marginRight: 60}}>
+                        <thead>
+                            <tr>
+                                <th style={{ width: 58 }}>ID</th>
+                                <th style={{ width: 120 }}>First name</th>
+                                <th style={{ width: 155 }}>Last name</th>
+                                <th style={{ width: 230 }}>Email</th>
+                                <th style={{ width: 140 }}>Work phone</th>
+                                <th style={{ width: 140 }}>Personal phone</th>
+                                <th style={{ width: 280 }}>Address</th>
+                                <th style={{ width: 100 }}>Birthday</th>
+                                <th style={{ width: 200 }}><button onClick={this.addContact} className="btn btn-success">Add</button></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {rows}
+                        </tbody>
+                    </table>
+                </div>) : (
+                        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 15 + '%'}}>
+                            <h1>No&nbsp;</h1>
+                            <h1 onClick={this.addContact} style={{color:'blue', cursor: 'pointer'}}>contacts</h1>
+                            <h1>&nbsp;in list!</h1>
+                        </div>)}
             </div>
         );
     }
