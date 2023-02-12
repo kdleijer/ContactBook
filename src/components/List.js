@@ -166,15 +166,18 @@ class List extends React.Component{
                 <td style={{marginTop: -5, marginLeft: -4}}>
                     {this.state.selectedForEdit !== contact.id && this.state.selectedForDeletion !== contact.id && ( <>
                           <button className="btn btn-info mr-2" onClick={() => this.editData(contact.id)}>Edit</button>
-                          <button onClick={() => this.deleteData(contact.id)} className="btn btn-danger">Delete</button>
+                          <button style={{marginLeft: 1}} onClick={() => this.deleteData(contact.id)} className="btn btn-danger">Delete</button>
                         </>)}
                     {this.state.selectedForEdit === contact.id && ( <>
                           <button className="btn btn-info mr-2" onClick={() => this.editData(contact.id)}>Save</button>
-                          <button onClick={() => this.cancel(contact.id)} className="btn btn-secondary mr-2">Cancel</button>
+                          <button style={{marginLeft: 1}} onClick={() => this.cancel(contact.id)} className="btn btn-secondary mr-2">Cancel</button>
                         </>)}
                     {this.state.selectedForDeletion === contact.id && ( <>
-                          <button onClick={() => this.deleteData(contact.id)} className="btn btn-danger mr-2">Sure?</button>
-                          <button onClick={() => this.cancel(contact.id)} className="btn btn-secondary">Cancel</button>
+                        {/* Spam delete button */}
+                            <button onClick={() => this.cancel(contact.id)} className="btn btn-secondary">Cancel</button>
+                            <button style={{marginLeft: 9}} onClick={() => this.deleteData(contact.id)} className="btn btn-danger mr-2">Sure?</button>
+                        {/* <button onClick={() => this.deleteData(contact.id)} className="btn btn-danger mr-2">Sure?</button>
+                            <button onClick={() => this.cancel(contact.id)} className="btn btn-secondary">Cancel</button> */}
                         </>)}
                 </td>
             </tr>
