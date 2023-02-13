@@ -33,8 +33,14 @@ class List extends React.Component{
     }
 
     componentDidMount(){
+        fetch('http://127.0.0.1:8000/contact/')
+            .then(response => response.json())
+            .then(data => {
+                if (data.length === 0) {
+          this.addContact();}})
+
         this.fetchData();
-    }
+        }
 
     deleteData(id){
         if (this.state.selectedForDeletion === id) {
@@ -138,7 +144,6 @@ class List extends React.Component{
 
 
     render(){
-        const { data } = this.state;
         const contactData=this.state.data;
         const rows=contactData.map((contact)=>
             <tr key={contact.id}>
@@ -204,7 +209,6 @@ class List extends React.Component{
 
         return (
             <div>
-                {(data && data.length > 0) ? (
                 <div style={{maxHeight: 500, overflow: "auto" }} className="contactGroup">
                     {/* MOVED NAVBAR FROM APP.JS */}
                     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -257,22 +261,11 @@ class List extends React.Component{
                             {rows}
                         </tbody>
                     </table>
-                </div>) : (
-                        <div>
-                            <div style={{display: 'flex'}}>
-                                <h1>ContactBook</h1>
-                                <h6 style={{position: 'relative', top: 155, left: -20}}>by SzymCode</h6>
-                            </div>
-                            <div style={{ display: 'flex', marginLeft: 39 + '%' }}>
-                                <h2>No&nbsp;</h2>
-                                <h2 onClick={() => { this.addContact(); this.setState({ contact_group: "Initial group" });
-                                }} style={{ color:'blue', cursor: 'pointer' }}>contacts</h2>
-                                <h2>&nbsp;in list!</h2>
-                            </div>
-                        </div>)}
+                </div>)
             </div>
         );
     }
+
 }
 
 export default List;
