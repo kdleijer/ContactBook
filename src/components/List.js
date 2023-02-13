@@ -5,6 +5,7 @@ class List extends React.Component{
     constructor(props){
         super(props);
         this.state={
+            old_group:'',
             contact_group:'',
             contact_id:'',
             first_name:'',
@@ -136,11 +137,28 @@ class List extends React.Component{
   };
 
   handleSubmit = () => {
-    localStorage.setItem("contact_group", this.state.contact_group);
-    this.setState({
-      isEditing: false
-    });
-  };
+      this.state.data.forEach((contact) => {
+          if (contact.contact_group === this.state.oldGroup) {
+              let updatedContact = {
+                  contact_group: this.state.contact_group,
+              };
+              fetch(`http://127.0.0.1:8000/contact/${contact.id}/`, {
+                  method: 'PUT',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(updatedContact),
+              })
+                  .then(response => response)
+                  .then((data) => {
+                      if (data) {
+                          this.fetchData();
+                      }
+                  });
+          }
+      });
+      this.setState({isEditing: false, contact_group: ''});
+  }
 
 
     render(){
@@ -209,7 +227,6 @@ class List extends React.Component{
 
         return (
             <div>
-                <div style={{maxHeight: 500, overflow: "auto" }} className="contactGroup">
                     {/* MOVED NAVBAR FROM APP.JS */}
                     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                     <Link className="navbar-brand" to="/">YourBrand</Link>
@@ -231,12 +248,13 @@ class List extends React.Component{
                             <input type="text" value={this.state.contact_group} onChange={this.handleChange} />
                           </form>
                         ) : (
-                          <h3 style={{ position: "absolute", top: 110, left: 65, fontSize: 35 }} onClick={this.handleEdit}>
+                          <h3 style={{ position: "absolute", top: 110, left: 65, fontSize: 35 }} onClick={() => { this.handleEdit(); this.setState({ oldGroup: this.state.contact_group }); }}>
                             {this.state.contact_group}
                           </h3>
                         )
                       }
                     </div>
+                <div style={{maxHeight: 400, overflow: "scroll" }} className="contactGroup">
                     <table className="table table-bordered" style={{ width: "100%",minWidth: 1470, maxWidth: 1470, marginLeft: 60, marginRight: 60}}>
                         <thead>
                             <tr>
