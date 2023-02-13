@@ -15,6 +15,7 @@ class List extends React.Component{
             address:'',
             birthday:'',
             data:[],
+            isEditing: false,
             selectedForDeletion: null,
             selectedForEdit: null,
         };
@@ -116,7 +117,24 @@ class List extends React.Component{
             });
         });
     }
+    handleEdit = () => {
+    this.setState({
+      isEditing: true
+    });
+  };
 
+  handleChange = event => {
+    this.setState({
+      contact_group: event.target.value
+    });
+  };
+
+  handleSubmit = () => {
+    localStorage.setItem("contact_group", this.state.contact_group);
+    this.setState({
+      isEditing: false
+    });
+  };
 
 
     render(){
@@ -203,7 +221,18 @@ class List extends React.Component{
                     </div>
                     </nav>
                     {/* MOVED NAVBAR FROM APP.JS */}
-                    <h3 style={{ position: "absolute", top: 110, left: 65, fontSize: 35}}>{this.state.contact_group}</h3>
+                    <div>
+                      {this.state.isEditing ? (
+                          <form onSubmit={this.handleSubmit}>
+                            <input type="text" value={this.state.contact_group} onChange={this.handleChange} />
+                          </form>
+                        ) : (
+                          <h3 style={{ position: "absolute", top: 110, left: 65, fontSize: 35 }} onClick={this.handleEdit}>
+                            {this.state.contact_group}
+                          </h3>
+                        )
+                      }
+                    </div>
                     <table className="table table-bordered" style={{ width: "100%",minWidth: 1470, maxWidth: 1470, marginLeft: 60, marginRight: 60}}>
                         <thead>
                             <tr>
@@ -215,7 +244,13 @@ class List extends React.Component{
                                 <th style={{ width: 140 }}>Personal phone</th>
                                 <th style={{ width: 280 }}>Address</th>
                                 <th style={{ width: 100 }}>Birthday</th>
-                                <th style={{ width: 200 }}><button onClick={this.addContact} className="btn btn-success">Add</button></th>
+                                <th style={{ width: 200 }}><button onClick={() => { this.addContact();
+                                    this.setState({ contact_group: "Initial group" });}} className="btn btn-success">Add</button></th>
+
+                                {/* TODO: Add button to create new group and initiate new table */}
+                                {/* TODO: Create the ability to delete columns and add custom ones */}
+                                {/* TODO: Change the order by dragging the columns */}
+
                             </tr>
                         </thead>
                         <tbody>
