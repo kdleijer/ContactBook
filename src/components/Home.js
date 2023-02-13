@@ -8,12 +8,11 @@ class Home extends Component {
       <div>
         <div style={{display: 'flex'}}>
           <h1>ContactBook</h1>
-          <h6 style={{position: 'relative', top: 155, left: -20}}>by SzymCode</h6>
+          <h6 style={{position: 'relative', top: 202, left: -20}}>by SzymCode</h6>
         </div>
-        <div style={{ display: 'flex', marginLeft: 39 + '%' }}>
-          <h2>No&nbsp;</h2>
-          <Link  to="/list" className={"linkList"} style={{ color:'blue', cursor: 'pointer' }}>contacts</Link>
-          <h2>&nbsp;in list!</h2>
+        <div style={{ display: 'flex', marginLeft: 13 + '%' }}>
+          <h2>Keep in touch with your&nbsp;</h2>
+          <Link  to="/list" className={"linkList"} style={{ textDecoration: 'none', color: '#03befc', cursor: 'pointer' }}>contacts</Link>
         </div>
       </div>
     );
