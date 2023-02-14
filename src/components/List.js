@@ -21,7 +21,8 @@ class List extends React.Component{
             selectedForDeletion: null,
             selectedForEdit: null,
             searchQuery: '',
-            searchColumn: ''
+            searchColumn: '',
+            disableDeleteButtons: false,
         };
     }
 
@@ -208,7 +209,7 @@ class List extends React.Component{
                 </td>
                 <td>
                     {this.state.selectedForEdit === contact.id ?
-                        <input type="text" id={`last_name-${contact.id}`} defaultValue={contact.last_name} style={{width: 142, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
+                        <input type="text" id={`last_name-${contact.id}`} defaultValue={contact.last_name} style={{width: 162, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
                         contact.last_name}
                 </td>
                 <td style={{textOverflow: 'ellipsis'}}>
@@ -228,18 +229,19 @@ class List extends React.Component{
                 </td>
                 <td style={{textOverflow: 'ellipsis'}}>
                     {this.state.selectedForEdit === contact.id ?
-                        <input type="text" id={`address-${contact.id}`} defaultValue={contact.address} style={{width: 270, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
+                        <input type="text" id={`address-${contact.id}`} defaultValue={contact.address} style={{width: 295, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
                         contact.address}
                 </td>
                 <td>
                     {this.state.selectedForEdit === contact.id ?
-                        <input type="text" id={`birthday-${contact.id}`} defaultValue={contact.birthday} style={{width: 86, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
+                        <input type="text" id={`birthday-${contact.id}`} defaultValue={contact.birthday} style={{width: 85, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
                         contact.birthday}
                 </td>
                 <td style={{marginTop: -5, marginLeft: -4}}>
                     {this.state.selectedForEdit !== contact.id && this.state.selectedForDeletion !== contact.id && ( <>
                           <button className="btn btn-info mr-2" onClick={() => this.editData(contact.id)}>Edit</button>
-                          <button style={{marginLeft: 1}} onClick={() => this.deleteData(contact.id)} className="btn btn-danger">Delete</button>
+                          <button className="btn btn-danger" style={{marginLeft: 1, opacity: this.state.disableDeleteButtons ? 0.2 : 1}}
+                              disabled={!!this.state.disableDeleteButtons} onClick={() => this.deleteData(contact.id)}>Delete</button>
                         </>)}
                     {this.state.selectedForEdit === contact.id && ( <>
                           <button className="btn btn-info mr-2" onClick={() => this.editData(contact.id)}>Save</button>
@@ -297,14 +299,19 @@ class List extends React.Component{
                             <tr>
                                 <th style={{ width: 58 }}>ID</th>
                                 <th style={{ width: 130 }}>First name</th>
-                                <th style={{ width: 155 }}>Last name</th>
+                                <th style={{ width: 175 }}>Last name</th>
                                 <th style={{ width: 230 }}>Email</th>
                                 <th style={{ width: 140 }}>Work phone</th>
                                 <th style={{ width: 140 }}>Personal phone</th>
-                                <th style={{ width: 280 }}>Address</th>
+                                <th style={{ width: 304 }}>Address</th>
                                 <th style={{ width: 100 }}>Birthday</th>
-                                <th style={{ width: 190 }}><button onClick={() => { this.addContact();
-                                    this.setState({ contact_group: "Initial group" });}} className="btn btn-success">Add</button></th>
+                                <th style={{ width: 146 }}>
+                                    <button onClick={() => { this.addContact();
+                                    this.setState({ contact_group: "Initial group" });}} className="btn btn-success">Add</button>
+
+                                    <button className="btn btn-secondary mr-2" style={{marginLeft: 9}} onClick={() =>
+                                    {this.setState({ disableDeleteButtons: !this.state.disableDeleteButtons });}}><s>Delete</s></button>
+                                </th>
 
                                 {/* TODO: Add button to create new group and initiate new table */}
                                 {/* TODO: Create the ability to delete columns and add custom ones */}
