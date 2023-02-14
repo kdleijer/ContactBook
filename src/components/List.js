@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import { saveAs } from "file-saver";
 
 class List extends React.Component{
     constructor(props){
@@ -21,6 +22,16 @@ class List extends React.Component{
             selectedForEdit: null,
         };
     }
+
+/* DOWNLOAD DATA */
+    downloadAsJSON = () => {
+    const jsonData = JSON.stringify(this.state.data);
+    const blob = new Blob([jsonData], { type: "application/json" });
+    saveAs(blob, "contacts.json");
+  };
+/* DOWNLOAD DATA */
+//TODO: write downloadAsPDF function
+
 
 /* INITIAL FETCH DATA */
     fetchData(){
@@ -243,17 +254,16 @@ class List extends React.Component{
 
         return (
             <div>
+                <text className={'downloads'} onClick={this.downloadAsJSON}>Download JSON</text>
                     {/* MOVED NAVBAR FROM APP.JS */}
                     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                     <Link className="navbar-brand" to="/home">SzymCode</Link>
-                    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                      <span className="navbar-toggler-icon"></span>
-                    </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
                       <ul className="navbar-nav">
                         <li className="nav-item">
                           <Link className="nav-link" to="/list">List</Link>
                         </li>
+
                       </ul>
                     </div>
                     </nav>

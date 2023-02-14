@@ -17,6 +17,11 @@ div::-webkit-scrollbar {
     min-width: 1580px;
     margin-bottom: 100px;
 }
+.downloads {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+}
 
 /* TABLE */
 .table-bordered {
