@@ -20,6 +20,8 @@ class List extends React.Component{
             isEditing: false,
             selectedForDeletion: null,
             selectedForEdit: null,
+            searchQuery: '',
+            searchColumn: ''
         };
     }
 
@@ -29,7 +31,7 @@ class List extends React.Component{
     const blob = new Blob([jsonData], { type: "application/json" });
     saveAs(blob, "contacts.json");
   };
-/* DOWNLOAD DATA */
+    /* DOWNLOAD DATA */
 //TODO: write downloadAsPDF function
 
 
@@ -189,7 +191,9 @@ class List extends React.Component{
 /* EDIT GROUP NAME */
 
     render(){
-        const contactData=this.state.data;
+        const contactData = this.state.data.filter(contact =>
+                contact.first_name.toLowerCase().includes(this.state.searchQuery.toLowerCase()));
+
         const rows=contactData.map((contact)=>
             <tr key={contact.id}>
                 <td>
@@ -199,7 +203,7 @@ class List extends React.Component{
                 </td>
                 <td>
                     {this.state.selectedForEdit === contact.id ?
-                        <input type="text" id={`first_name-${contact.id}`} defaultValue={contact.first_name} style={{width: 106, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
+                        <input type="text" id={`first_name-${contact.id}`} defaultValue={contact.first_name} style={{width: 116, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
                         contact.first_name}
                 </td>
                 <td>
@@ -263,8 +267,14 @@ class List extends React.Component{
                         <li className="nav-item">
                           <Link className="nav-link" to="/list">List</Link>
                         </li>
-
                       </ul>
+                        <form className="form-inline ml-auto">
+                            <input className="form-control mr-sm-2"
+                                   type="search" value={this.state.searchQuery}
+                                   onChange={e => this.setState({searchQuery: e.target.value})}
+                                   placeholder="Search by first name"/>
+                            {/* <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> */}
+                        </form>
                     </div>
                     </nav>
                     {/* MOVED NAVBAR FROM APP.JS */}
@@ -286,14 +296,14 @@ class List extends React.Component{
                         <thead>
                             <tr>
                                 <th style={{ width: 58 }}>ID</th>
-                                <th style={{ width: 120 }}>First name</th>
+                                <th style={{ width: 130 }}>First name</th>
                                 <th style={{ width: 155 }}>Last name</th>
                                 <th style={{ width: 230 }}>Email</th>
                                 <th style={{ width: 140 }}>Work phone</th>
                                 <th style={{ width: 140 }}>Personal phone</th>
                                 <th style={{ width: 280 }}>Address</th>
                                 <th style={{ width: 100 }}>Birthday</th>
-                                <th style={{ width: 200 }}><button onClick={() => { this.addContact();
+                                <th style={{ width: 190 }}><button onClick={() => { this.addContact();
                                     this.setState({ contact_group: "Initial group" });}} className="btn btn-success">Add</button></th>
 
                                 {/* TODO: Add button to create new group and initiate new table */}
@@ -310,7 +320,6 @@ class List extends React.Component{
             </div>
         );
     }
-
 }
 
 export default List;
