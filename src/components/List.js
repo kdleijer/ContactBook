@@ -32,7 +32,7 @@ class List extends React.Component{
     const blob = new Blob([jsonData], { type: "application/json" });
     saveAs(blob, "contacts.json");
   };
-    /* DOWNLOAD DATA */
+/* DOWNLOAD DATA */
 //TODO: write downloadAsPDF function
 
 
@@ -51,6 +51,11 @@ class List extends React.Component{
 
 /* LIFECYCLE METHOD */
     componentDidMount(){
+        const savedContactGroup = localStorage.getItem('contact_group');
+        if (savedContactGroup) {
+          this.setState({ contact_group: savedContactGroup });
+        }
+
         fetch('http://127.0.0.1:8000/contact/')
             .then(response => response.json())
             .then(data => {
@@ -183,12 +188,13 @@ class List extends React.Component{
                     .then((data) => {
                         if (data) {
                             this.fetchData();
+                            localStorage.setItem('contact_group', this.state.contact_group);
                         }
                     });
             }
         });
-        this.setState({isEditing: false, contact_group: ''});
-    }
+        this.setState({isEditing: false});
+    };
 /* EDIT GROUP NAME */
 
     render(){
@@ -284,7 +290,7 @@ class List extends React.Component{
                 <div style={{maxHeight: 400, overflow: "scroll" }} className="contactGroup">
                     <div>
                       {this.state.isEditing ? (
-                          <form onSubmit={this.handleSubmit}>
+                          <form style={{ position: "absolute", top: 102, left: 60, fontSize: 35}} onSubmit={this.handleSubmit}>
                               <input type="text" value={this.state.contact_group} onChange={this.handleChange}/>
                           </form>
                         ) : (
