@@ -1,6 +1,6 @@
 import React from 'react';
-import {Link} from "react-router-dom";
 import { saveAs } from "file-saver";
+import Navbar from "./Navbar";
 
 class List extends React.Component{
     constructor(props){
@@ -268,25 +268,9 @@ class List extends React.Component{
         return (
             <div>
                 <text className={'downloads'} onClick={this.downloadAsJSON}>Download JSON</text>
-                    {/* MOVED NAVBAR FROM APP.JS */}
-                    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <Link className="navbar-brand" to="/home">SzymCode</Link>
-                    <div className="collapse navbar-collapse" id="navbarNav">
-                      <ul className="navbar-nav">
-                        <li className="nav-item">
-                          <Link className="nav-link" to="/list">My lists</Link>
-                        </li>
-                      </ul>
-                        <form className="form-inline ml-auto">
-                            <input className="form-control mr-sm-2"
-                                   type="search" value={this.state.searchQuery}
-                                   onChange={e => this.setState({searchQuery: e.target.value})}
-                                   placeholder="Search by first name"/>
-                            {/* <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> */}
-                        </form>
-                    </div>
-                    </nav>
-                    {/* MOVED NAVBAR FROM APP.JS */}
+                <Navbar/>
+                <input type="search" value={this.state.searchQuery} placeholder="Search by first name" onChange={e => this.setState({searchQuery: e.target.value})}
+                       style={{ position: "absolute", top:10, right: 10, borderRadius: 8, height: 35, outline: 'none', paddingLeft: 5 }}/>
 
                 {/* TODO: initialize new table with a new group  */}
                 <button onClick={() => { this.addContact(); this.setState({ contact_group: "New group" });}} className="btn btn-outline-success"
