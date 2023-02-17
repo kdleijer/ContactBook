@@ -270,7 +270,7 @@ class List extends React.Component{
                 <text className={'downloads'} onClick={this.downloadAsJSON}>Download JSON</text>
                 <Navbar/>
                 <input type="search" value={this.state.searchQuery} placeholder="Search by first name" onChange={e => this.setState({searchQuery: e.target.value})}
-                       style={{ position: "absolute", top:10, right: 10, borderRadius: 8, height: 35, outline: 'none', paddingLeft: 5 }}/>
+                       style={{ position: "absolute", top:10, right: 10, borderRadius: 8, height: 35, outline: 'none', paddingLeft: 10, borderWidth: 0 }}/>
 
                 {/* TODO: initialize new table with a new group  */}
                 <button onClick={() => { this.addContact(); this.setState({ contact_group: "New group" });}} className="btn btn-outline-success"

@@ -17,6 +17,9 @@ div::-webkit-scrollbar {
     min-width: 1580px;
     margin-bottom: 100px;
 }
+.active{
+    color: lightgray !important;
+}
 .downloads {
     position: absolute;
     top: 70px;
