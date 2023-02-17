@@ -82,7 +82,7 @@ class List extends React.Component{
                 }
             });
         } else {
-            this.setState({ selectedForDeletion: id });
+            this.setState({ selectedForDeletion: id, selectedForEdit: null });
         }
     }
 /* DELETE CONTACT */
@@ -117,7 +117,7 @@ class List extends React.Component{
                 }
             });
         } else {
-            this.setState({ selectedForEdit: id });
+            this.setState({ selectedForEdit: id, selectedForDeletion: null });
         }
     }
 /* EDIT CONTACT */
@@ -154,6 +154,7 @@ class List extends React.Component{
             .then(response => response.json())
             .then((data) => {
                 this.fetchData();
+                localStorage.setItem('contact_group', this.state.contact_group);
                 this.setState({ selectedForEdit: data.id, selectedForDeletion: null});
             });
         });
@@ -273,7 +274,7 @@ class List extends React.Component{
                     <div className="collapse navbar-collapse" id="navbarNav">
                       <ul className="navbar-nav">
                         <li className="nav-item">
-                          <Link className="nav-link" to="/list">List</Link>
+                          <Link className="nav-link" to="/list">My lists</Link>
                         </li>
                       </ul>
                         <form className="form-inline ml-auto">
@@ -287,20 +288,26 @@ class List extends React.Component{
                     </nav>
                     {/* MOVED NAVBAR FROM APP.JS */}
 
-                <div style={{maxHeight: 400, overflow: "scroll" }} className="contactGroup">
+                {/* TODO: initialize new table with a new group  */}
+                <button onClick={() => { this.addContact(); this.setState({ contact_group: "New group" });}} className="btn btn-outline-success"
+                        style={{ position: "absolute", left: 40, top: 117, width: 25, height: 25, borderRadius: 5, padding: 0, fontSize: 25 }}> <div style={{marginTop: -10.5, marginLeft: -1}}>+</div></button>
+
+
+                <div style={{maxHeight: 350, overflow: "scroll"}} className="contactGroup">
                     <div>
                       {this.state.isEditing ? (
-                          <form style={{ position: "absolute", top: 102, left: 60, fontSize: 35}} onSubmit={this.handleSubmit}>
-                              <input type="text" value={this.state.contact_group} onChange={this.handleChange}/>
+                          <form style={{ position: "absolute", top: 99, left: 78, fontSize: 35}} onSubmit={this.handleSubmit}>
+                              <input type="text" value={this.state.contact_group} onChange={this.handleChange} style={{ fontWeight:500,  outline: "none", borderWidth: 0 }} autoFocus/>
                           </form>
                         ) : (
-                          <h3 style={{ position: "absolute", top: 110, left: 65, fontSize: 35 }} onClick={() => { this.handleEdit(); this.setState({ oldGroup: this.state.contact_group }); }}>
+
+                          <h3 style={{ position: "absolute", top: 105, left: 80, fontSize: 35 }} onClick={() => { this.handleEdit(); this.setState({ oldGroup: this.state.contact_group }); }}>
                               {this.state.contact_group}
                           </h3>
                         )
                       }
                     </div>
-                    <table className="table table-bordered" style={{ width: "100%",minWidth: 1470, maxWidth: 1470, marginLeft: 60, marginRight: 60}}>
+                    <table className="table table-bordered" style={{ width: "100%",minWidth: 1470, maxWidth: 1470, marginLeft: 60, marginRight: 60 }}>
                         <thead>
                             <tr>
                                 <th style={{ width: 58 }}>ID</th>
@@ -329,7 +336,7 @@ class List extends React.Component{
                             {rows}
                         </tbody>
                     </table>
-                </div>)
+                </div>
             </div>
         );
     }
