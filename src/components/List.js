@@ -89,36 +89,48 @@ class List extends React.Component{
 
 
 /* EDIT CONTACT */
-    editData(id){
+    editData(id) {
         if (this.state.selectedForEdit === id) {
-            const updatedContact = {
-                contact_id: document.querySelector(`#contact_id-${id}`).value,
-                first_name: document.querySelector(`#first_name-${id}`).value,
-                last_name: document.querySelector(`#last_name-${id}`).value,
-                email: document.querySelector(`#email-${id}`).value,
-                work_phone: document.querySelector(`#work_phone-${id}`).value,
-                personal_phone: document.querySelector(`#personal_phone-${id}`).value,
-                address: document.querySelector(`#address-${id}`).value,
-                birthday: document.querySelector(`#birthday-${id}`).value,
-            }
+            const updatedContact = this.getUpdatedContactInfo(id);
+            this.updateContact(id, updatedContact);
+        } else {
+            this.setState({selectedForEdit: id, selectedForDeletion: null});
+        }
+    }
 
-            fetch('http://127.0.0.1:8000/contact/' + id + '/', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(updatedContact),
-            })
-            .then(response => response)
+    getUpdatedContactInfo(id) {
+        const contactInfo = {
+            contact_id: "",
+            first_name: "",
+            last_name: "",
+            email: "",
+            work_phone: "",
+            personal_phone: "",
+            address: "",
+            birthday: "",
+        };
+        const fields = ["contact_id", "first_name", "last_name", "email", "work_phone", "personal_phone", "address", "birthday"];
+        fields.forEach((field) => {
+            contactInfo[field] = document.querySelector(`#${field}-${id}`).value;
+        });
+        return contactInfo;
+    }
+
+    updateContact(id, updatedContact) {
+        fetch('http://127.0.0.1:8000/contact/' + id + '/', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedContact),
+        })
+            .then((response) => response)
             .then((data) => {
-                if(data) {
-                    this.setState({ selectedForEdit: null });
+                if (data) {
+                    this.setState({selectedForEdit: null});
                     this.fetchData();
                 }
             });
-        } else {
-            this.setState({ selectedForEdit: id, selectedForDeletion: null });
-        }
     }
 /* EDIT CONTACT */
 
@@ -202,33 +214,30 @@ class List extends React.Component{
         const buttonStyles = {marginTop: -5, marginLeft: -4};
 
         const editButton = (
-            <button className="btn btn-info mr-2" onClick={() => this.editData(contact.id)} style={{marginLeft: -2}}>
+            <button
+                className="btn btn-info mr-2" style={{marginLeft: -2}} onClick={() => this.editData(contact.id)}>
                 {this.state.selectedForEdit === contact.id ? "Save" : "Edit"}</button>);
 
         const cancelButton = (
             <button
-                style={{marginLeft: this.state.selectedForEdit === contact.id ? 1 : -2}}
-                onClick={() => this.cancel(contact.id)}
-                className="btn btn-secondary mr-2">Cancel</button>);
+                className="btn btn-secondary mr-2" style={{marginLeft: this.state.selectedForEdit === contact.id ? 1 : -2}}
+                onClick={() => this.cancel(contact.id)}>Cancel</button>);
 
         const deleteButton = (
             <button
-                className="btn btn-danger"
-                style={{marginLeft: 1, opacity: this.state.disableDeleteButtons ? 0.2 : 1}}
-                disabled={!!this.state.disableDeleteButtons}
-                onClick={() => this.deleteData(contact.id)}>{this.state.selectedForDeletion === contact.id ? "Sure?" : "Delete"}</button>
-        );
+                className="btn btn-danger" style={{marginLeft: 1, opacity: this.state.disableDeleteButtons ? 0.2 : 1}}
+                disabled={!!this.state.disableDeleteButtons} onClick={() => this.deleteData(contact.id)}>
+                {this.state.selectedForDeletion === contact.id ? "Sure?" : "Delete"}</button>);
 
-        const buttons =
-            this.state.selectedForEdit === contact.id ? (
-                <>{editButton}{cancelButton}</>
-            ) : this.state.selectedForDeletion === contact.id ? (
-                <>{cancelButton}{deleteButton}</>
-            ) : (
-                <>{editButton}{deleteButton}</>
-            );
-
-        return <td style={buttonStyles}>{buttons}</td>;
+        let buttonGroup;
+        if (this.state.selectedForEdit === contact.id) {
+            buttonGroup = <>{editButton}{cancelButton}</>;
+        } else if (this.state.selectedForDeletion === contact.id) {
+            buttonGroup = <>{cancelButton}{deleteButton}</>;
+        } else {
+            buttonGroup = <>{editButton}{deleteButton}</>;
+        }
+        return <td style={buttonStyles}>{buttonGroup}</td>;
     }
 
     render() {
