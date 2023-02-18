@@ -211,21 +211,21 @@ class List extends React.Component{
 /* EDIT GROUP NAME */
 
     renderButtons(contact) {
-        const buttonStyles = {marginTop: -5, marginLeft: -4};
+        const buttonStyles = {padding: 6}
 
         const editButton = (
             <button
-                className="btn btn-info mr-2" style={{marginLeft: -2}} onClick={() => this.editData(contact.id)}>
+                className="btn btn-outline-info" onClick={() => this.editData(contact.id)}>
                 {this.state.selectedForEdit === contact.id ? "Save" : "Edit"}</button>);
 
         const cancelButton = (
             <button
-                className="btn btn-secondary mr-2" style={{marginLeft: this.state.selectedForEdit === contact.id ? 1 : -2}}
+                className="btn btn-outline-dark" style={{marginLeft: this.state.selectedForEdit === contact.id ? 4 : -2}}
                 onClick={() => this.cancel(contact.id)}>Cancel</button>);
 
         const deleteButton = (
             <button
-                className="btn btn-danger" style={{marginLeft: 1, opacity: this.state.disableDeleteButtons ? 0.2 : 1}}
+                className="btn btn-outline-danger" style={{marginLeft: 4, opacity: this.state.disableDeleteButtons ? 0.2 : 1}}
                 disabled={!!this.state.disableDeleteButtons} onClick={() => this.deleteData(contact.id)}>
                 {this.state.selectedForDeletion === contact.id ? "Sure?" : "Delete"}</button>);
 
@@ -245,24 +245,23 @@ class List extends React.Component{
         const contactData = data.filter(contact => contact.first_name.toLowerCase().includes(searchQuery.toLowerCase()));
         const rows = contactData.map((contact) => {
             const inputFields = [
-                {id: "contact_id", defaultValue: contact.contact_id, width: 42},
-                {id: "first_name", defaultValue: contact.first_name, width: 116},
-                {id: "last_name", defaultValue: contact.last_name, width: 162},
-                {id: "email", defaultValue: contact.email, width: 219, style: {textOverflow: "ellipsis"}},
-                {id: "work_phone", defaultValue: contact.work_phone, width: 126},
-                {id: "personal_phone", defaultValue: contact.personal_phone, width: 127},
-                {id: "address", defaultValue: contact.address, width: 295, style: {textOverflow: "ellipsis"}},
-                {id: "birthday", defaultValue: contact.birthday, width: 85}
+                  {id: "contact_id", defaultValue: contact.contact_id, width: 45, maxLength: 4},
+                  {id: "first_name", defaultValue: contact.first_name, width: 128, maxLength: 15},
+                  {id: "last_name", defaultValue: contact.last_name, width: 176, maxLength: 25},
+                  {id: "email", defaultValue: contact.email, width: 234, maxLength: 40},
+                  {id: "work_phone", defaultValue: contact.work_phone, width: 134, maxLength: 15},
+                  {id: "personal_phone", defaultValue: contact.personal_phone, width: 134, maxLength: 15},
+                  {id: "address", defaultValue: contact.address, width: 333, maxLength: 50},
+                  {id: "birthday", defaultValue: contact.birthday, width: 86, maxLength: 10}
             ];
             const inputFieldsElements = inputFields.map((field) => (
-                <td key={`${field.id}-${contact.id}`}>
+                <td key={`${field.id}-${contact.id}`} style={{padding:7, paddingTop: 8}}>
                     {this.state.selectedForEdit === contact.id ?
                         <input type="text" id={`${field.id}-${contact.id}`} defaultValue={field.defaultValue} style={{
-                            width: field.width, marginTop: -5, marginLeft: -4, marginRight: -4, ...field.style}}/> :
-                        field.defaultValue}
+                              width: field.width,  marginTop: -4, marginLeft: -4, marginBottom: -4, ...field.style}} maxLength={field.maxLength} /> :(
+                        <div className='contactFields'>{field.defaultValue}</div>)}
                 </td>
             ));
-
             return (
                 <tr key={contact.id}>
                     {inputFieldsElements}
@@ -273,7 +272,8 @@ class List extends React.Component{
 
         return (
             <div>
-                <span className={"downloads"} onClick={this.downloadAsJSON}>Download JSON</span>
+                <button className={["downloads", "btn", "btn-outline-dark"].join(" ")} onClick={this.downloadAsJSON}
+                style={{width:120}} >Download JSON</button>
                 <Navbar/>
                 <input type="search" value={this.state.searchQuery} placeholder="Search by first name"
                        onChange={e => this.setState({searchQuery: e.target.value})}
@@ -287,7 +287,7 @@ class List extends React.Component{
                 </button>
 
 
-                <div style={{maxHeight: 350, overflow: "scroll"}} className="contactGroup">
+                <div style={{maxHeight: 350, overflow: "scroll",  marginBottom:50}} className="contactGroup">
                     <div>
                         {this.state.isEditing ? (
                             <form style={{position: "absolute", top: 99, left: 78, fontSize: 35}}
@@ -302,23 +302,22 @@ class List extends React.Component{
                             </h3>
                         )}
                     </div>
-                    <table className="table table-bordered"
-                           style={{width: "100%", minWidth: 1470, maxWidth: 1470, marginLeft: 60, marginRight: 60}}>
+                    <table className="table table-bordered" style={{width: "100%", minWidth: 1470, maxWidth: 1470, marginLeft: 65, marginRight: 65}}>
                         <thead>
                         <tr>
-                            <th style={{width: 58}}>ID</th>
-                            <th style={{width: 130}}>First name</th>
-                            <th style={{width: 175}}>Last name</th>
-                            <th style={{width: 230}}>Email</th>
-                            <th style={{width: 140}}>Work phone</th>
-                            <th style={{width: 140}}>Personal phone</th>
-                            <th style={{width: 304}}>Address</th>
-                            <th style={{width: 100}}>Birthday</th>
-                            <th style={{width: 146}}>
+                            <th style={{width: 50, padding: 6, fontSize: 17}}>ID</th>
+                            <th style={{width: 130, padding: 6, fontSize: 17}}>First name</th>
+                            <th style={{width: 175, padding: 6, fontSize: 17}}>Last name</th>
+                            <th style={{width: 230, padding: 6, fontSize: 17}}>Email</th>
+                            <th style={{width: 135, padding: 6, fontSize: 17}}>Work phone</th>
+                            <th style={{width: 135, padding: 6, fontSize: 17}}>Personal phone</th>
+                            <th style={{width: 324, padding: 6, fontSize: 17}}>Address</th>
+                            <th style={{width: 90, padding: 6, fontSize: 17}}>Birthday</th>
+                            <th style={{width: 127, padding: 6, fontSize: 17}}>
                                 <button onClick={() => {this.addContact();this.setState({contact_group: "Initial group"});}}
-                                        className="btn btn-success">Add</button>
+                                        className="btn btn-outline-success">Add</button>
 
-                                <button className="btn btn-secondary mr-2" style={{marginLeft: 9}} onClick={() => {
+                                <button className="btn btn-outline-dark" style={{marginLeft: 4}} onClick={() => {
                                     this.setState({disableDeleteButtons: !this.state.disableDeleteButtons});}}><s>Delete</s></button>
 
                             </th>
@@ -335,7 +334,7 @@ class List extends React.Component{
                     </table>
                 </div>
             </div>
-        );
+        )
     }
 }
 

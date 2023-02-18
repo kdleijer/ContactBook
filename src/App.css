@@ -23,7 +23,7 @@ div::-webkit-scrollbar {
 .downloads {
     position: absolute;
     top: 70px;
-    right: 20px;
+    right: 12px;
 }
 
 /* TABLE */
@@ -40,8 +40,9 @@ th {
     position: sticky;
     top: 0;
 }
-td {
+.contactFields {
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 .btn {
     margin-top: -2px;
