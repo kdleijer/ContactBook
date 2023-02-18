@@ -7,7 +7,8 @@
 ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)\
 ![Known Vulnerabilities](https://snyk.io/test/github/Szymcode/ContactBook/badge.svg)
 ![License](https://img.shields.io/badge/license-BSD--3-important)
-[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/SzymCode/ContactBook/issues)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/SzymCode/ContactBook/issues)\
+<a href="https://codeclimate.com/github/SzymCode/ContactBook/maintainability"><img src="https://api.codeclimate.com/v1/badges/7a5893e847a0dadee33f/maintainability"/></a>
 
 </div>
 
