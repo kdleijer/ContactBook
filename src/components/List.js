@@ -199,9 +199,8 @@ class List extends React.Component{
 /* EDIT GROUP NAME */
 
     render() {
-        const contactData = this.state.data.filter(contact =>
-            contact.first_name.toLowerCase().includes(this.state.searchQuery.toLowerCase()));
-
+        const { data, searchQuery } = this.state;
+        const contactData = data.filter(contact => contact.first_name.toLowerCase().includes(searchQuery.toLowerCase()));
         const rows = contactData.map((contact) => {
             const inputFields = [
                 {id: "contact_id", defaultValue: contact.contact_id, width: 42},
@@ -214,14 +213,10 @@ class List extends React.Component{
                 {id: "birthday", defaultValue: contact.birthday, width: 85}
             ];
             const inputFieldsElements = inputFields.map((field) => (
-                <td>
+                <td key={`${field.id}-${contact.id}`}>
                     {this.state.selectedForEdit === contact.id ?
                         <input type="text" id={`${field.id}-${contact.id}`} defaultValue={field.defaultValue} style={{
-                            width: field.width,
-                            marginTop: -5,
-                            marginLeft: -4,
-                            marginRight: -4, ...field.style
-                        }}/> :
+                            width: field.width, marginTop: -5, marginLeft: -4, marginRight: -4, ...field.style}}/> :
                         field.defaultValue}
                 </td>
             ));
@@ -264,9 +259,9 @@ class List extends React.Component{
             );
         });
 
-    return (
+        return (
         <div>
-            <text className={"downloads"} onClick={this.downloadAsJSON}>Download JSON</text>
+            <span className={"downloads"} onClick={this.downloadAsJSON}>Download JSON</span>
             <Navbar />
             <input type="search" value={this.state.searchQuery} placeholder="Search by first name" onChange={e => this.setState({ searchQuery: e.target.value })}
                 style={{ position: "absolute", top: 10, right: 10, borderRadius: 8, height: 35, outline: 'none', paddingLeft: 10, borderWidth: 0 }} />
