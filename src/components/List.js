@@ -198,83 +198,66 @@ class List extends React.Component{
     };
 /* EDIT GROUP NAME */
 
-    render(){
-        const contactData = this.state.data.filter(contact =>
-                contact.first_name.toLowerCase().includes(this.state.searchQuery.toLowerCase()));
+    render() {
+    const contactData = this.state.data.filter(contact =>
+        contact.first_name.toLowerCase().includes(this.state.searchQuery.toLowerCase()));
 
-        const rows=contactData.map((contact)=>
+    const rows = contactData.map((contact) => {
+        const inputFields = [
+            { id: "contact_id", defaultValue: contact.contact_id, width: 42 },
+            { id: "first_name", defaultValue: contact.first_name, width: 116 },
+            { id: "last_name", defaultValue: contact.last_name, width: 162 },
+            { id: "email", defaultValue: contact.email, width: 219, style: { textOverflow: "ellipsis" } },
+            { id: "work_phone", defaultValue: contact.work_phone, width: 126 },
+            { id: "personal_phone", defaultValue: contact.personal_phone, width: 127 },
+            { id: "address", defaultValue: contact.address, width: 295, style: { textOverflow: "ellipsis" } },
+            { id: "birthday", defaultValue: contact.birthday, width: 85 }
+        ];
+        const inputFieldsElements = inputFields.map((field) => (
+            <td>
+                {this.state.selectedForEdit === contact.id ?
+                    <input type="text" id={`${field.id}-${contact.id}`} defaultValue={field.defaultValue} style={{ width: field.width, marginTop: -5, marginLeft: -4, marginRight: -4, ...field.style }} /> :
+                    field.defaultValue}
+            </td>
+        ));
+
+        return (
             <tr key={contact.id}>
-                <td>
-                    {this.state.selectedForEdit === contact.id ?
-                        <input type="text" id={`contact_id-${contact.id}`} defaultValue={contact.contact_id} style={{width: 42, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
-                        contact.contact_id}
-                </td>
-                <td>
-                    {this.state.selectedForEdit === contact.id ?
-                        <input type="text" id={`first_name-${contact.id}`} defaultValue={contact.first_name} style={{width: 116, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
-                        contact.first_name}
-                </td>
-                <td>
-                    {this.state.selectedForEdit === contact.id ?
-                        <input type="text" id={`last_name-${contact.id}`} defaultValue={contact.last_name} style={{width: 162, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
-                        contact.last_name}
-                </td>
-                <td style={{textOverflow: 'ellipsis'}}>
-                    {this.state.selectedForEdit === contact.id ?
-                        <input type="text" id={`email-${contact.id}`} defaultValue={contact.email} style={{width: 219, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
-                        contact.email}
-                </td>
-                <td>
-                    {this.state.selectedForEdit === contact.id ?
-                        <input type="text" id={`work_phone-${contact.id}`} defaultValue={contact.work_phone} style={{width: 126, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
-                        contact.work_phone}
-                </td>
-                <td>
-                    {this.state.selectedForEdit === contact.id ?
-                        <input type="text" id={`personal_phone-${contact.id}`} defaultValue={contact.personal_phone} style={{width: 127, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
-                        contact.personal_phone}
-                </td>
-                <td style={{textOverflow: 'ellipsis'}}>
-                    {this.state.selectedForEdit === contact.id ?
-                        <input type="text" id={`address-${contact.id}`} defaultValue={contact.address} style={{width: 295, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
-                        contact.address}
-                </td>
-                <td>
-                    {this.state.selectedForEdit === contact.id ?
-                        <input type="text" id={`birthday-${contact.id}`} defaultValue={contact.birthday} style={{width: 85, marginTop: -5, marginLeft: -4, marginRight: -4}}/> :
-                        contact.birthday}
-                </td>
-                <td style={{marginTop: -5, marginLeft: -4}}>
-                    {this.state.selectedForEdit !== contact.id && this.state.selectedForDeletion !== contact.id && ( <>
-                          <button className="btn btn-info mr-2" onClick={() => this.editData(contact.id)}>Edit</button>
-                          <button className="btn btn-danger" style={{marginLeft: 1, opacity: this.state.disableDeleteButtons ? 0.2 : 1}}
-                              disabled={!!this.state.disableDeleteButtons} onClick={() => this.deleteData(contact.id)}>Delete</button>
-                        </>)}
-                    {this.state.selectedForEdit === contact.id && ( <>
-                          <button className="btn btn-info mr-2" onClick={() => this.editData(contact.id)}>Save</button>
-                          <button style={{marginLeft: 1}} onClick={() => this.cancel(contact.id)} className="btn btn-secondary mr-2">Cancel</button>
-                        </>)}
-                    {this.state.selectedForDeletion === contact.id && ( <>
-                        {/* Spam delete button */}
+                {inputFieldsElements}
+                <td style={{ marginTop: -5, marginLeft: -4 }}>
+                    {this.state.selectedForEdit !== contact.id && this.state.selectedForDeletion !== contact.id && (
+                        <>
+                            <button className="btn btn-info mr-2" onClick={() => this.editData(contact.id)}>Edit</button>
+                            <button className="btn btn-danger" style={{ marginLeft: 1, opacity: this.state.disableDeleteButtons ? 0.2 : 1 }}
+                                disabled={!!this.state.disableDeleteButtons} onClick={() => this.deleteData(contact.id)}>Delete</button>
+                        </>
+                    )}
+                    {this.state.selectedForEdit === contact.id && (
+                        <>
+                            <button className="btn btn-info mr-2" onClick={() => this.editData(contact.id)}>Save</button>
+                            <button style={{ marginLeft: 1 }} onClick={() => this.cancel(contact.id)} className="btn btn-secondary mr-2">Cancel</button>
+                        </>
+                    )}
+                    {this.state.selectedForDeletion === contact.id && (
+                        <>
                             <button onClick={() => this.cancel(contact.id)} className="btn btn-secondary">Cancel</button>
-                            <button style={{marginLeft: 9}} onClick={() => this.deleteData(contact.id)} className="btn btn-danger mr-2">Sure?</button>
-                        {/* <button onClick={() => this.deleteData(contact.id)} className="btn btn-danger mr-2">Sure?</button>
-                            <button onClick={() => this.cancel(contact.id)} className="btn btn-secondary">Cancel</button> */}
-                        </>)}
+                            <button style={{ marginLeft: 9 }} onClick={() => this.deleteData(contact.id)} className="btn btn-danger mr-2">Sure?</button>
+                        </>
+                    )}
                 </td>
             </tr>
         );
+    });
 
-        return (
-            <div>
-                <text className={'downloads'} onClick={this.downloadAsJSON}>Download JSON</text>
-                <Navbar/>
-                <input type="search" value={this.state.searchQuery} placeholder="Search by first name" onChange={e => this.setState({searchQuery: e.target.value})}
-                       style={{ position: "absolute", top:10, right: 10, borderRadius: 8, height: 35, outline: 'none', paddingLeft: 10, borderWidth: 0 }}/>
+    return (
+        <div>
+            <text className={"downloads"} onClick={this.downloadAsJSON}>Download JSON</text>
+            <Navbar />
+            <input type="search" value={this.state.searchQuery} placeholder="Search by first name" onChange={e => this.setState({ searchQuery: e.target.value })}
+                style={{ position: "absolute", top: 10, right: 10, borderRadius: 8, height: 35, outline: 'none', paddingLeft: 10, borderWidth: 0 }} />
 
-                {/* TODO: initialize new table with a new group  */}
-                <button onClick={() => { this.addContact(); this.setState({ contact_group: "New group" });}} className="btn btn-outline-success"
-                        style={{ position: "absolute", left: 40, top: 117, width: 25, height: 25, borderRadius: 5, padding: 0, fontSize: 25 }}> <div style={{marginTop: -10.5, marginLeft: -1}}>+</div></button>
+            <button onClick={() => { this.addContact(); this.setState({ contact_group: "New group" }); }} className="btn btn-outline-success"
+                style={{ position: "absolute", left: 40, top: 117, width: 25, height: 25, borderRadius: 5, padding: 0, fontSize: 25 }}> <div style={{marginTop: -10.5, marginLeft: -1}}>+</div></button>
 
 
                 <div style={{maxHeight: 350, overflow: "scroll"}} className="contactGroup">
