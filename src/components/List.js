@@ -240,9 +240,13 @@ class List extends React.Component{
         return <td style={buttonStyles}>{buttonGroup}</td>;
     }
 
+
     render() {
         const {data, searchQuery} = this.state;
-        const contactData = data.filter(contact => contact.first_name.toLowerCase().includes(searchQuery.toLowerCase()));
+        const contactData = data.filter(contact => (
+            contact.contact_group === this.state.contact_group && /* TODO: Create new table with specific data by contact_group */
+            contact.first_name.toLowerCase().includes(searchQuery.toLowerCase())
+        ));
         const rows = contactData.map((contact) => {
             const inputFields = [
                   {id: "contact_id", defaultValue: contact.contact_id, width: 45, maxLength: 4},
@@ -272,23 +276,8 @@ class List extends React.Component{
 
         return (
             <div>
-                <button className={["downloads", "btn", "btn-outline-dark"].join(" ")} onClick={this.downloadAsJSON}
-                style={{width:120}} >Download JSON</button>
                 <Navbar/>
-                <input type="search" value={this.state.searchQuery} placeholder="Search by first name"
-                       onChange={e => this.setState({searchQuery: e.target.value})}
-                       style={{ position: "absolute", top: 10, right: 10, borderRadius: 8,
-                           height: 35, outline: 'none', paddingLeft: 10, borderWidth: 0}}/>
-
-                <button onClick={() => {this.addContact();this.setState({contact_group: "New group"});}}
-                       className="btn btn-outline-success" style={{position: "absolute", left: 40, top: 117, width: 25,
-                           height: 25, borderRadius: 5, padding: 0, fontSize: 25}}>
-                       <div style={{marginTop: -10.5, marginLeft: -1}}>+</div>
-                </button>
-
-
-                <div style={{maxHeight: 350, overflow: "scroll",  marginBottom:50}} className="contactGroup">
-                    <div>
+                <div>
                         {this.state.isEditing ? (
                             <form style={{position: "absolute", top: 99, left: 78, fontSize: 35}}
                                   onSubmit={this.handleSubmit}>
@@ -301,7 +290,21 @@ class List extends React.Component{
                                 {this.state.contact_group}
                             </h3>
                         )}
-                    </div>
+                </div>
+
+                <button className={["downloads", "btn", "btn-outline-dark"].join(" ")} onClick={this.downloadAsJSON}
+                    style={{width:120}} >Download JSON</button>
+                <input type="search" value={this.state.searchQuery} placeholder="Search by first name"
+                       onChange={e => this.setState({searchQuery: e.target.value})}
+                       style={{ position: "absolute", top: 10, right: 10, borderRadius: 8,
+                           height: 35, outline: 'none', paddingLeft: 10, borderWidth: 0}}/>
+                <button onClick={() => {this.addContact();this.setState({contact_group: "New group"});}}
+                       className="btn btn-outline-success" style={{position: "absolute", left: 40, top: 117, width: 25,
+                           height: 25, borderRadius: 5, padding: 0, fontSize: 25}}>
+                       <div style={{marginTop: -10.5, marginLeft: -1}}>+</div>
+                </button>
+
+                <div style={{maxHeight: 350, overflow: "scroll",  marginBottom:50}} className="contactGroup">
                     <table className="table table-bordered" style={{width: "100%", minWidth: 1470, maxWidth: 1470, marginLeft: 65, marginRight: 65}}>
                         <thead>
                         <tr>
@@ -322,7 +325,6 @@ class List extends React.Component{
 
                             </th>
 
-                            {/* TODO: Add button to create new group and initiate new table */}
                             {/* TODO: Create the ability to delete columns and add custom ones */}
                             {/* TODO: Change the order by dragging the columns */}
 
