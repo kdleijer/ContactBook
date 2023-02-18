@@ -198,8 +198,41 @@ class List extends React.Component{
     };
 /* EDIT GROUP NAME */
 
+    renderButtons(contact) {
+        const buttonStyles = {marginTop: -5, marginLeft: -4};
+
+        const editButton = (
+            <button className="btn btn-info mr-2" onClick={() => this.editData(contact.id)} style={{marginLeft: -2}}>
+                {this.state.selectedForEdit === contact.id ? "Save" : "Edit"}</button>);
+
+        const cancelButton = (
+            <button
+                style={{marginLeft: this.state.selectedForEdit === contact.id ? 1 : -2}}
+                onClick={() => this.cancel(contact.id)}
+                className="btn btn-secondary mr-2">Cancel</button>);
+
+        const deleteButton = (
+            <button
+                className="btn btn-danger"
+                style={{marginLeft: 1, opacity: this.state.disableDeleteButtons ? 0.2 : 1}}
+                disabled={!!this.state.disableDeleteButtons}
+                onClick={() => this.deleteData(contact.id)}>{this.state.selectedForDeletion === contact.id ? "Sure?" : "Delete"}</button>
+        );
+
+        const buttons =
+            this.state.selectedForEdit === contact.id ? (
+                <>{editButton}{cancelButton}</>
+            ) : this.state.selectedForDeletion === contact.id ? (
+                <>{cancelButton}{deleteButton}</>
+            ) : (
+                <>{editButton}{deleteButton}</>
+            );
+
+        return <td style={buttonStyles}>{buttons}</td>;
+    }
+
     render() {
-        const { data, searchQuery } = this.state;
+        const {data, searchQuery} = this.state;
         const contactData = data.filter(contact => contact.first_name.toLowerCase().includes(searchQuery.toLowerCase()));
         const rows = contactData.map((contact) => {
             const inputFields = [
@@ -224,90 +257,68 @@ class List extends React.Component{
             return (
                 <tr key={contact.id}>
                     {inputFieldsElements}
-                    <td style={{marginTop: -5, marginLeft: -4}}>
-                        {this.state.selectedForEdit !== contact.id && this.state.selectedForDeletion !== contact.id && (
-                            <>
-                                <button className="btn btn-info mr-2" onClick={() => this.editData(contact.id)}>Edit
-                                </button>
-                                <button className="btn btn-danger"
-                                        style={{marginLeft: 1, opacity: this.state.disableDeleteButtons ? 0.2 : 1}}
-                                        disabled={!!this.state.disableDeleteButtons}
-                                        onClick={() => this.deleteData(contact.id)}>Delete
-                                </button>
-                            </>
-                        )}
-                        {this.state.selectedForEdit === contact.id && (
-                            <>
-                                <button className="btn btn-info mr-2" onClick={() => this.editData(contact.id)}>Save
-                                </button>
-                                <button style={{marginLeft: 1}} onClick={() => this.cancel(contact.id)}
-                                        className="btn btn-secondary mr-2">Cancel
-                                </button>
-                            </>
-                        )}
-                        {this.state.selectedForDeletion === contact.id && (
-                            <>
-                                <button onClick={() => this.cancel(contact.id)} className="btn btn-secondary">Cancel
-                                </button>
-                                <button style={{marginLeft: 9}} onClick={() => this.deleteData(contact.id)}
-                                        className="btn btn-danger mr-2">Sure?
-                                </button>
-                            </>
-                        )}
-                    </td>
+                    {this.renderButtons(contact)}
                 </tr>
             );
         });
 
         return (
-        <div>
-            <span className={"downloads"} onClick={this.downloadAsJSON}>Download JSON</span>
-            <Navbar />
-            <input type="search" value={this.state.searchQuery} placeholder="Search by first name" onChange={e => this.setState({ searchQuery: e.target.value })}
-                style={{ position: "absolute", top: 10, right: 10, borderRadius: 8, height: 35, outline: 'none', paddingLeft: 10, borderWidth: 0 }} />
+            <div>
+                <span className={"downloads"} onClick={this.downloadAsJSON}>Download JSON</span>
+                <Navbar/>
+                <input type="search" value={this.state.searchQuery} placeholder="Search by first name"
+                       onChange={e => this.setState({searchQuery: e.target.value})}
+                       style={{ position: "absolute", top: 10, right: 10, borderRadius: 8,
+                           height: 35, outline: 'none', paddingLeft: 10, borderWidth: 0}}/>
 
-            <button onClick={() => { this.addContact(); this.setState({ contact_group: "New group" }); }} className="btn btn-outline-success"
-                style={{ position: "absolute", left: 40, top: 117, width: 25, height: 25, borderRadius: 5, padding: 0, fontSize: 25 }}> <div style={{marginTop: -10.5, marginLeft: -1}}>+</div></button>
+                <button onClick={() => {this.addContact();this.setState({contact_group: "New group"});}}
+                       className="btn btn-outline-success" style={{position: "absolute", left: 40, top: 117, width: 25,
+                           height: 25, borderRadius: 5, padding: 0, fontSize: 25}}>
+                       <div style={{marginTop: -10.5, marginLeft: -1}}>+</div>
+                </button>
 
 
                 <div style={{maxHeight: 350, overflow: "scroll"}} className="contactGroup">
                     <div>
-                      {this.state.isEditing ? (
-                          <form style={{ position: "absolute", top: 99, left: 78, fontSize: 35}} onSubmit={this.handleSubmit}>
-                              <input type="text" value={this.state.contact_group} onChange={this.handleChange} style={{ fontWeight:500,  outline: "none", borderWidth: 0 }} autoFocus/>
-                          </form>
+                        {this.state.isEditing ? (
+                            <form style={{position: "absolute", top: 99, left: 78, fontSize: 35}}
+                                  onSubmit={this.handleSubmit}>
+                                <input type="text" value={this.state.contact_group} onChange={this.handleChange}
+                                       style={{fontWeight: 500, outline: "none", borderWidth: 0}} autoFocus/>
+                            </form>
                         ) : (
-
-                          <h3 style={{ position: "absolute", top: 105, left: 80, fontSize: 35 }} onClick={() => { this.handleEdit(); this.setState({ oldGroup: this.state.contact_group }); }}>
-                              {this.state.contact_group}
-                          </h3>
-                        )
-                      }
+                            <h3 style={{position: "absolute", top: 105, left: 80, fontSize: 35}} onClick={() => {
+                                this.handleEdit();this.setState({oldGroup: this.state.contact_group});}}>
+                                {this.state.contact_group}
+                            </h3>
+                        )}
                     </div>
-                    <table className="table table-bordered" style={{ width: "100%",minWidth: 1470, maxWidth: 1470, marginLeft: 60, marginRight: 60 }}>
+                    <table className="table table-bordered"
+                           style={{width: "100%", minWidth: 1470, maxWidth: 1470, marginLeft: 60, marginRight: 60}}>
                         <thead>
-                            <tr>
-                                <th style={{ width: 58 }}>ID</th>
-                                <th style={{ width: 130 }}>First name</th>
-                                <th style={{ width: 175 }}>Last name</th>
-                                <th style={{ width: 230 }}>Email</th>
-                                <th style={{ width: 140 }}>Work phone</th>
-                                <th style={{ width: 140 }}>Personal phone</th>
-                                <th style={{ width: 304 }}>Address</th>
-                                <th style={{ width: 100 }}>Birthday</th>
-                                <th style={{ width: 146 }}>
-                                    <button onClick={() => { this.addContact();
-                                    this.setState({ contact_group: "Initial group" });}} className="btn btn-success">Add</button>
+                        <tr>
+                            <th style={{width: 58}}>ID</th>
+                            <th style={{width: 130}}>First name</th>
+                            <th style={{width: 175}}>Last name</th>
+                            <th style={{width: 230}}>Email</th>
+                            <th style={{width: 140}}>Work phone</th>
+                            <th style={{width: 140}}>Personal phone</th>
+                            <th style={{width: 304}}>Address</th>
+                            <th style={{width: 100}}>Birthday</th>
+                            <th style={{width: 146}}>
+                                <button onClick={() => {this.addContact();this.setState({contact_group: "Initial group"});}}
+                                        className="btn btn-success">Add</button>
 
-                                    <button className="btn btn-secondary mr-2" style={{marginLeft: 9}} onClick={() =>
-                                    {this.setState({ disableDeleteButtons: !this.state.disableDeleteButtons });}}><s>Delete</s></button>
-                                </th>
+                                <button className="btn btn-secondary mr-2" style={{marginLeft: 9}} onClick={() => {
+                                    this.setState({disableDeleteButtons: !this.state.disableDeleteButtons});}}><s>Delete</s></button>
 
-                                {/* TODO: Add button to create new group and initiate new table */}
-                                {/* TODO: Create the ability to delete columns and add custom ones */}
-                                {/* TODO: Change the order by dragging the columns */}
+                            </th>
 
-                            </tr>
+                            {/* TODO: Add button to create new group and initiate new table */}
+                            {/* TODO: Create the ability to delete columns and add custom ones */}
+                            {/* TODO: Change the order by dragging the columns */}
+
+                        </tr>
                         </thead>
                         <tbody>
                             {rows}
