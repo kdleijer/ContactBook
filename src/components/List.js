@@ -199,55 +199,70 @@ class List extends React.Component{
 /* EDIT GROUP NAME */
 
     render() {
-    const contactData = this.state.data.filter(contact =>
-        contact.first_name.toLowerCase().includes(this.state.searchQuery.toLowerCase()));
+        const contactData = this.state.data.filter(contact =>
+            contact.first_name.toLowerCase().includes(this.state.searchQuery.toLowerCase()));
 
-    const rows = contactData.map((contact) => {
-        const inputFields = [
-            { id: "contact_id", defaultValue: contact.contact_id, width: 42 },
-            { id: "first_name", defaultValue: contact.first_name, width: 116 },
-            { id: "last_name", defaultValue: contact.last_name, width: 162 },
-            { id: "email", defaultValue: contact.email, width: 219, style: { textOverflow: "ellipsis" } },
-            { id: "work_phone", defaultValue: contact.work_phone, width: 126 },
-            { id: "personal_phone", defaultValue: contact.personal_phone, width: 127 },
-            { id: "address", defaultValue: contact.address, width: 295, style: { textOverflow: "ellipsis" } },
-            { id: "birthday", defaultValue: contact.birthday, width: 85 }
-        ];
-        const inputFieldsElements = inputFields.map((field) => (
-            <td>
-                {this.state.selectedForEdit === contact.id ?
-                    <input type="text" id={`${field.id}-${contact.id}`} defaultValue={field.defaultValue} style={{ width: field.width, marginTop: -5, marginLeft: -4, marginRight: -4, ...field.style }} /> :
-                    field.defaultValue}
-            </td>
-        ));
-
-        return (
-            <tr key={contact.id}>
-                {inputFieldsElements}
-                <td style={{ marginTop: -5, marginLeft: -4 }}>
-                    {this.state.selectedForEdit !== contact.id && this.state.selectedForDeletion !== contact.id && (
-                        <>
-                            <button className="btn btn-info mr-2" onClick={() => this.editData(contact.id)}>Edit</button>
-                            <button className="btn btn-danger" style={{ marginLeft: 1, opacity: this.state.disableDeleteButtons ? 0.2 : 1 }}
-                                disabled={!!this.state.disableDeleteButtons} onClick={() => this.deleteData(contact.id)}>Delete</button>
-                        </>
-                    )}
-                    {this.state.selectedForEdit === contact.id && (
-                        <>
-                            <button className="btn btn-info mr-2" onClick={() => this.editData(contact.id)}>Save</button>
-                            <button style={{ marginLeft: 1 }} onClick={() => this.cancel(contact.id)} className="btn btn-secondary mr-2">Cancel</button>
-                        </>
-                    )}
-                    {this.state.selectedForDeletion === contact.id && (
-                        <>
-                            <button onClick={() => this.cancel(contact.id)} className="btn btn-secondary">Cancel</button>
-                            <button style={{ marginLeft: 9 }} onClick={() => this.deleteData(contact.id)} className="btn btn-danger mr-2">Sure?</button>
-                        </>
-                    )}
+        const rows = contactData.map((contact) => {
+            const inputFields = [
+                {id: "contact_id", defaultValue: contact.contact_id, width: 42},
+                {id: "first_name", defaultValue: contact.first_name, width: 116},
+                {id: "last_name", defaultValue: contact.last_name, width: 162},
+                {id: "email", defaultValue: contact.email, width: 219, style: {textOverflow: "ellipsis"}},
+                {id: "work_phone", defaultValue: contact.work_phone, width: 126},
+                {id: "personal_phone", defaultValue: contact.personal_phone, width: 127},
+                {id: "address", defaultValue: contact.address, width: 295, style: {textOverflow: "ellipsis"}},
+                {id: "birthday", defaultValue: contact.birthday, width: 85}
+            ];
+            const inputFieldsElements = inputFields.map((field) => (
+                <td>
+                    {this.state.selectedForEdit === contact.id ?
+                        <input type="text" id={`${field.id}-${contact.id}`} defaultValue={field.defaultValue} style={{
+                            width: field.width,
+                            marginTop: -5,
+                            marginLeft: -4,
+                            marginRight: -4, ...field.style
+                        }}/> :
+                        field.defaultValue}
                 </td>
-            </tr>
-        );
-    });
+            ));
+
+            return (
+                <tr key={contact.id}>
+                    {inputFieldsElements}
+                    <td style={{marginTop: -5, marginLeft: -4}}>
+                        {this.state.selectedForEdit !== contact.id && this.state.selectedForDeletion !== contact.id && (
+                            <>
+                                <button className="btn btn-info mr-2" onClick={() => this.editData(contact.id)}>Edit
+                                </button>
+                                <button className="btn btn-danger"
+                                        style={{marginLeft: 1, opacity: this.state.disableDeleteButtons ? 0.2 : 1}}
+                                        disabled={!!this.state.disableDeleteButtons}
+                                        onClick={() => this.deleteData(contact.id)}>Delete
+                                </button>
+                            </>
+                        )}
+                        {this.state.selectedForEdit === contact.id && (
+                            <>
+                                <button className="btn btn-info mr-2" onClick={() => this.editData(contact.id)}>Save
+                                </button>
+                                <button style={{marginLeft: 1}} onClick={() => this.cancel(contact.id)}
+                                        className="btn btn-secondary mr-2">Cancel
+                                </button>
+                            </>
+                        )}
+                        {this.state.selectedForDeletion === contact.id && (
+                            <>
+                                <button onClick={() => this.cancel(contact.id)} className="btn btn-secondary">Cancel
+                                </button>
+                                <button style={{marginLeft: 9}} onClick={() => this.deleteData(contact.id)}
+                                        className="btn btn-danger mr-2">Sure?
+                                </button>
+                            </>
+                        )}
+                    </td>
+                </tr>
+            );
+        });
 
     return (
         <div>
