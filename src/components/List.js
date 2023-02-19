@@ -243,101 +243,109 @@ class List extends React.Component{
 
     render() {
         const {data, searchQuery} = this.state;
-        const contactData = data.filter(contact => (
-            contact.contact_group === this.state.contact_group && /* TODO: Create new table with specific data by contact_group */
-            contact.first_name.toLowerCase().includes(searchQuery.toLowerCase())
-        ));
-        const rows = contactData.map((contact) => {
-            const inputFields = [
-                  {id: "contact_id", defaultValue: contact.contact_id, width: 45, maxLength: 4},
-                  {id: "first_name", defaultValue: contact.first_name, width: 128, maxLength: 15},
-                  {id: "last_name", defaultValue: contact.last_name, width: 176, maxLength: 25},
-                  {id: "email", defaultValue: contact.email, width: 234, maxLength: 40},
-                  {id: "work_phone", defaultValue: contact.work_phone, width: 134, maxLength: 15},
-                  {id: "personal_phone", defaultValue: contact.personal_phone, width: 134, maxLength: 15},
-                  {id: "address", defaultValue: contact.address, width: 333, maxLength: 50},
-                  {id: "birthday", defaultValue: contact.birthday, width: 86, maxLength: 10}
-            ];
-            const inputFieldsElements = inputFields.map((field) => (
-                <td key={`${field.id}-${contact.id}`} style={{padding:7, paddingTop: 8}}>
-                    {this.state.selectedForEdit === contact.id ?
-                        <input type="text" id={`${field.id}-${contact.id}`} defaultValue={field.defaultValue} style={{
-                              width: field.width,  marginTop: -4, marginLeft: -4, marginBottom: -4, ...field.style}} maxLength={field.maxLength} /> :(
-                        <div className='contactFields'>{field.defaultValue}</div>)}
-                </td>
-            ));
+        const groups = data.reduce((acc, contact) => {
+            if (!acc[contact.contact_group]) {
+                acc[contact.contact_group] = [];
+            }
+            acc[contact.contact_group].push(contact);
+            return acc;
+        }, {});
+
+        const tables = Object.entries(groups).map(([group, contacts]) => {
+            const contactData = contacts.filter(contact =>
+                contact.first_name.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+            const rows = contactData.map(contact => {
+                const inputFields = [
+                    {id: "contact_id", defaultValue: contact.contact_id, width: 44, maxLength: 4},
+                    {id: "first_name", defaultValue: contact.first_name, width: 128, maxLength: 15},
+                    {id: "last_name", defaultValue: contact.last_name, width: 155, maxLength: 25},
+                    {id: "email", defaultValue: contact.email, width: 243, maxLength: 40},
+                    {id: "work_phone", defaultValue: contact.work_phone, width: 140, maxLength: 15},
+                    {id: "personal_phone", defaultValue: contact.personal_phone, width: 139, maxLength: 15},
+                    {id: "address", defaultValue: contact.address, width: 335, maxLength: 50},
+                    {id: "birthday", defaultValue: contact.birthday, width: 86, maxLength: 10}
+                ];
+                const inputFieldsElements = inputFields.map(field => (
+                    <td key={`${field.id}-${contact.id}`} style={{padding: 7, paddingTop: 8}}>
+                        {this.state.selectedForEdit === contact.id ? (
+                            <input type="text" id={`${field.id}-${contact.id}`} defaultValue={field.defaultValue}
+                                   style={{width: field.width, marginTop: -4, marginLeft: -4, marginBottom: -4,
+                                       ...field.style}} maxLength={field.maxLength}/>
+                        ) : (
+                            <div className="contactFields">{field.defaultValue}</div>
+                        )}
+                    </td>
+                ));
+                return (
+                    <tr key={contact.id}>
+                        {inputFieldsElements}
+                        {this.renderButtons(contact)}
+                    </tr>
+                );
+            });
+
             return (
-                <tr key={contact.id}>
-                    {inputFieldsElements}
-                    {this.renderButtons(contact)}
-                </tr>
+                <div key={group}>
+                    <div>
+                        {this.state.isEditing ? (
+                            <form style={{position: "relative", top: -0, left: 78, fontSize: 35}}
+                                  onSubmit={this.handleSubmit}>
+                                <input type="text" value={this.state.contact_group} onChange={this.handleChange}
+                                       style={{fontWeight: 500, outline: "none", borderWidth: 0}} autoFocus/>
+                            </form>
+                        ) : (
+                            <h3 style={{position: "relative", top: 0, left: 80, fontSize: 35}} onClick={() => {
+                                this.handleEdit();this.setState({oldGroup: this.state.contact_group});}}>{group}
+                            </h3>
+                        )}
+
+                        {/* TODO: fix rendering and editing of table headers */}
+
+                        <div style={{maxHeight: 350, overflow: "scroll", marginBottom: 50}} className="contactGroup">
+                            <table className="table table-bordered" style={{width: "100%", minWidth: 1470, maxWidth: 1470, marginLeft: 60, marginRight: 60}}>
+                                <thead>
+                                <tr>
+                                    <th style={{width: 48, padding: 6, fontSize: 17}}>ID</th>
+                                    <th style={{width: 124, padding: 6, fontSize: 17}}>First name</th>
+                                    <th style={{width: 149, padding: 6, fontSize: 17}}>Last name</th>
+                                    <th style={{width: 230, padding: 6, fontSize: 17}}>Email</th>
+                                    <th style={{width: 135, padding: 6, fontSize: 17}}>Work phone</th>
+                                    <th style={{width: 135, padding: 6, fontSize: 17}}>Personal phone</th>
+                                    <th style={{width: 313, padding: 6, fontSize: 17}}>Address</th>
+                                    <th style={{width: 86, padding: 6, fontSize: 17}}>Birthday</th>
+                                    <th style={{width: 123, padding: 6, fontSize: 17}}>
+                                        <button onClick={() => {this.addContact();this.setState({contact_group: group});}}
+                                                className="btn btn-outline-success">Add</button>
+                                        <button style={{marginLeft: 4}} onClick={() => {this.setState({disableDeleteButtons: !this.state.disableDeleteButtons});}}
+                                                className="btn btn-outline-dark"><s>Delete</s></button>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>{rows}</tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             );
         });
 
         return (
             <div>
                 <Navbar/>
-                <div>
-                        {this.state.isEditing ? (
-                            <form style={{position: "absolute", top: 99, left: 78, fontSize: 35}}
-                                  onSubmit={this.handleSubmit}>
-                                <input type="text" value={this.state.contact_group} onChange={this.handleChange}
-                                       style={{fontWeight: 500, outline: "none", borderWidth: 0}} autoFocus/>
-                            </form>
-                        ) : (
-                            <h3 style={{position: "absolute", top: 105, left: 80, fontSize: 35}} onClick={() => {
-                                this.handleEdit();this.setState({oldGroup: this.state.contact_group});}}>
-                                {this.state.contact_group}
-                            </h3>
-                        )}
-                </div>
-
                 <button className={["downloads", "btn", "btn-outline-dark"].join(" ")} onClick={this.downloadAsJSON}
-                    style={{width:120}} >Download JSON</button>
+                       style={{width: 120}}>Download JSON</button>
+
                 <input type="search" value={this.state.searchQuery} placeholder="Search by first name"
                        onChange={e => this.setState({searchQuery: e.target.value})}
-                       style={{ position: "absolute", top: 10, right: 10, borderRadius: 8,
-                           height: 35, outline: 'none', paddingLeft: 10, borderWidth: 0}}/>
-                <button onClick={() => {this.addContact();this.setState({contact_group: "New group"});}}
-                       className="btn btn-outline-success" style={{position: "absolute", left: 40, top: 117, width: 25,
-                           height: 25, borderRadius: 5, padding: 0, fontSize: 25}}>
-                       <div style={{marginTop: -10.5, marginLeft: -1}}>+</div>
-                </button>
+                       style={{position: "absolute", top: 10, right: 10, borderRadius: 8, height: 35, outline: 'none', paddingLeft: 10, borderWidth: 0}}/>
 
-                <div style={{maxHeight: 350, overflow: "scroll",  marginBottom:50}} className="contactGroup">
-                    <table className="table table-bordered" style={{width: "100%", minWidth: 1470, maxWidth: 1470, marginLeft: 65, marginRight: 65}}>
-                        <thead>
-                        <tr>
-                            <th style={{width: 50, padding: 6, fontSize: 17}}>ID</th>
-                            <th style={{width: 130, padding: 6, fontSize: 17}}>First name</th>
-                            <th style={{width: 175, padding: 6, fontSize: 17}}>Last name</th>
-                            <th style={{width: 230, padding: 6, fontSize: 17}}>Email</th>
-                            <th style={{width: 135, padding: 6, fontSize: 17}}>Work phone</th>
-                            <th style={{width: 135, padding: 6, fontSize: 17}}>Personal phone</th>
-                            <th style={{width: 324, padding: 6, fontSize: 17}}>Address</th>
-                            <th style={{width: 90, padding: 6, fontSize: 17}}>Birthday</th>
-                            <th style={{width: 127, padding: 6, fontSize: 17}}>
-                                <button onClick={() => {this.addContact();this.setState({contact_group: "Initial group"});}}
-                                        className="btn btn-outline-success">Add</button>
-
-                                <button className="btn btn-outline-dark" style={{marginLeft: 4}} onClick={() => {
-                                    this.setState({disableDeleteButtons: !this.state.disableDeleteButtons});}}><s>Delete</s></button>
-
-                            </th>
-
-                            {/* TODO: Create the ability to delete columns and add custom ones */}
-                            {/* TODO: Change the order by dragging the columns */}
-
-                        </tr>
-                        </thead>
-                        <tbody>
-                            {rows}
-                        </tbody>
-                    </table>
-                </div>
+                <button onClick={() => {this.addContact();this.setState({contact_group: "New group"});}} className="btn btn-outline-success"
+                       style={{position: "absolute", left: 40, top: 167, width: 25, height: 25, borderRadius: 5, padding: 0, fontSize: 25}}>
+                    <div style={{marginTop: -10.5, marginLeft: -1}}>+</div></button>
+                {tables}
             </div>
-        )
+        );
     }
 }
-
 export default List;

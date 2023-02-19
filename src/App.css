@@ -1,4 +1,5 @@
 html, body {
+    overflow-x: hidden;
     min-width: 1050px;
     max-width: 2000px;
 }
