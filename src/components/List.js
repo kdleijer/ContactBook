@@ -6,17 +6,18 @@ class List extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            old_group:'',
-            contact_group:'',
-            contact_id:'',
-            first_name:'',
-            last_name:'',
-            email:'',
-            work_phone:'',
-            personal_phone:'',
-            address:'',
-            birthday:'',
-            data:[],
+            old_group: '',
+            contact_group: '',
+            contact_id: '',
+            first_name: '',
+            last_name: '',
+            email: '',
+            work_phone: '',
+            personal_phone: '',
+            address: '',
+            birthday: '',
+            data: [],
+            editingGroup: '',
             isEditing: false,
             selectedForDeletion: null,
             selectedForEdit: null,
@@ -31,7 +32,7 @@ class List extends React.Component{
     const jsonData = JSON.stringify(this.state.data);
     const blob = new Blob([jsonData], { type: "application/json" });
     saveAs(blob, "contacts.json");
-  };
+    };
 /* DOWNLOAD DATA */
 //TODO: write downloadAsPDF function
 
@@ -63,7 +64,7 @@ class List extends React.Component{
                     this.setState({ contact_group: "Initial group" });
                     this.addContact();}})
         this.fetchData();
-        }
+    }
 /* LIFECYCLE METHOD */
 
 
@@ -175,7 +176,7 @@ class List extends React.Component{
     this.setState({
         isEditing: true
     });
-  };
+    };
 /* ADD CONTACT */
 
 
@@ -211,7 +212,7 @@ class List extends React.Component{
 /* EDIT GROUP NAME */
 
     renderButtons(contact) {
-        const buttonStyles = {padding: 6}
+        const buttonStyles = {padding: 5.5}
 
         const editButton = (
             <button
@@ -267,7 +268,7 @@ class List extends React.Component{
                     {id: "birthday", defaultValue: contact.birthday, width: 86, maxLength: 10}
                 ];
                 const inputFieldsElements = inputFields.map(field => (
-                    <td key={`${field.id}-${contact.id}`} style={{padding: 7, paddingTop: 8}}>
+                    <td key={`${field.id}-${contact.id}`} style={{padding: 7}}>
                         {this.state.selectedForEdit === contact.id ? (
                             <input type="text" id={`${field.id}-${contact.id}`} defaultValue={field.defaultValue}
                                    style={{width: field.width, marginTop: -4, marginLeft: -4, marginBottom: -4,
@@ -288,19 +289,16 @@ class List extends React.Component{
             return (
                 <div key={group}>
                     <div>
-                        {this.state.isEditing ? (
-                            <form style={{position: "relative", top: -0, left: 78, fontSize: 35}}
-                                  onSubmit={this.handleSubmit}>
+                        {this.state.editingGroup === group ? (
+                            <form style={{ position: "relative", top: -6, left: 78, fontSize: 35, marginBottom: -4.5 }} onSubmit={this.handleSubmit}>
                                 <input type="text" value={this.state.contact_group} onChange={this.handleChange}
-                                       style={{fontWeight: 500, outline: "none", borderWidth: 0}} autoFocus/>
+                                    style={{ fontWeight: 500, outline: "none", borderWidth: 0}} autoFocus/>
                             </form>
                         ) : (
-                            <h3 style={{position: "relative", top: 0, left: 80, fontSize: 35}} onClick={() => {
-                                this.handleEdit();this.setState({oldGroup: this.state.contact_group});}}>{group}
+                            <h3 style={{ position: "relative", top: 0, left: 80, fontSize: 35 }} onClick={() => {this.handleEdit();
+                                this.setState({contact_group: group, editingGroup: group, oldGroup: group});}}>{group}
                             </h3>
                         )}
-
-                        {/* TODO: fix rendering and editing of table headers */}
 
                         <div style={{maxHeight: 350, overflow: "scroll", marginBottom: 50}} className="contactGroup">
                             <table className="table table-bordered" style={{width: "100%", minWidth: 1470, maxWidth: 1470, marginLeft: 60, marginRight: 60}}>
@@ -314,7 +312,7 @@ class List extends React.Component{
                                     <th style={{width: 135, padding: 6, fontSize: 17}}>Personal phone</th>
                                     <th style={{width: 313, padding: 6, fontSize: 17}}>Address</th>
                                     <th style={{width: 86, padding: 6, fontSize: 17}}>Birthday</th>
-                                    <th style={{width: 123, padding: 6, fontSize: 17}}>
+                                    <th style={{width: 123, padding: 6, fontSize: 17, paddingTop: 4, paddingBottom: 5.5}}>
                                         <button onClick={() => {this.addContact();this.setState({contact_group: group});}}
                                                 className="btn btn-outline-success">Add</button>
                                         <button style={{marginLeft: 4}} onClick={() => {this.setState({disableDeleteButtons: !this.state.disableDeleteButtons});}}
