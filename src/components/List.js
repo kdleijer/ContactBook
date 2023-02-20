@@ -212,10 +212,10 @@ class List extends React.Component{
 /* EDIT GROUP NAME */
 
     renderButtons(contact) {
-        const buttonStyles = {padding: 5.5}
+        const buttonStyles = {padding: 4}
 
         const editButton = (
-            <button
+            <button style={{marginLeft: 0}}
                 className="btn btn-outline-info" onClick={() => this.editData(contact.id)}>
                 {this.state.selectedForEdit === contact.id ? "Save" : "Edit"}</button>);
 
@@ -311,12 +311,12 @@ class List extends React.Component{
                                     <th style={{width: 135, padding: 6, fontSize: 17}}>Work phone</th>
                                     <th style={{width: 135, padding: 6, fontSize: 17}}>Personal phone</th>
                                     <th style={{width: 313, padding: 6, fontSize: 17}}>Address</th>
-                                    <th style={{width: 86, padding: 6, fontSize: 17}}>Birthday</th>
-                                    <th style={{width: 123, padding: 6, fontSize: 17, paddingTop: 4, paddingBottom: 5.5}}>
-                                        <button onClick={() => {this.addContact();this.setState({contact_group: group});}}
-                                                className="btn btn-outline-success">Add</button>
-                                        <button style={{marginLeft: 4}} onClick={() => {this.setState({disableDeleteButtons: !this.state.disableDeleteButtons});}}
-                                                className="btn btn-outline-dark"><s>Delete</s></button>
+                                    <th style={{width: 86, padding: 6,  fontSize: 17}}>Birthday</th>
+                                    <th style={{width: 123, padding: 4, fontSize: 17}}>
+                                        <button style={{marginLeft: 0}} className="btn btn-outline-success"
+                                            onClick={() => {this.addContact();this.setState({contact_group: group});}}>Add</button>
+                                        <button style={{marginLeft: 4}} className="btn btn-outline-dark"
+                                            onClick={() => {this.setState({disableDeleteButtons: !this.state.disableDeleteButtons});}}><s>Delete</s></button>
                                     </th>
                                 </tr>
                                 </thead>
