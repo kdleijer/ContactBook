@@ -14,8 +14,10 @@
 
 # ContactBook
 
-This website helps to storage contacts data, share it with others and download contact lists to JSON or PDF file. 
-You can clone this repo and run it on your internal server.
+This website helps to storage contacts data, share it with others and download contact lists to JSON or PDF file.
+You can clone this repo and run it on your internal server. The project was created for educational purposes and to demonstrate my coding skills to my future recruiters.
+<br>
+**I highly encourage you to contributions!**
 
 
 ## 🛠️ Installation
