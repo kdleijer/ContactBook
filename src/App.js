@@ -16,6 +16,7 @@ function App(){
             <Route path="list/" element={<List/>} exact />
           </Routes>
         </div>
+        /* TODO: RESTRICT ROUTES */
       );
 }
 

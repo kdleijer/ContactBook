@@ -27,15 +27,6 @@ class List extends React.Component{
         };
     }
 
-/* DOWNLOAD DATA */
-    downloadAsJSON = () => {
-    const jsonData = JSON.stringify(this.state.data);
-    const blob = new Blob([jsonData], { type: "application/json" });
-    saveAs(blob, "contacts.json");
-    };
-/* DOWNLOAD DATA */
-//TODO: write downloadAsPDF function
-
 
 /* INITIAL FETCH DATA */
     fetchData(){
@@ -172,15 +163,15 @@ class List extends React.Component{
             });
         });
     }
-    handleEdit = () => {
-    this.setState({
-        isEditing: true
-    });
-    };
 /* ADD CONTACT */
 
 
 /* EDIT GROUP NAME */
+    handleEdit = () => {
+        this.setState({
+            isEditing: true
+        });
+    };
     handleChange = event => {
         this.setState({
           contact_group: event.target.value
@@ -210,6 +201,17 @@ class List extends React.Component{
         this.setState({isEditing: false});
     };
 /* EDIT GROUP NAME */
+
+
+/* DOWNLOAD DATA */
+    downloadAsJSON = () => {
+        const jsonData = JSON.stringify(this.state.data);
+        const blob = new Blob([jsonData], { type: "application/json" });
+        saveAs(blob, "contacts.json");
+    };
+/* DOWNLOAD DATA */
+//TODO: write downloadAsPDF function
+
 
     renderButtons(contact) {
         const buttonStyles = {padding: 4}
@@ -290,7 +292,7 @@ class List extends React.Component{
                 <div key={group}>
                     <div>
                         {this.state.editingGroup === group ? (
-                            <form style={{ position: "relative", top: -6, left: 78, fontSize: 35, marginBottom: -4.5 }} onSubmit={this.handleSubmit}>
+                            <form style={{ position: "relative", top: -6, left: 78, fontSize: 35, marginBottom: -4.5, width: 800 }} onSubmit={this.handleSubmit}>
                                 <input type="text" value={this.state.contact_group} onChange={this.handleChange}
                                     style={{ fontWeight: 500, outline: "none", borderWidth: 0}} autoFocus/>
                             </form>
@@ -336,7 +338,7 @@ class List extends React.Component{
 
                 <input type="search" value={this.state.searchQuery} placeholder="Search by first name"
                        onChange={e => this.setState({searchQuery: e.target.value})}
-                       style={{position: "absolute", top: 10, right: 10, borderRadius: 8, height: 35, outline: 'none', paddingLeft: 10, borderWidth: 0}}/>
+                       style={{position: "absolute", top: 160, right: 80, borderRadius: 8, height: 35, outline: 'none', paddingLeft: 10}}/>
 
                 <button onClick={() => {this.addContact();this.setState({contact_group: "New group"});}} className="btn btn-outline-success"
                        style={{position: "absolute", left: 40, top: 167, width: 25, height: 25, borderRadius: 5, padding: 0, fontSize: 25}}>

@@ -42,6 +42,9 @@ function NavbarItems({selected, onClick}) {
                 <NavItem path="/list" selected={selected} onClick={onClick}>My lists</NavItem>
                 <NavItem path="/about" selected={selected} onClick={onClick}>About</NavItem>
             </ul>
+            <ul className="navbar-nav ml-auto">
+                <NavItem path="http://127.0.0.1:8000/accounts/logout" selected={selected} onClick={onClick}>Logout</NavItem>
+            </ul>
         </div>
     );
 }
