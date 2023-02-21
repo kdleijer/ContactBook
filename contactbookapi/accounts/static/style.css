@@ -1,0 +1,79 @@
+body,
+		html {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			background: #ebeff5;
+		}
+		.user_card {
+			width: 350px;
+			margin-top: auto;
+			margin-bottom: auto;
+			background: linear-gradient(206deg, rgba(141,141,237,1) 2%, rgba(0,212,255,1) 100%);
+			position: relative;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			padding: 20px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 5px;
+
+		}
+		.form_container {
+			margin-top: 10px;
+		}
+		#form-title{
+			color: white;
+		}
+
+		.login_container {
+			padding: 10px;
+		}
+		.input-group-text {
+			background: #303b42;
+			color: white;
+            width: 40px;
+            height: 38px;
+			border: 1px solid white
+		}
+
+		#messages{
+			color: black;
+			padding: 10px;
+			margin-top: 15px;
+		}
+
+@media (max-width: 1000px) {
+    .fa-key {
+        width: 100px;
+        font-size: 45px;
+    }
+	.fa-user{
+		width: 100px;
+		font-size: 45px;
+	}
+	.user_card {
+		width: 100%;
+		font-size: 40px;
+		border-radius: 20px;
+		padding: 40px;
+  	}
+	.input-group-text {
+		background: #303b42;
+		color: white;
+		width: 90px;
+		height: 90px;
+		border-color: white;
+		border-width: 2px;
+		margin-bottom: 5px;
+	}
+
+	.form_container {
+		margin-top: 30px;
+	}
+	.form-control{
+		height: 90px;
+		font-size: 35px;
+		margin-bottom: 5px;
+	}
+}
