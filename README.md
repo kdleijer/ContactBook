@@ -20,6 +20,21 @@ You can clone this repo and run it on your internal server. The project was crea
 **I highly encourage you to contributions!**
 
 
+## 🎯 TODO:
+
+• Restrict routes in App.js with is_authenticated from django registration
+
+• Dragging, resizing, deleting columns and create custom ones
+
+• Download contact data to PDF
+
+• Settings page 
+
+• User specific data + share data with other users
+
+• Better UI design + theme selection
+
+
 ## 🛠️ Installation
 
 • Clone this repository.
@@ -52,3 +67,12 @@ python manage.py runserver
 ```bash
 npm start
 ```
+
+
+## ❓ Usage
+
+• **localhost:8000** - Django REST API
+
+• **localhost:8000/accounts/login** & **/register** - Django login and registration
+
+• **localhost:3000/home** - ContactBook main page
