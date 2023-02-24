@@ -6,9 +6,9 @@
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)\
 ![Known Vulnerabilities](https://snyk.io/test/github/Szymcode/ContactBook/badge.svg)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/SzymCode/ContactBook/issues)
+<a href="https://codeclimate.com/github/SzymCode/ContactBook/maintainability"><img src="https://api.codeclimate.com/v1/badges/82bf96d0eed9ecd61446/maintainability" /></a>\
 ![License](https://img.shields.io/badge/license-BSD--3-important)
-[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/SzymCode/ContactBook/issues)\
-<a href="https://codeclimate.com/github/SzymCode/ContactBook/maintainability"><img src="https://api.codeclimate.com/v1/badges/82bf96d0eed9ecd61446/maintainability" /></a>
 
 </div>
 
@@ -34,6 +34,8 @@ You can clone this repo and run it on your internal server. The project was crea
 
 • Better UI design + theme selection
 
+• Combine logging/registration with home page
+
 
 ## 🛠️ Installation
 
@@ -55,6 +57,7 @@ npm install
 ## 🚀 Run 
 
 • First change SECRET_KEY in **contactbookapi** settings.
+
 
 • **contactbookapi** directory:
 
