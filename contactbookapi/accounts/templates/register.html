@@ -48,7 +48,7 @@
 						</div>
 
 				   		<div class="d-flex justify-content-center mt-3 login_container">
-				 			<input class="btn register_btn" type="submit" value="Register account">
+				 			<input class="btn btn-outline-info register_btn" type="submit" value="Register account">
 				   		</div>
 					</form>
 				</div>
@@ -57,7 +57,7 @@
 				
 				<div class="mt-2">
 					<div class="d-flex justify-content-center links">
-						Already have an account? <a href="{% url 'login' %}" class="ml-2" style="text-decoration: none; color: white;"> Login</a>
+						Already have an account? <a href="{% url 'login' %}" class="ml-2" style="text-decoration: none; color: #03befc;"> Login</a>
 					</div>
 				</div>
 			</div>
@@ -65,15 +65,15 @@
 	</div>
 	<script>
 
-		var form_fields = document.getElementsByTagName('input')
-		form_fields[1].placeholder='Username...';
-		form_fields[2].placeholder='Email...';
-		form_fields[3].placeholder='Enter password...';
-		form_fields[4].placeholder='Re-enter password...';
+		var formFields = document.getElementsByTagName('input')
+		formFields[1].placeholder='Username...';
+		formFields[2].placeholder='Email...';
+		formFields[3].placeholder='Enter password...';
+		formFields[4].placeholder='Re-enter password...';
 
 
-		for (var field in form_fields){	
-			form_fields[field].className += ' form-control'
+		for (var field in formFields){
+			formFields[field].className += ' form-control'
 		}
 	</script>
 </body>

@@ -8,7 +8,7 @@ body, html {
 	width: 350px;
 	margin-top: auto;
 	margin-bottom: auto;
-	background: linear-gradient(206deg, rgba(141,141,237,1) 2%, rgba(0,212,255,1) 100%);
+	background: whitesmoke;
 	position: relative;
 	display: flex;
 	justify-content: center;
@@ -21,7 +21,7 @@ body, html {
 	margin-top: 10px;
 }
 #form-title {
-	color: white;
+	color: black;
 }
 .login_container {
 	padding: 10px;
@@ -31,16 +31,16 @@ body, html {
 	color: white;
 	width: 40px;
 	height: 38px;
-	border: 1px solid white
+	border: 1px solid #303b42;
 }
 #messages {
-	color: white;
+	color: black;
 	padding: 5px;
 	margin: 0;
 	text-align: center;
 }
 .errorlist {
-	color: white;
+	color: black;
 	padding: 5px;
 	margin: 0 0 0 20px;
 	text-align: center;
@@ -72,7 +72,6 @@ body, html {
 		border-width: 2px;
 		margin-bottom: 5px;
 	}
-
 	.form_container {
 		margin-top: 30px;
 	}
