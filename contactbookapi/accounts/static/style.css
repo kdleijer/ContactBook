@@ -36,14 +36,14 @@ body, html {
 #messages {
 	color: black;
 	padding: 5px;
-	margin: 0;
-	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 15px;
 }
 .errorlist {
 	color: black;
 	padding: 5px;
-	margin: 0 0 0 20px;
-	text-align: center;
+	margin: 0;
 }
 
 @media (max-width: 1000px) {

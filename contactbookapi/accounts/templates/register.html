@@ -53,10 +53,16 @@
 					</form>
 				</div>
 
-				{{form.errors}}
+				{% if form.errors %}
+                        {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                                <p id="errorlist">- {{ error }}</p>
+                            {% endfor %}
+                        {% endfor %}
+                {% endif %}
 				
 				<div class="mt-2">
-					<div class="d-flex justify-content-center links">
+					<div class="d-flex justify-content-center links" style="margin-top: -5px">
 						Already have an account? <a href="{% url 'login' %}" class="ml-2" style="text-decoration: none; color: #03befc;"> Login</a>
 					</div>
 				</div>

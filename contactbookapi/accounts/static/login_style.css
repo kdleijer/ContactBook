@@ -1,7 +1,7 @@
 .signin_btn {
-	width: 70%;
+	width: 100%;
 	margin-top: 0;
-	margin-bottom: 0;
+	margin-bottom: 5px;
 }
 .form-control {
 	border-radius: 0;
@@ -15,7 +15,7 @@
 		font-size: 70px;
 	}
 	.signin_btn {
-		width: 300px;
+		width: 400px;
 		height: 80px;
 		font-size: 30px;
 		border-radius: 10px;
