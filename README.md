@@ -6,8 +6,8 @@
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)\
 ![Known Vulnerabilities](https://snyk.io/test/github/Szymcode/ContactBook/badge.svg)
-[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/SzymCode/ContactBook/issues)
-<a href="https://codeclimate.com/github/SzymCode/ContactBook/maintainability"><img src="https://api.codeclimate.com/v1/badges/82bf96d0eed9ecd61446/maintainability" /></a>\
+<a href="https://codeclimate.com/github/SzymCode/ContactBook/maintainability"><img src="https://api.codeclimate.com/v1/badges/82bf96d0eed9ecd61446/maintainability" /></a>
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/SzymCode/ContactBook/issues)\
 ![License](https://img.shields.io/badge/license-BSD--3-important)
 
 </div>
@@ -22,9 +22,12 @@ You can clone this repo and run it on your internal server. The project was crea
 
 ## 🎯 TODO:
 
+
 • Restrict routes in App.js with is_authenticated from django registration
 
 • Dragging, resizing, deleting columns and create custom ones
+
+• Static position of tables
 
 • Download contact data to PDF
 
@@ -35,6 +38,9 @@ You can clone this repo and run it on your internal server. The project was crea
 • Better UI design + theme selection
 
 • Combine logging/registration with home page
+
+• Mobile website
+
 
 
 ## 🛠️ Installation
