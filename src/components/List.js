@@ -215,38 +215,45 @@ class List extends React.Component{
 
     renderButtons(contact) {
         const buttonStyles = {padding: 4}
-
         const editButton = (
-            <button style={{marginLeft: 0}}
-                className="btn btn-outline-info" onClick={() => this.editData(contact.id)}>
+            <button style={{marginLeft: 0}} className="btn btn-outline-info" onClick={() => this.editData(contact.id)}>
                 {this.state.selectedForEdit === contact.id ? "Save" : "Edit"}
             </button>
         );
-
         const cancelButton = (
-            <button
-                className="btn btn-outline-dark" style={{ marginLeft: this.state.selectedForEdit === contact.id ? 4 : -2 }}
+            <button className="btn btn-outline-dark" style={{ marginLeft: this.state.selectedForEdit === contact.id ? 4 : -2 }}
                 onClick={() => this.cancel(contact.id)}>Cancel
             </button>
         );
-
         const deleteButton = (
-            <button
-                className="btn btn-outline-danger" style={{ marginLeft: 4, opacity: this.state.disableDeleteButtons ? 0.2 : 1 }}
+            <button className="btn btn-outline-danger" style={{ marginLeft: 4, opacity: this.state.disableDeleteButtons ? 0.2 : 1 }}
                 disabled={!!this.state.disableDeleteButtons} onClick={() => this.deleteData(contact.id)}>
                 {this.state.selectedForDeletion === contact.id ? "Sure?" : "Delete"}
             </button>
         );
-
         let buttonGroup;
-        if (this.state.selectedForEdit === contact.id) {
-            buttonGroup = <>{editButton}{cancelButton}</>;
-        } else if (this.state.selectedForDeletion === contact.id) {
-            buttonGroup = <>{cancelButton}{deleteButton}</>;
-        } else {
-            buttonGroup = <>{editButton}{deleteButton}</>;
-        }
+        if (this.state.selectedForEdit === contact.id) {buttonGroup = <>{editButton}{cancelButton}</>;}
+        else if (this.state.selectedForDeletion === contact.id) {buttonGroup = <>{cancelButton}{deleteButton}</>;}
+        else {buttonGroup = <>{editButton}{deleteButton}</>;}
         return <td style={buttonStyles}>{buttonGroup}</td>;
+    }
+
+    renderMenu() {
+        return (
+            <div>
+                <Navbar/>
+                <button className={["downloads", "btn", "btn-outline-dark"].join(" ")} onClick={this.downloadAsJSON}
+                        style={{width: 120}}>Download JSON
+                </button>
+                <input type="search" value={this.state.searchQuery} placeholder="Search by first name"
+                        onChange={e => this.setState({searchQuery: e.target.value})}
+                        style={{ position: "absolute", top: 160, right: 80, borderRadius: 8, height: 35, outline: 'none', paddingLeft: 10}}/>
+                <button onClick={() => {this.addContact();this.setState({contact_group: "New group"});}}
+                        className="btn btn-outline-success" style={{position: "absolute", left: 40, top: 167, width: 25, height: 25,
+                        borderRadius: 5, padding: 0, fontSize: 25}}> <div style={{marginTop: -10.5, marginLeft: -1}}>+</div>
+                </button>
+            </div>
+        );
     }
 
 
@@ -268,23 +275,11 @@ class List extends React.Component{
 
         if (this.matchedContacts.length === 0) {
             return (
-                // TODO: wrap it to function and call it
                 <div>
-                    <Navbar/>
-                    <button className={ ["downloads", "btn", "btn-outline-dark"].join(" ") } onClick={this.downloadAsJSON}
-                            style={{width: 120}}>Download JSON
-                    </button>
-
-                    <input type="search" value={this.state.searchQuery} placeholder="Search by first name"
-                           onChange={ e => this.setState({searchQuery: e.target.value}) }
-                           style={{ position: "absolute", top: 160, right: 80, borderRadius: 8, height: 35, outline: 'none', paddingLeft: 10 }}/>
-
-                    <button onClick={() => { this.addContact();this.setState({ contact_group: "New group" }); }} className="btn btn-outline-success"
-                           style={{ position: "absolute", left: 40, top: 167, width: 25, height: 25, borderRadius: 5, padding: 0, fontSize: 25 }}>
-                        <div style={{ marginTop: -10.5, marginLeft: -1 }}>+</div>
-                    </button>
+                    {this.renderMenu()}
                     <h2 style={{textAlign: "center"}}>No contacts matching the first name</h2>
-                </div>)
+                </div>
+            );
         }
 
         const tables = this.matchedContacts.map(([group, contacts]) => {
@@ -308,16 +303,11 @@ class List extends React.Component{
                             <input type="text" id={`${field.id}-${contact.id}`} defaultValue={field.defaultValue}
                                    style={{width: field.width, marginTop: -4, marginLeft: -4, marginBottom: -4,
                                        ...field.style}} maxLength={field.maxLength} />
-                        ) : (
-                            <div className="contactFields">{field.defaultValue}</div>
-                        )}
+                        ) : ( <div className="contactFields">{field.defaultValue}</div> )}
                     </td>
                 ));
                 return (
-                    <tr key={contact.contact_id}>
-                        {inputFieldsElements}
-                        {this.renderButtons(contact)}
-                    </tr>
+                    <tr key={contact.contact_id}>{inputFieldsElements}{this.renderButtons(contact)}</tr>
                 );
             });
 
@@ -369,21 +359,8 @@ class List extends React.Component{
         });
 
         return (
-            // TODO: wrap it to function and call it
             <div>
-                <Navbar/>
-                <button className={ ["downloads", "btn", "btn-outline-dark"].join(" ") } onClick={this.downloadAsJSON}
-                        style={{width: 120}}>Download JSON
-                </button>
-
-                <input type="search" value={this.state.searchQuery} placeholder="Search by first name"
-                       onChange={ e => this.setState({searchQuery: e.target.value}) }
-                       style={{ position: "absolute", top: 160, right: 80, borderRadius: 8, height: 35, outline: 'none', paddingLeft: 10 }}/>
-
-                <button onClick={() => { this.addContact();this.setState({ contact_group: "New group" }); }} className="btn btn-outline-success"
-                       style={{ position: "absolute", left: 40, top: 167, width: 25, height: 25, borderRadius: 5, padding: 0, fontSize: 25 }}>
-                    <div style={{ marginTop: -10.5, marginLeft: -1 }}>+</div>
-                </button>
+                {this.renderMenu()}
                 {tables}
             </div>
         );
