@@ -18,11 +18,11 @@ class List extends React.Component{
             birthday: '',
             data: [],
             editingGroup: '',
+            searchQuery: '',
+            searchColumn: '',
             isEditing: false,
             selectedForDeletion: null,
             selectedForEdit: null,
-            searchQuery: '',
-            searchColumn: '',
             disableDeleteButtons: false,
         };
     }
@@ -95,7 +95,7 @@ class List extends React.Component{
             const updatedContact = this.getUpdatedContactInfo(id);
             this.updateContact(id, updatedContact);
         } else {
-            this.setState({selectedForEdit: id, selectedForDeletion: null});
+            this.setState({ selectedForEdit: id, selectedForDeletion: null });
         }
     }
 
@@ -128,7 +128,7 @@ class List extends React.Component{
             .then((response) => response)
             .then((data) => {
                 if (data) {
-                    this.setState({selectedForEdit: null});
+                    this.setState({ selectedForEdit: null });
                     this.fetchData();
                 }
             });
@@ -168,7 +168,7 @@ class List extends React.Component{
             .then((data) => {
                 this.fetchData();
                 localStorage.setItem('contact_group', this.state.contact_group);
-                this.setState({ selectedForEdit: data.id, selectedForDeletion: null});
+                this.setState({ selectedForEdit: data.id, selectedForDeletion: null });
             });
         });
     }
@@ -207,7 +207,7 @@ class List extends React.Component{
                     });
             }
         });
-        this.setState({isEditing: false});
+        this.setState({ isEditing: false });
     };
 /* EDIT GROUP NAME */
 
@@ -241,10 +241,10 @@ class List extends React.Component{
             </button>
         );
         let buttonGroup;
-        if (this.state.selectedForEdit === contact.id) {buttonGroup = <>{editButton}{cancelButton}</>;}
-        else if (this.state.selectedForDeletion === contact.id) {buttonGroup = <>{cancelButton}{deleteButton}</>;}
-        else {buttonGroup = <>{editButton}{deleteButton}</>;}
-        return <td style={buttonStyles}>{buttonGroup}</td>;
+        if (this.state.selectedForEdit === contact.id) { buttonGroup = <>{editButton}{cancelButton}</>; }
+        else if (this.state.selectedForDeletion === contact.id) { buttonGroup = <>{cancelButton}{deleteButton}</>; }
+        else { buttonGroup = <>{editButton}{deleteButton}</>; }
+        return <td style={buttonStyles}>{ buttonGroup }</td>;
     }
 
     renderMenu() {
