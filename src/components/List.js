@@ -260,7 +260,34 @@ class List extends React.Component{
             return acc;
         }, {});
 
-        const tables = Object.entries(groups).map(([group, contacts]) => {
+        this.matchedContacts = Object.entries(groups).filter(([group, contacts]) => {
+            return contacts.some(contact =>
+                contact.first_name.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+        });
+
+        if (this.matchedContacts.length === 0) {
+            return (
+                // TODO: wrap it to function and call it
+                <div>
+                    <Navbar/>
+                    <button className={ ["downloads", "btn", "btn-outline-dark"].join(" ") } onClick={this.downloadAsJSON}
+                            style={{width: 120}}>Download JSON
+                    </button>
+
+                    <input type="search" value={this.state.searchQuery} placeholder="Search by first name"
+                           onChange={ e => this.setState({searchQuery: e.target.value}) }
+                           style={{ position: "absolute", top: 160, right: 80, borderRadius: 8, height: 35, outline: 'none', paddingLeft: 10 }}/>
+
+                    <button onClick={() => { this.addContact();this.setState({ contact_group: "New group" }); }} className="btn btn-outline-success"
+                           style={{ position: "absolute", left: 40, top: 167, width: 25, height: 25, borderRadius: 5, padding: 0, fontSize: 25 }}>
+                        <div style={{ marginTop: -10.5, marginLeft: -1 }}>+</div>
+                    </button>
+                    <h2 style={{textAlign: "center"}}>No contacts matching the first name</h2>
+                </div>)
+        }
+
+        const tables = this.matchedContacts.map(([group, contacts]) => {
             const contactData = contacts.filter(contact =>
                 contact.first_name.toLowerCase().includes(searchQuery.toLowerCase())
             );
@@ -342,6 +369,7 @@ class List extends React.Component{
         });
 
         return (
+            // TODO: wrap it to function and call it
             <div>
                 <Navbar/>
                 <button className={ ["downloads", "btn", "btn-outline-dark"].join(" ") } onClick={this.downloadAsJSON}
