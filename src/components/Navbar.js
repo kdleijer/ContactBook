@@ -40,10 +40,10 @@ function NavbarItems({selected, onClick}) {
         <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
                 <NavItem path="/list" selected={selected} onClick={onClick}>My lists</NavItem>
-                <NavItem path="/about" selected={selected} onClick={onClick}>About</NavItem>
+                <NavItem path="/settings" selected={selected} onClick={onClick}>Settings</NavItem>
             </ul>
             <ul className="navbar-nav ml-auto">
-                <NavItem path="http://127.0.0.1:8000/accounts/logout" selected={selected} onClick={onClick}>Logout</NavItem>
+                <NavItem path="/about" selected={selected} onClick={onClick}>About</NavItem>
             </ul>
         </div>
     );
