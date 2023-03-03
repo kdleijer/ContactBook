@@ -12,9 +12,7 @@ class Home extends Component {
                 </div>
                 <div className={"messages"} style={{marginLeft: 13 + '%'}}>
                     <h2>Keep in touch with your&nbsp;</h2>
-                    <Link to="/list" className={"linkList"} style={{textDecoration: 'none', color: '#03befc', cursor: 'pointer'}}>
-                        contacts
-                    </Link>
+                    <Link to="/list" className={"linkList"}>contacts</Link>
                 </div>
             </div>
         );

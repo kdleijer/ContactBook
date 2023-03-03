@@ -28,6 +28,15 @@ class List extends React.Component{
     }
 
 
+/* BLUE "CONTACTS" TEXT */
+    displayContactsMessage () {
+        return (
+            <p className={"linkList"} onClick={() => window.location.reload()}>contacts&nbsp;</p>
+        );
+    }
+/* BLUE "CONTACTS" TEXT */
+
+
 /* INITIAL FETCH DATA */
     fetchData(){
         fetch('http://127.0.0.1:8000/contact/')
@@ -278,9 +287,7 @@ class List extends React.Component{
                 <div>
                     {this.renderMenu()}
                     <div className={"messages"} style={{ marginLeft: 8 + '%' }}>
-                        <h2 style={{textAlign: "center"}}>No&nbsp;</h2>
-                        <p className={"linkList"} style={{ textDecoration: 'none', color: '#03befc', cursor: 'pointer' }}
-                               onClick={() => window.location.reload()}>contacts&nbsp;</p>
+                        <h2>No&nbsp;</h2> <div style={{ marginTop: 11.1 + '%'}}>{this.displayContactsMessage()}</div>
                         <h2>matching the first name</h2>
                     </div>
                 </div>
@@ -291,9 +298,7 @@ class List extends React.Component{
                 <div>
                     {this.renderMenu()}
                     <div className={"messages"} style={{ marginLeft: 27 + '%' }}>
-                        <h2>There are no&nbsp;</h2>
-                        <p className={"linkList"} style={{ textDecoration: 'none', color: '#03befc', cursor: 'pointer' }}
-                           onClick={() => window.location.reload()}>contacts</p>
+                        <h2>There are no&nbsp;</h2>{this.displayContactsMessage()}
                     </div>
                 </div>
             );
