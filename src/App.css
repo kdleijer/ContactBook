@@ -75,6 +75,10 @@ h6 {
     font-size: 80px;
     margin-top: 14%;
 }
+.messages {
+    display: flex;
+}
+
 /* HOME */
 
 

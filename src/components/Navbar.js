@@ -31,7 +31,7 @@ function Navbar() {
 function NavbarBrand({selected, onClick}) {
     return (
         <Link className={`navbar-brand ${selected === "/home" ? "active" : ""}`} to="/home"
-                  onClick={() => onClick("/home")}>SzymCode</Link>
+              onClick={() => onClick("/home")}>SzymCode</Link>
     );
 }
 
@@ -41,9 +41,10 @@ function NavbarItems({selected, onClick}) {
             <ul className="navbar-nav">
                 <NavItem path="/list" selected={selected} onClick={onClick}>My lists</NavItem>
                 <NavItem path="/settings" selected={selected} onClick={onClick}>Settings</NavItem>
+                <NavItem path="/about" selected={selected} onClick={onClick}>About</NavItem>
             </ul>
             <ul className="navbar-nav ml-auto">
-                <NavItem path="/about" selected={selected} onClick={onClick}>About</NavItem>
+                <NavItem path="http://127.0.0.1:8000/accounts/logout" selected={selected} onClick={onClick}>Logout</NavItem>
             </ul>
         </div>
     );

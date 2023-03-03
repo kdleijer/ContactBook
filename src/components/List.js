@@ -273,11 +273,28 @@ class List extends React.Component{
             );
         });
 
-        if (this.matchedContacts.length === 0) {
+        if ((data.length !== 0)  && this.matchedContacts.length === 0) {
             return (
                 <div>
                     {this.renderMenu()}
-                    <h2 style={{textAlign: "center"}}>No contacts matching the first name</h2>
+                    <div className={"messages"} style={{ marginLeft: 8 + '%' }}>
+                        <h2 style={{textAlign: "center"}}>No&nbsp;</h2>
+                        <p className={"linkList"} style={{ textDecoration: 'none', color: '#03befc', cursor: 'pointer' }}
+                               onClick={() => window.location.reload()}>contacts&nbsp;</p>
+                        <h2>matching the first name</h2>
+                    </div>
+                </div>
+            );
+        }
+        if (data.length === 0) {
+            return (
+                <div>
+                    {this.renderMenu()}
+                    <div className={"messages"} style={{ marginLeft: 27 + '%' }}>
+                        <h2>There are no&nbsp;</h2>
+                        <p className={"linkList"} style={{ textDecoration: 'none', color: '#03befc', cursor: 'pointer' }}
+                           onClick={() => window.location.reload()}>contacts</p>
+                    </div>
                 </div>
             );
         }
