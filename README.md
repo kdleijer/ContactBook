@@ -13,6 +13,8 @@
 
 </div>
 
+
+
 # ContactBook
 
 This website helps to storage contacts data, share it with others and download contact lists to JSON or PDF file.
@@ -22,9 +24,18 @@ You can clone this repo and run it on your internal server. The project was crea
 
 <br>
 
+### Table of Contents
+
+- [Installation](#%EF%B8%8F-installation)
+- [Run](#-run)
+- [Usage](#-usage)
+- [Solved Problems](#-solved-problems)
+- [TODO](#-todo)
+
+<br>
 
 
-## 🛠️ Installation:
+## 🛠️ Installation: 
 
 • Clone this repository.
 
@@ -39,6 +50,8 @@ pip install -r requirements.txt
 ```bash
 npm install
 ```
+
+</details> 
 
 <br>
 
@@ -77,7 +90,7 @@ npm start
 
 
 
-## ✅ Solved problems:
+## ✅ Solved Problems:
 
 - [X] Contact groups
 
