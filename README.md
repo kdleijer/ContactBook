@@ -22,20 +22,19 @@ You can clone this repo and run it on your internal server. The project was crea
 <br>
 **I highly encourage you to contributions!**
 
-<br>
-
 ### Table of Contents
 
 - [Installation](#%EF%B8%8F-installation)
 - [Run](#-run)
 - [Usage](#-usage)
-- [Solved Problems](#-solved-problems)
-- [TODO](#-todo)
+- [Solved Problems](#--solved-problems-)
+- [TODO](#--todo-)
 
 <br>
 
 
-## 🛠️ Installation: 
+
+## 🛠️ Installation:
 
 • Clone this repository.
 
@@ -90,7 +89,8 @@ npm start
 
 
 
-## ✅ Solved Problems:
+<details>
+<summary> <h2> ✅ Solved Problems: </h2> </summary>
 
 - [X] Contact groups
 
@@ -112,11 +112,12 @@ npm start
 
 - [X] Edit all contacts in table with editable header above table
 
+</details>
 <br>
 
 
-
-## 🎯 TODO:
+<details>
+<summary> <h2> 🎯 TODO: </h2> </summary>
 
 
 - [ ] Restrict routes in App.js with is_authenticated from django registration
@@ -140,3 +141,4 @@ npm start
 - [ ] Combine logging/registration with home page
 
 - [ ] Mobile website
+</details>
