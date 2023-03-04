@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from .forms import CreateUserForm
 
 
@@ -60,3 +62,9 @@ def logoutUser(request):
 @login_required(login_url='login')
 def home(request):
     return redirect('http://localhost:3000/home/')
+
+
+@api_view(['GET'])
+def check_authentication(request):
+    authenticated = request.user.is_authenticated
+    return Response({'authenticated': authenticated})
