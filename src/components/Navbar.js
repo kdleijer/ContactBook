@@ -36,6 +36,10 @@ function NavbarBrand({selected, onClick}) {
 }
 
 function NavbarItems({selected, onClick}) {
+    const handleLogout = () => {
+        window.location.href = 'http://localhost:8000/accounts/logout';
+    };
+
     return (
         <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
@@ -43,14 +47,9 @@ function NavbarItems({selected, onClick}) {
                 <NavItem path="/settings" selected={selected} onClick={onClick}>Settings</NavItem>
                 <NavItem path="/about" selected={selected} onClick={onClick}>About</NavItem>
             </ul>
-
-            {/* TODO: fix logout from navbar | manually entered "http://127.0.0.1:8000/accounts/logout/" works */}
             <ul className="navbar-nav ml-auto">
-                <p style={{color: "white", position: "absolute", top: 15, right: 80}}>TYPE IN SEARCHBOARD localhost:8000/accounts/logout BECAUSE NAVITEM LOGOUT DOESNT WORK RIGHT NOW >>></p>
-                <NavItem path="http://127.0.0.1:8000/accounts/logout/" selected={selected} onClick={onClick}>Logout</NavItem>
+                <NavItem selected={selected} onClick={handleLogout}>Logout</NavItem>
             </ul>
-            {/* TODO: fix logout from navitem | manually entered "http://127.0.0.1:8000/accounts/logout/" works*/}
-
         </div>
     );
 }

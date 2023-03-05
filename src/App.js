@@ -6,11 +6,11 @@ import Home from './components/Home';
 import List from './components/List';
 import About from './components/About';
 import Settings from './components/Settings';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(null);
-    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         fetch('http://localhost:8000/accounts/auth/', {
@@ -20,23 +20,23 @@ function App() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             setIsAuthenticated(data.authenticated);
-            console.log(data);
         })
-        .catch(error => console.error(error));
+        .catch(error => console.error(error))
+        .finally(() => setIsLoading(false));
     }, []);
 
     useEffect(() => {
         if (isAuthenticated === false) {
-            navigate('/login'); /* TODO: redirect to absolute path localhost:8000/accounts/login instead :3000/login */
+          window.location.replace('http://localhost:8000/accounts/login');
         }
-    }, [isAuthenticated, navigate]);
-    if (isAuthenticated === null) {
+    }, [isAuthenticated]);
+
+    if (isLoading) {
         return <div>Loading...</div>;
     }
 
-    return (
+     return isAuthenticated && (
         <div className="container-fluid">
             <Routes>
                 <Route path="/home" element={<Home/>}/>
