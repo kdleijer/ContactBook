@@ -36,6 +36,8 @@ You can clone this repo and run it on your internal server. The project was crea
 
 ## 🛠️ Installation:
 
+• First make sure u have installed latest versions of ReactJS, NodeJS, Python, Django, 
+
 • Clone this repository.
 
 • Install modules from requirements.txt in **contactbookapi** directory.
@@ -58,7 +60,7 @@ npm install
 
 ## 🚀 Run:
 
-• First change SECRET_KEY in **contactbookapi** settings.
+• Change SECRET_KEY in **contactbookapi** settings.
 
 
 • **contactbookapi** directory:
@@ -92,15 +94,17 @@ npm start
 <details>
 <summary> <h2> ✅ Solved Problems: </h2> </summary>
 
-- [X] Restrict routes in App.js with authentication from django API endpoint
+- [X] **Full functionality of restrict routes in App.js with authentication from django API endpoint!**
 
-- [X] Contact groups
+- [X] **Implemented user login/registration from my own template project: [RegistrationDjango](https://github.com/SzymCode/RegistrationDjango)!**
+
+- [X] **Contact groups!**
+
+- [X] **Render multiple tables with contact group specific data!**
+
+- [X] **Fetch data with REST API!**
 
 - [X] Search contacts by first name
-
-- [X] Multiple tables with contact group specific data
-
-- [X] Fetch data with REST API
 
 - [X] Specific tables headers
 
@@ -108,7 +112,6 @@ npm start
 
 - [X] Download data to JSON file
 
-- [X] Implemented user login/registration from my own template project: [RegistrationDjango](https://github.com/SzymCode/RegistrationDjango)
 
 - [X] Refactored code for better maintainability
 
@@ -120,8 +123,6 @@ npm start
 
 <details>
 <summary> <h2> 🎯 TODO: </h2> </summary>
-
-- [ ] Working logout from NavItem 
 
 - [ ] Dragging, resizing, deleting columns and create custom ones
 
