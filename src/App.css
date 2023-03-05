@@ -1,7 +1,13 @@
 html, body {
     overflow-x: hidden;
-    min-width: 1050px;
+    min-width: 1580px;
     max-width: 2000px;
+}
+
+@media screen and (max-width: 1579px) {
+  html, body {
+    overflow-x: auto;
+  }
 }
 div::-webkit-scrollbar {
     /*body {

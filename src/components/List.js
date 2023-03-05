@@ -248,6 +248,17 @@ class List extends React.Component{
     }
 
     renderMenu() {
+        if (this.state.data.length === 0) {
+            return (
+                <Navbar/>
+            );
+        }
+        const uniqueContactGroups = [...new Set(this.state.data.map(contact => contact.contact_group))];
+        let newGroupName = `New Group ${uniqueContactGroups.length}`;
+        while (uniqueContactGroups.includes(newGroupName)) {
+            const number = parseInt(newGroupName.slice(-1), 10);
+            newGroupName = newGroupName.slice(0, -1) + (number + 1);
+        }
         return (
             <div>
                 <Navbar/>
@@ -256,14 +267,16 @@ class List extends React.Component{
                 </button>
                 <input type="search" value={this.state.searchQuery} placeholder="Search by first name"
                         onChange={e => this.setState({searchQuery: e.target.value})}
-                        style={{ position: "absolute", top: 160, right: 80, borderRadius: 8, height: 35, outline: 'none', paddingLeft: 10}}/>
-                <button onClick={() => {this.addContact();this.setState({contact_group: "New group"});}}
-                        className="btn btn-outline-success" style={{position: "absolute", left: 40, top: 167, width: 25, height: 25,
-                        borderRadius: 5, padding: 0, fontSize: 25}}> <div style={{marginTop: -10.5, marginLeft: -1}}>+</div>
+                        style={{ position: "absolute", top: 185, right: 80, borderRadius: 8, height: 35, outline: 'none', paddingLeft: 10}}/>
+                <button onClick={() => {this.addContact();this.setState({contact_group: newGroupName});}} className="btn btn-outline-success"
+                        style={{ position: "absolute", left: 19, top: 143, width: 35, height: 35, borderRadius: 5, padding: 0, fontSize: 40,
+                            background: "white", color: "green", borderColor: "green" }}>
+                    <div style={{ marginTop: -17.9, marginLeft: -0.5 }}>+</div>
                 </button>
             </div>
         );
     }
+
 
 
     render() {
@@ -335,20 +348,21 @@ class List extends React.Component{
 
             return (
                 <div key={group}>
-                    <div>
+                    <div style={{border:"solid", borderWidth: 2, borderColor:"#dce2e3", borderRadius: 10, minWidth: 1540,
+                        paddingTop: 20, paddingRight: 20, marginLeft: 30, marginRight: 30, marginBottom: 30,  boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.4)"}}>
                         {this.state.editingGroup === group ? (
-                            <form style={{ position: "relative", top: -6, left: 78, fontSize: 35, marginBottom: -4.5, width: 800 }} onSubmit={this.handleSubmit}>
+                            <form style={{ position: "relative", top: -6, left: 78, fontSize: 35, marginBottom: -4.5, maxWidth: 700 }} onSubmit={this.handleSubmit}>
                                 <input type="text" value={this.state.contact_group} onChange={this.handleChange}
                                     style={{ fontWeight: 500, outline: "none", borderWidth: 0 }} autoFocus onBlur={() => this.setState({ editingGroup: null })} />
                             </form>
                         ) : (
-                            <h3 style={{ position: "relative", top: 0, left: 80, fontSize: 35 }} onClick={() => { this.handleEdit();
+                            <h3 style={{ position: "relative", top: 0, left: 80, fontSize: 35, maxWidth: 700 }} onClick={() => { this.handleEdit();
                                 this.setState({ contact_group: group, editingGroup: group, oldGroup: group }); }}>{group}
                             </h3>
                         ) }
 
                         <div style={{ maxHeight: 350, overflow: "scroll", marginBottom: 50 }} className="contactGroup">
-                            <table className="table table-bordered" style={{width: "100%", minWidth: 1470, maxWidth: 1470, marginLeft: 60, marginRight: 60}}>
+                            <table className="table table-bordered" style={{width: "100%", minWidth: 1470, maxWidth: 1460, marginLeft: 33 }}>
                                 <thead>
                                 <tr>
                                     <th style={{ width: 48,  padding: 6, fontSize: 17 }}>ID</th>
