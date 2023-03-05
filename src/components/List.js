@@ -222,6 +222,7 @@ class List extends React.Component{
 //TODO: write downloadAsPDF function
 
 
+/* RENDER BUTTONS */
     renderButtons(contact) {
         const buttonStyles = {padding: 4}
         const editButton = (
@@ -246,7 +247,10 @@ class List extends React.Component{
         else { buttonGroup = <>{editButton}{deleteButton}</>; }
         return <td style={buttonStyles}>{ buttonGroup }</td>;
     }
+/* RENDER BUTTONS */
 
+
+/* RENDER MENU */
     renderMenu() {
         if (this.state.data.length === 0) {
             return (
@@ -276,9 +280,10 @@ class List extends React.Component{
             </div>
         );
     }
+/* RENDER MENU */
 
 
-
+/* RENDER TABLES */
     render() {
         const {data, searchQuery} = this.state;
         const groups = data.reduce((acc, contact) => {
@@ -393,7 +398,6 @@ class List extends React.Component{
                 </div>
             );
         });
-
         return (
             <div>
                 {this.renderMenu()}
@@ -401,5 +405,6 @@ class List extends React.Component{
             </div>
         );
     }
+/* RENDER TABLES */
 }
 export default List;

@@ -39,6 +39,7 @@ function App() {
     return isAuthenticated && (
         <div className="container-fluid">
             <Routes>
+                <Route path="*" element={<Home/>}/>
                 <Route path="/home" element={<Home/>}/>
                 <Route path="/list" element={<List/>}/>
                 <Route path="/about" element={<About/>}/>
