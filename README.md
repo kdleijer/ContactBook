@@ -10,6 +10,7 @@
 <a href="https://codeclimate.com/github/SzymCode/ContactBook/maintainability"><img src="https://api.codeclimate.com/v1/badges/82bf96d0eed9ecd61446/maintainability" /></a>
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/SzymCode/ContactBook/issues)\
 ![License](https://img.shields.io/badge/license-BSD--3-important)
+<img src="https://img.shields.io/badge/npm-9.4.1-brightgreen"/>
 
 </div>
 
@@ -112,11 +113,11 @@ npm start
 
 - [X] Download data to JSON file
 
-
 - [X] Refactored code for better maintainability
 
 - [X] Edit all contacts in table with editable header above table
 
+- [X] Loading screen
 </details>
 <br>
 
@@ -133,8 +134,6 @@ npm start
 - [ ] Display contacts by selected order
 
 - [ ] Download contact data to PDF
-
-- [ ] Loading screen
 
 - [ ] Settings page 
 
