@@ -36,7 +36,7 @@ You can clone this repo and run it on your internal server. The project was crea
 
 ## 🛠️ Installation:
 
-• First make sure u have installed latest versions of ReactJS, NodeJS, Python, Django, 
+• First make sure u have installed latest versions of ReactJS, NodeJS, Python, Django.
 
 • Clone this repository.
 
@@ -133,6 +133,8 @@ npm start
 - [ ] Display contacts by selected order
 
 - [ ] Download contact data to PDF
+
+- [ ] Loading screen
 
 - [ ] Settings page 
 
