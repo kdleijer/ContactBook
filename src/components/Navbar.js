@@ -45,7 +45,6 @@ function NavbarItems({selected, onClick}) {
             <ul className="navbar-nav">
                 <NavItem path="/list" selected={selected} onClick={onClick}>My lists</NavItem>
                 <NavItem path="/settings" selected={selected} onClick={onClick}>Settings</NavItem>
-                <NavItem path="/about" selected={selected} onClick={onClick}>About</NavItem>
             </ul>
             <ul className="navbar-nav ml-auto">
                 <NavItem selected={selected} onClick={handleLogout}>Logout</NavItem>

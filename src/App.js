@@ -33,10 +33,10 @@ function App() {
     }, [isAuthenticated]);
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <h2 style={{marginLeft: 40 + '%'}}>Loading...</h2>;
     }
 
-     return isAuthenticated && (
+    return isAuthenticated && (
         <div className="container-fluid">
             <Routes>
                 <Route path="/home" element={<Home/>}/>
