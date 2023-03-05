@@ -22,7 +22,7 @@ You can clone this repo and run it on your internal server. The project was crea
 <br>
 **I highly encourage you to contributions!**
 
-### Table of Contents
+### Table of Contents:
 
 - [Installation](#%EF%B8%8F-installation)
 - [Run](#-run)
@@ -92,6 +92,8 @@ npm start
 <details>
 <summary> <h2> ✅ Solved Problems: </h2> </summary>
 
+- [X] Restrict routes in App.js with authentication from django API endpoint
+
 - [X] Contact groups
 
 - [X] Search contacts by first name
@@ -119,8 +121,7 @@ npm start
 <details>
 <summary> <h2> 🎯 TODO: </h2> </summary>
 
-
-- [ ] Restrict routes in App.js with is_authenticated from django registration
+- [ ] Working logout from NavItem 
 
 - [ ] Dragging, resizing, deleting columns and create custom ones
 
