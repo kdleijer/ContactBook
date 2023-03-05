@@ -27,8 +27,8 @@ You can clone this repo and run it on your internal server. The project was crea
 - [Installation](#%EF%B8%8F-installation)
 - [Run](#-run)
 - [Usage](#-usage)
-- [Solved Problems](#--solved-problems-)
-- [TODO](#--todo-)
+- [Solved Problems](#--solved-problems--)
+- [TODO](#--todo--)
 
 <br>
 
@@ -91,8 +91,8 @@ npm start
 
 
 
-<details>
-<summary> <h2> ✅ Solved Problems: </h2> </summary>
+
+<details><summary> <h2> ✅ Solved Problems:  </summary>
 
 - [X] **Full functionality of restrict routes in App.js with authentication from django API endpoint!**
 
@@ -121,8 +121,8 @@ npm start
 <br>
 
 
-<details>
-<summary> <h2> 🎯 TODO: </h2> </summary>
+
+<details><summary> <h2> 🎯 TODO:  </summary>
 
 - [ ] Dragging, resizing, deleting columns and create custom ones
 
