@@ -1,11 +1,11 @@
 import React from "react";
-import Settings from "./Settings";
+import Navbar from "./Navbar";
 import {Link} from "react-router-dom";
 
 function About() {
     return (
         <>
-            <Settings/>
+            <Navbar/>
             <h2 style={{marginLeft: 41.5 + '%'}}>ABOUT</h2>
             <Link to="/settings">
                 <button className="btn btn-outline-dark"

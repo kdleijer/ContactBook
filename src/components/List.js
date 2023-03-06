@@ -1,5 +1,4 @@
 import React from 'react';
-import { saveAs } from "file-saver";
 import Navbar from "./Navbar";
 
 class List extends React.Component{
@@ -61,7 +60,7 @@ class List extends React.Component{
             .then(response => response.json())
             .then(data => {
                 if (data.length === 0) {
-                    this.setState({ contact_group: "Initial group" });
+                    this.setState({ contact_group: "Initial Group" });
                     this.addContact();}})
         this.fetchData();
     }
@@ -212,13 +211,6 @@ class List extends React.Component{
 /* EDIT GROUP NAME */
 
 
-/* DOWNLOAD DATA */
-    downloadAsJSON = () => {
-        const jsonData = JSON.stringify(this.state.data);
-        const blob = new Blob([jsonData], { type: "application/json" });
-        saveAs(blob, "contacts.json");
-    };
-/* DOWNLOAD DATA */
 //TODO: write downloadAsPDF function
 
 
@@ -231,7 +223,7 @@ class List extends React.Component{
             </button>
         );
         const cancelButton = (
-            <button className="btn btn-outline-dark" style={{ marginLeft: this.state.selectedForEdit === contact.id ? 4 : -2 }}
+            <button className="btn btn-outline-dark" style={{ marginLeft: this.state.selectedForEdit === contact.id ? 4 : 0 }}
                 onClick={() => this.cancel(contact.id)}>Cancel
             </button>
         );
@@ -266,14 +258,12 @@ class List extends React.Component{
         return (
             <div>
                 <Navbar/>
-                <button className={["downloads", "btn", "btn-outline-dark"].join(" ")} onClick={this.downloadAsJSON}
-                        style={{width: 120}}>Download JSON
-                </button>
-                <input type="search" value={this.state.searchQuery} placeholder="Search by first name"
+                <input type="search" value={this.state.searchQuery} placeholder=" Search by first name..."
                         onChange={e => this.setState({searchQuery: e.target.value})}
-                        style={{ position: "absolute", top: 185, right: 80, borderRadius: 8, height: 35, outline: 'none', paddingLeft: 10}}/>
+                        style={{ position: "absolute", top: 10, left: 520, borderRadius: 8, borderWidth: 0,
+                            height: 35, width: 600, outline: 'none', paddingLeft: 10}}/>
                 <button onClick={() => {this.addContact();this.setState({contact_group: newGroupName});}} className="btn btn-outline-success"
-                        style={{ position: "absolute", left: 19, top: 143, width: 35, height: 35, borderRadius: 5, padding: 0, fontSize: 40,
+                        style={{ position: "absolute", left: 16, top: 70, width: 35, height: 35, borderRadius: 5, padding: 0, fontSize: 40,
                             background: "white", color: "green", borderColor: "green" }}>
                     <div style={{ marginTop: -17.9, marginLeft: -0.5 }}>+</div>
                 </button>
@@ -305,23 +295,12 @@ class List extends React.Component{
                 <div>
                     {this.renderMenu()}
                     <div className={"messages"} style={{ marginLeft: 8 + '%' }}>
-                        <h2>No&nbsp;</h2> <div style={{ marginTop: 11.1 + '%'}}>{this.displayContactsMessage()}</div>
+                        <h2>No&nbsp;</h2> <div style={{ marginTop: 11.1 + '%' }}>{this.displayContactsMessage()}</div>
                         <h2>matching the first name</h2>
                     </div>
                 </div>
             );
         }
-        if (data.length === 0) {
-            return (
-                <div>
-                    {this.renderMenu()}
-                    <div className={"messages"} style={{ marginLeft: 27 + '%' }}>
-                        <h2>There are no&nbsp;</h2>{this.displayContactsMessage()}
-                    </div>
-                </div>
-            );
-        }
-
         const tables = this.matchedContacts.map(([group, contacts]) => {
             const contactData = contacts.filter(contact =>
                 contact.first_name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -354,7 +333,7 @@ class List extends React.Component{
             return (
                 <div key={group}>
                     <div style={{border:"solid", borderWidth: 2, borderColor:"#dce2e3", borderRadius: 10, minWidth: 1540,
-                        paddingTop: 20, paddingRight: 20, marginLeft: 30, marginRight: 30, marginBottom: 30,  boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.4)"}}>
+                        paddingTop: 20, paddingRight: 20, marginLeft: 30, marginRight: 30, marginBottom: 30, boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.4)"}}>
                         {this.state.editingGroup === group ? (
                             <form style={{ position: "relative", top: -6, left: 78, fontSize: 35, marginBottom: -4.5, maxWidth: 700 }} onSubmit={this.handleSubmit}>
                                 <input type="text" value={this.state.contact_group} onChange={this.handleChange}

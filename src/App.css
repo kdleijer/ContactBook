@@ -22,7 +22,7 @@ div::-webkit-scrollbar {
 }
 .navbar {
     min-width: 1580px;
-    margin-bottom: 100px;
+    margin-bottom: 30px;
 }
 .active{
     color: lightgray !important;
