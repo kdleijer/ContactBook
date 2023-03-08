@@ -60,7 +60,7 @@ class List extends React.Component{
             .then(response => response.json())
             .then(data => {
                 if (data.length === 0) {
-                    this.setState({ contact_group: "Initial Group" });
+                    this.setState({ contact_group: "New Group 1" });
                     this.addContact();}})
         this.fetchData();
     }
@@ -283,7 +283,6 @@ class List extends React.Component{
             acc[contact.contact_group].push(contact);
             return acc;
         }, {});
-
         this.matchedContacts = Object.entries(groups).filter(([group, contacts]) => {
             return contacts.some(contact =>
                 contact.first_name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -301,6 +300,23 @@ class List extends React.Component{
                 </div>
             );
         }
+
+        if (data.length === 0) {
+            setTimeout(() => {
+                this.setState({showMessage: true});
+            }, 500);
+            return (
+                <div>
+                    {this.renderMenu()}
+                    {this.state.showMessage ? (
+                        <div className={"messages"} style={{marginLeft: 27 + '%'}}>
+                            <h2>There are no&nbsp;</h2>{this.displayContactsMessage()}
+                        </div>
+                    ) : null}
+                </div>
+            );
+        }
+
         const tables = this.matchedContacts.map(([group, contacts]) => {
             const contactData = contacts.filter(contact =>
                 contact.first_name.toLowerCase().includes(searchQuery.toLowerCase())
