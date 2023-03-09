@@ -37,9 +37,10 @@ You can clone this repo and run it on your internal server. The project was crea
 
 ## 🛠️ Installation:
 
-• First make sure u have installed latest versions of ReactJS, NodeJS, Python, Django.
+• First make sure u have installed latest versions of [ReactJS, NodeJS,](https://www.tutorialspoint.com/reactjs/reactjs_environment_setup.htm) 
+[Python, Django.](https://www.geeksforgeeks.org/django-introduction-and-installation/)
 
-• Clone this repository.
+• Clone this repository or download latest release.
 
 • Install modules from requirements.txt in **contactbookapi** directory.
 
