@@ -9,6 +9,16 @@ import Settings from './components/Settings';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
+    const [data, setData] = React.useState([]);
+
+    React.useEffect(() => {
+        fetch('http://127.0.0.1:8000/contact/')
+            .then((response) => response.json())
+            .then((data) => {
+                setData(data);
+            })
+    }, []);
+
     const [isAuthenticated, setIsAuthenticated] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -43,7 +53,7 @@ function App() {
                 <Route path="/home" element={<Home/>}/>
                 <Route path="/list" element={<List/>}/>
                 <Route path="/about" element={<About/>}/>
-                <Route path="/settings" element={<Settings/>}/>
+                <Route path="/settings" element={<Settings data={data} setData={setData}/>}/>
             </Routes>
         </div>
     );

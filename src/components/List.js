@@ -48,6 +48,7 @@ class List extends React.Component{
     }
 /* INITIAL FETCH DATA */
 
+/* TODO: Move fetchData and componentDidMount to App.js */
 
 /* LIFECYCLE METHOD */
     componentDidMount(){

@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { saveAs } from "file-saver";
 import Navbar from "./Navbar";
 
-function Settings() {
+function Settings(props) {
 /* DOWNLOAD DATA */
     function downloadAsJSON () {
-        const jsonData = JSON.stringify(this.state.data);
+        const jsonData = JSON.stringify(props.data);
         const blob = new Blob([jsonData], { type: "application/json" });
         saveAs(blob, "contacts.json");
     }
