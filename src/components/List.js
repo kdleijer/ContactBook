@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from "./Navbar";
+import Dropdown from 'react-bootstrap/Dropdown';
 
 class List extends React.Component{
     constructor(props){
@@ -18,6 +19,7 @@ class List extends React.Component{
             data: [],
             editingGroup: '',
             searchQuery: '',
+            searchField: '',
             searchColumn: '',
             isEditing: false,
             selectedForDeletion: null,
@@ -259,10 +261,26 @@ class List extends React.Component{
         return (
             <div>
                 <Navbar/>
+                <Dropdown style={{position: "absolute", top: 14, left: 1295}}>
+                    <Dropdown.Toggle variant="outline-info" id="dropdown-basic" style={{width: 20, height: 20, paddingTop: 0 }}>
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item>       First name         </Dropdown.Item>
+                            <Dropdown.Item>       Second name        </Dropdown.Item>
+                            <Dropdown.Item>       Email              </Dropdown.Item>
+                            <Dropdown.Item>       Work phone         </Dropdown.Item>
+                            <Dropdown.Item>       Personal phone     </Dropdown.Item>
+                            <Dropdown.Item>       Address            </Dropdown.Item>
+                            <Dropdown.Item>       Birthday           </Dropdown.Item>
+                        </Dropdown.Menu>
+                </Dropdown>
+
                 <input type="search" value={this.state.searchQuery} placeholder=" Search by first name..."
                         onChange={e => this.setState({searchQuery: e.target.value})}
                         style={{ position: "absolute", top: 10, left: 680, borderRadius: 8, borderWidth: 0,
                             height: 35, width: 600, outline: 'none', paddingLeft: 10, margin: "auto", display: "flex"}}/>
+
                 <button onClick={() => {this.addContact();this.setState({contact_group: newGroupName});}} className="btn btn-outline-success"
                         style={{ position: "absolute", left: 205, top: 150, width: 35, height: 35, borderRadius: 5, padding: 0, fontSize: 40}}>
                         <div style={{ marginTop: -17.9, marginLeft: -0.5 }}>+</div>
@@ -361,18 +379,19 @@ class List extends React.Component{
                             </h3>
                         ) }
 
+
                         <div style={{ maxHeight: 350, overflow: "scroll", marginBottom: 50 }} className="contactGroup">
                             <table className="table table-bordered" style={{width: "100%", minWidth: 1470, maxWidth: 1460, marginLeft: 33 }}>
                                 <thead>
                                 <tr>
-                                    <th style={{ width: 48,  padding: 6, fontSize: 17 }}>ID</th>
-                                    <th style={{ width: 124, padding: 6, fontSize: 17 }}>First name</th>
-                                    <th style={{ width: 149, padding: 6, fontSize: 17 }}>Last name</th>
-                                    <th style={{ width: 230, padding: 6, fontSize: 17 }}>Email</th>
-                                    <th style={{ width: 135, padding: 6, fontSize: 17 }}>Work phone</th>
-                                    <th style={{ width: 135, padding: 6, fontSize: 17 }}>Personal phone</th>
-                                    <th style={{ width: 313, padding: 6, fontSize: 17 }}>Address</th>
-                                    <th style={{ width: 86,  padding: 6, fontSize: 17 }}>Birthday</th>
+                                    <th style={{ width: 48,  padding: 6, fontSize: 17 }}>     ID                 </th>
+                                    <th style={{ width: 124, padding: 6, fontSize: 17 }}>     First name         </th>
+                                    <th style={{ width: 149, padding: 6, fontSize: 17 }}>     Last name          </th>
+                                    <th style={{ width: 230, padding: 6, fontSize: 17 }}>     Email              </th>
+                                    <th style={{ width: 135, padding: 6, fontSize: 17 }}>     Work phone         </th>
+                                    <th style={{ width: 135, padding: 6, fontSize: 17 }}>     Personal phone     </th>
+                                    <th style={{ width: 313, padding: 6, fontSize: 17 }}>     Address            </th>
+                                    <th style={{ width: 86,  padding: 6, fontSize: 17 }}>     Birthday           </th>
                                     <th style={{ width: 123, padding: 4, fontSize: 17 }}>
 
                                         <button style={{ marginLeft: 0 }} className="btn btn-outline-success"
