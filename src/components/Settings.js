@@ -16,7 +16,7 @@ function Settings(props) {
             <Navbar/>
             <Link to="/about">
                 <button className={["btn", "btn-outline-dark"].join(" ")}
-                       style={{ position: "absolute", bottom: 20, left: 1835, background: "white", color: "black", width: 65 }}>About
+                       style={{ position: "absolute", bottom: 20, left: 1835, width: 65 }}>About
                 </button>
             </Link>
             <button className={["downloads", "btn", "btn-outline-dark"].join(" ")} onClick={downloadAsJSON}

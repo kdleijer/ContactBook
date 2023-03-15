@@ -19,7 +19,7 @@ class List extends React.Component{
             data: [],
             editingGroup: '',
             searchQuery: '',
-            searchField: '',
+            searchOption: 'first_name',
             searchColumn: '',
             isEditing: false,
             selectedForDeletion: null,
@@ -252,12 +252,6 @@ class List extends React.Component{
                 <Navbar/>
             );
         }
-        const uniqueContactGroups = [...new Set(this.state.data.map(contact => contact.contact_group))];
-        let newGroupName = `New Group ${uniqueContactGroups.length}`;
-        while (uniqueContactGroups.includes(newGroupName)) {
-            const number = parseInt(newGroupName.slice(-1), 10);
-            newGroupName = newGroupName.slice(0, -1) + (number + 1);
-        }
         return (
             <div>
                 <Navbar/>
@@ -266,25 +260,20 @@ class List extends React.Component{
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            <Dropdown.Item>       First name         </Dropdown.Item>
-                            <Dropdown.Item>       Second name        </Dropdown.Item>
-                            <Dropdown.Item>       Email              </Dropdown.Item>
-                            <Dropdown.Item>       Work phone         </Dropdown.Item>
-                            <Dropdown.Item>       Personal phone     </Dropdown.Item>
-                            <Dropdown.Item>       Address            </Dropdown.Item>
-                            <Dropdown.Item>       Birthday           </Dropdown.Item>
+                            <Dropdown.Item onClick={() => this.setState({ searchOption: 'first_name'     })}>       First name         </Dropdown.Item>
+                            <Dropdown.Item onClick={() => this.setState({ searchOption: 'last_name'      })}>       Last name          </Dropdown.Item>
+                            <Dropdown.Item onClick={() => this.setState({ searchOption: 'email'          })}>       Email              </Dropdown.Item>
+                            <Dropdown.Item onClick={() => this.setState({ searchOption: 'work_phone'     })}>       Work phone         </Dropdown.Item>
+                            <Dropdown.Item onClick={() => this.setState({ searchOption: 'personal_phone' })}>       Personal phone     </Dropdown.Item>
+                            <Dropdown.Item onClick={() => this.setState({ searchOption: 'address'        })}>       Address            </Dropdown.Item>
+                            <Dropdown.Item onClick={() => this.setState({ searchOption: 'birthday'       })}>       Birthday           </Dropdown.Item>
                         </Dropdown.Menu>
                 </Dropdown>
 
-                <input type="search" value={this.state.searchQuery} placeholder=" Search by first name..."
+                <input type="search" value={this.state.searchQuery}  placeholder={`Search by ${this.state.searchOption}`}
                         onChange={e => this.setState({searchQuery: e.target.value})}
                         style={{ position: "absolute", top: 10, left: 680, borderRadius: 8, borderWidth: 0,
                             height: 35, width: 600, outline: 'none', paddingLeft: 10, margin: "auto", display: "flex"}}/>
-
-                <button onClick={() => {this.addContact();this.setState({contact_group: newGroupName});}} className="btn btn-outline-success"
-                        style={{ position: "absolute", left: 205, top: 150, width: 35, height: 35, borderRadius: 5, padding: 0, fontSize: 40}}>
-                        <div style={{ marginTop: -17.9, marginLeft: -0.5 }}>+</div>
-                </button>
             </div>
         );
     }
@@ -303,17 +292,17 @@ class List extends React.Component{
         }, {});
         this.matchedContacts = Object.entries(groups).filter(([group, contacts]) => {
             return contacts.some(contact =>
-                contact.first_name.toLowerCase().includes(searchQuery.toLowerCase())
+                contact[this.state.searchOption].toLowerCase().includes(searchQuery.toLowerCase())
             );
-        });
+        })
 
         if ((data.length !== 0)  && this.matchedContacts.length === 0) {
             return (
                 <div>
                     {this.renderMenu()}
-                    <div className={"messages"} style={{ marginLeft: 8 + '%' }}>
-                        <h2>No&nbsp;</h2> <div style={{ marginTop: 11.1 + '%' }}>{this.displayContactsMessage()}</div>
-                        <h2>matching the first name</h2>
+                    <div className={"messages"}>
+                        <h2 style={{marginLeft: "auto"}}>No&nbsp;</h2> <div style={{ marginTop: '11.3%' }}>{this.displayContactsMessage()}</div>
+                        <h2 style={{marginRight: "auto"}}>matching the {this.state.searchOption}</h2>
                     </div>
                 </div>
             );
@@ -327,7 +316,7 @@ class List extends React.Component{
                 <div>
                     {this.renderMenu()}
                     {this.state.showMessage ? (
-                        <div className={"messages"} style={{marginLeft: 27 + '%'}}>
+                        <div className={"messages"} style={{marginLeft: '25%'}}>
                             <h2>There are no&nbsp;</h2>{this.displayContactsMessage()}
                         </div>
                     ) : null}
@@ -337,7 +326,7 @@ class List extends React.Component{
 
         const tables = this.matchedContacts.map(([group, contacts]) => {
             const contactData = contacts.filter(contact =>
-                contact.first_name.toLowerCase().includes(searchQuery.toLowerCase())
+                contact[this.state.searchOption].toLowerCase().includes(searchQuery.toLowerCase())
             );
             const rows = contactData.map(contact => {
                 const inputFields = [
@@ -364,8 +353,19 @@ class List extends React.Component{
                 );
             });
 
+
+            const uniqueContactGroups = [...new Set(this.state.data.map(contact => contact.contact_group))];
+            let newGroupName = `New Group ${uniqueContactGroups.length}`;
+            while (uniqueContactGroups.includes(newGroupName)) {
+                const number = parseInt(newGroupName.slice(-1), 10);
+                newGroupName = newGroupName.slice(0, -1) + (number + 1);
+            }
             return (
                 <div key={group}>
+                    <button onClick={() => {this.addContact();this.setState({contact_group: newGroupName});}} className="btn btn-outline-success"
+                        style={{ position: "absolute", left: 205, top: 150, width: 35, height: 35, borderRadius: 5, padding: 0, fontSize: 40}}>
+                        <div style={{ marginTop: -17.9, marginLeft: -0.5 }}>+</div>
+                    </button>
                     <div style={{border:"solid", borderWidth: 2, borderColor:"#dce2e3", borderRadius: 5, minWidth: 1540, maxWidth: 1540,  right: 0,
                         paddingTop: 20, paddingRight: 20, marginLeft: "auto", marginRight: "auto", marginBottom: 30, boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.4)"}}>
                         {this.state.editingGroup === group ? (
