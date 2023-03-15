@@ -108,7 +108,7 @@ npm start
 
 - [X] **Fetch data with REST API!**
 
-- [X] Search contacts by first name
+- [X] **Search contacts by selected value!**
 
 - [X] Specific tables headers
 
@@ -131,8 +131,6 @@ npm start
 - [ ] Dragging, resizing, deleting columns and create custom ones
 
 - [ ] Static position of tables
-
-- [ ] Search contact by selected variable
 
 - [ ] Display contacts by selected order
 
