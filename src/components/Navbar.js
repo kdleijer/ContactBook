@@ -46,7 +46,7 @@ function NavbarItems({selected, onClick}) {
                 <NavItem path="/list" selected={selected} onClick={onClick}>My lists</NavItem>
                 <NavItem path="/settings" selected={selected} onClick={onClick}>Settings</NavItem>
             </ul>
-            <ul className="navbar-nav ml-auto" style={{position: "absolute", left: 1510}}>
+            <ul className="navbar-nav ml-auto" style={{position: "absolute", left: 95.5 + '%'}}>
                 <NavItem selected={selected} onClick={handleLogout} >Logout</NavItem>
             </ul>
         </div>

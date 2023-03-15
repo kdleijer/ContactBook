@@ -261,12 +261,11 @@ class List extends React.Component{
                 <Navbar/>
                 <input type="search" value={this.state.searchQuery} placeholder=" Search by first name..."
                         onChange={e => this.setState({searchQuery: e.target.value})}
-                        style={{ position: "absolute", top: 10, left: 520, borderRadius: 8, borderWidth: 0,
-                            height: 35, width: 600, outline: 'none', paddingLeft: 10}}/>
+                        style={{ position: "absolute", top: 10, left: 680, borderRadius: 8, borderWidth: 0,
+                            height: 35, width: 600, outline: 'none', paddingLeft: 10, margin: "auto", display: "flex"}}/>
                 <button onClick={() => {this.addContact();this.setState({contact_group: newGroupName});}} className="btn btn-outline-success"
-                        style={{ position: "absolute", left: 16, top: 70, width: 35, height: 35, borderRadius: 5, padding: 0, fontSize: 40,
-                            background: "white", color: "green", borderColor: "green" }}>
-                    <div style={{ marginTop: -17.9, marginLeft: -0.5 }}>+</div>
+                        style={{ position: "absolute", left: 205, top: 150, width: 35, height: 35, borderRadius: 5, padding: 0, fontSize: 40}}>
+                        <div style={{ marginTop: -17.9, marginLeft: -0.5 }}>+</div>
                 </button>
             </div>
         );
@@ -349,8 +348,8 @@ class List extends React.Component{
 
             return (
                 <div key={group}>
-                    <div style={{border:"solid", borderWidth: 2, borderColor:"#dce2e3", borderRadius: 10, minWidth: 1540,
-                        paddingTop: 20, paddingRight: 20, marginLeft: 30, marginRight: 30, marginBottom: 30, boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.4)"}}>
+                    <div style={{border:"solid", borderWidth: 2, borderColor:"#dce2e3", borderRadius: 5, minWidth: 1540, maxWidth: 1540,  right: 0,
+                        paddingTop: 20, paddingRight: 20, marginLeft: "auto", marginRight: "auto", marginBottom: 30, boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.4)"}}>
                         {this.state.editingGroup === group ? (
                             <form style={{ position: "relative", top: -6, left: 78, fontSize: 35, marginBottom: -4.5, maxWidth: 700 }} onSubmit={this.handleSubmit}>
                                 <input type="text" value={this.state.contact_group} onChange={this.handleChange}

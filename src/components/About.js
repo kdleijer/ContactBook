@@ -9,7 +9,7 @@ function About() {
             <h2 style={{marginLeft: 41.5 + '%'}}>ABOUT</h2>
             <Link to="/settings">
                 <button className="btn btn-outline-dark"
-                       style={{ position: "absolute", bottom: 20, right: 20, background: "white", color: "black", width: 65 }}>Settings
+                       style={{ position: "absolute", bottom: 20, left: 1835, background: "white", color: "black", width: 65 }}>Settings
                 </button>
             </Link>
         </>
