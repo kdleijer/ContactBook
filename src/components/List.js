@@ -245,16 +245,48 @@ class List extends React.Component{
 /* RENDER BUTTONS */
 
 
+
 /* RENDER MENU */
+    renderSearch(){
+        return (
+            <input type="search" value={this.state.searchQuery}  placeholder={`Search by ${this.state.searchOption}`}
+                        onChange={e => this.setState({searchQuery: e.target.value})}
+                        style={{ position: "absolute", top: 10, left: 680, borderRadius: 8, borderWidth: 0,
+                            height: 35, width: 600, outline: 'none', paddingLeft: 10, margin: "auto", display: "flex"}}/>
+        )
+    }
     renderMenu() {
+        const uniqueContactGroups = [...new Set(this.state.data.map(contact => contact.contact_group))];
+            let newGroupName = `New Group ${uniqueContactGroups.length}`;
+            while (uniqueContactGroups.includes(newGroupName)) {
+                const number = parseInt(newGroupName.slice(-1), 10);
+                newGroupName = newGroupName.slice(0, -1) + (number + 1);
+            }
         if (this.state.data.length === 0) {
             return (
-                <Navbar/>
+                    <Navbar/>
+            );
+        }
+        if (this.matchedContacts.length === 0) {
+            return (
+                <div>
+                    <Navbar/>
+                    {this.renderSearch()}
+                    <div className={"messages"}>
+                        <h2 style={{marginLeft: "auto"}}>No&nbsp;</h2> <div style={{ marginTop: '11.3%' }}>{this.displayContactsMessage()}</div>
+                        <h2 style={{marginRight: "auto"}}>matching the {this.state.searchOption}</h2>
+                    </div>
+                </div>
             );
         }
         return (
             <div>
                 <Navbar/>
+                {this.renderSearch()}
+                <button onClick={() => {this.addContact();this.setState({contact_group: newGroupName});}} className="btn btn-outline-success"
+                        style={{ position: "absolute", left: 205, top: 150, width: 35, height: 35, borderRadius: 5, padding: 0, fontSize: 40}}>
+                        <div style={{ marginTop: -17.9, marginLeft: -0.5 }}>+</div>
+                </button>
                 <Dropdown style={{position: "absolute", top: 14, left: 1295}}>
                     <Dropdown.Toggle variant="outline-info" id="dropdown-basic" style={{width: 20, height: 20, paddingTop: 0 }}>
                         </Dropdown.Toggle>
@@ -269,11 +301,6 @@ class List extends React.Component{
                             <Dropdown.Item onClick={() => this.setState({ searchOption: 'birthday'       })}>       Birthday           </Dropdown.Item>
                         </Dropdown.Menu>
                 </Dropdown>
-
-                <input type="search" value={this.state.searchQuery}  placeholder={`Search by ${this.state.searchOption}`}
-                        onChange={e => this.setState({searchQuery: e.target.value})}
-                        style={{ position: "absolute", top: 10, left: 680, borderRadius: 8, borderWidth: 0,
-                            height: 35, width: 600, outline: 'none', paddingLeft: 10, margin: "auto", display: "flex"}}/>
             </div>
         );
     }
@@ -295,18 +322,6 @@ class List extends React.Component{
                 contact[this.state.searchOption].toLowerCase().includes(searchQuery.toLowerCase())
             );
         })
-
-        if ((data.length !== 0)  && this.matchedContacts.length === 0) {
-            return (
-                <div>
-                    {this.renderMenu()}
-                    <div className={"messages"}>
-                        <h2 style={{marginLeft: "auto"}}>No&nbsp;</h2> <div style={{ marginTop: '11.3%' }}>{this.displayContactsMessage()}</div>
-                        <h2 style={{marginRight: "auto"}}>matching the {this.state.searchOption}</h2>
-                    </div>
-                </div>
-            );
-        }
 
         if (data.length === 0) {
             setTimeout(() => {
@@ -353,19 +368,8 @@ class List extends React.Component{
                 );
             });
 
-
-            const uniqueContactGroups = [...new Set(this.state.data.map(contact => contact.contact_group))];
-            let newGroupName = `New Group ${uniqueContactGroups.length}`;
-            while (uniqueContactGroups.includes(newGroupName)) {
-                const number = parseInt(newGroupName.slice(-1), 10);
-                newGroupName = newGroupName.slice(0, -1) + (number + 1);
-            }
             return (
                 <div key={group}>
-                    <button onClick={() => {this.addContact();this.setState({contact_group: newGroupName});}} className="btn btn-outline-success"
-                        style={{ position: "absolute", left: 205, top: 150, width: 35, height: 35, borderRadius: 5, padding: 0, fontSize: 40}}>
-                        <div style={{ marginTop: -17.9, marginLeft: -0.5 }}>+</div>
-                    </button>
                     <div style={{border:"solid", borderWidth: 2, borderColor:"#dce2e3", borderRadius: 5, minWidth: 1540, maxWidth: 1540,  right: 0,
                         paddingTop: 20, paddingRight: 20, marginLeft: "auto", marginRight: "auto", marginBottom: 30, boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.4)"}}>
                         {this.state.editingGroup === group ? (
