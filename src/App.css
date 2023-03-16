@@ -81,7 +81,7 @@ h6 {
     cursor: pointer;
     animation: slide-down 0.5s ease-out, bounce-slime 1s ease-in-out alternate, fade-in 0.8s ease-in, infinite-bounce 0.7s ease-in-out 1s infinite alternate;
     font-size: 100px;
-    margin-top: 14%;
+    margin-top: 14.15%;
 }
 .messages {
     display: flex;

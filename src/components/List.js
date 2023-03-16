@@ -250,9 +250,9 @@ class List extends React.Component{
     renderSearch(){
         return (
             <input type="search" value={this.state.searchQuery}  placeholder={`Search by ${this.state.searchOption}`}
-                        onChange={e => this.setState({searchQuery: e.target.value})}
-                        style={{ position: "absolute", top: 10, left: 680, borderRadius: 8, borderWidth: 0,
-                            height: 35, width: 600, outline: 'none', paddingLeft: 10, margin: "auto", display: "flex"}}/>
+                   onChange={e => this.setState({searchQuery: e.target.value})}
+                   style={{ position: "absolute", top: 10, left: 680, borderRadius: 8, borderWidth: 0, height: 35,
+                       width: 600, outline: 'none', paddingLeft: 10, margin: "auto", display: "flex"}}/>
         )
     }
     renderMenu() {
@@ -299,6 +299,7 @@ class List extends React.Component{
                             <Dropdown.Item onClick={() => this.setState({ searchOption: 'personal_phone' })}>       Personal phone     </Dropdown.Item>
                             <Dropdown.Item onClick={() => this.setState({ searchOption: 'address'        })}>       Address            </Dropdown.Item>
                             <Dropdown.Item onClick={() => this.setState({ searchOption: 'birthday'       })}>       Birthday           </Dropdown.Item>
+                            <Dropdown.Item onClick={() => this.setState({ searchOption: 'contact_group'  })}>       Contact group      </Dropdown.Item>
                         </Dropdown.Menu>
                 </Dropdown>
             </div>
@@ -332,7 +333,7 @@ class List extends React.Component{
                     {this.renderMenu()}
                     {this.state.showMessage ? (
                         <div className={"messages"} style={{marginLeft: '25%'}}>
-                            <h2>There are no&nbsp;</h2>{this.displayContactsMessage()}
+                            <h2>There are no&nbsp;</h2> <div style={{ marginTop: '10.1%'}}>{this.displayContactsMessage()}</div>
                         </div>
                     ) : null}
                 </div>
