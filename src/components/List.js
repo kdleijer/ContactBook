@@ -258,11 +258,11 @@ class List extends React.Component{
     }
     renderMenu() {
         const uniqueContactGroups = [...new Set(this.state.data.map(contact => contact.contact_group))];
-            let newGroupName = `New Group ${uniqueContactGroups.length}`;
-            while (uniqueContactGroups.includes(newGroupName)) {
-                const number = parseInt(newGroupName.slice(-1), 10);
-                newGroupName = newGroupName.slice(0, -1) + (number + 1);
-            }
+        let newGroupName = `New Group ${uniqueContactGroups.length}`;
+        while (uniqueContactGroups.includes(newGroupName)) {
+            const number = parseInt(newGroupName.slice(-1), 10);
+            newGroupName = newGroupName.slice(0, -1) + (number + 1);
+        }
         if (this.state.data.length === 0) {
             return (
                     <Navbar/>

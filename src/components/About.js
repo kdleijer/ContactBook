@@ -22,7 +22,7 @@ function About() {
     }
 
     return (
-        <>
+        <div style={{height: 950, overflowY: "hidden"}}>
             <Navbar/>
             <h2 style={{marginLeft: '8%', marginTop: '-3%'}}>ContactBook</h2>
             <div className='line1' style={{height: 1, width: '46%', background: 'black', marginLeft: 10, marginRight: 'auto'}}/>
@@ -43,9 +43,9 @@ function About() {
             <div className='linev' style={{width: 1, height: 820, background: 'black', marginLeft: 'auto', marginRight: 'auto', position: 'absolute', left: 960, top: 100}}/>
 
 
-            <h3 className='about-header' style={{ position: 'absolute', top: 100, marginLeft: '60%'}}>Solved problems</h3>
-            <div className='line2' style={{position: 'absolute', top: 140, right: 10, height: 1, width: '46%', background: 'black'}}/>
-            <p className='about-content3' style={{position: 'absolute', top: 140, right: 20, maxWidth: '45%', marginLeft: 'auto', marginRight: 20, marginTop: 10, fontSize: 20}}>
+            <h3 className='about-header' style={{position: 'relative', top: -700, marginLeft: '60%'}}>Solved problems</h3>
+            <div className='line2' style={{position: 'relative', top: -700, left: 1025, height: 1, width: '46%', background: 'black'}}/>
+            <p className='about-content3' style={{position: 'relative', top: -700, right: -20, maxWidth: '45%', marginLeft: 'auto', marginRight: 20, marginTop: 10, fontSize: 20}}>
                 {check()} Full functionality of restrict routes in App.js with authentication from django API endpoint! <br/>
                 {check()} Implemented user login/registration from my own template project: <a href="https://github.com/SzymCode/RegistrationDjango">RegistrationDjango</a> <br/>
                 {check()} Contact groups! <br/>
@@ -60,9 +60,9 @@ function About() {
                 {check()} Loading screen <br/>
             </p>
 
-            <h3 className='about-header1' style={{ position: 'absolute', top: 540, marginLeft: '60%'}}>TODO</h3>
-            <div className='line3' style={{position: 'absolute', top: 580, right: 10, height: 1, width: '46%', background: 'black'}}/>
-            <p className='about-content4' style={{position: 'absolute', top: 580, right: 275, maxWidth: '45%', marginLeft: 'auto', marginRight: 20, marginTop: 10, fontSize: 20}}>
+            <h3 className='about-header1' style={{position: 'relative', top: -680, marginLeft: '60%'}}>TODO</h3>
+            <div className='line3' style={{position: 'relative', top: -680, left: 1025, height: 1, width: '46%', background: 'black'}}/>
+            <p className='about-content4' style={{position: 'relative', top: -680, right: -44, maxWidth: '45%', marginLeft: 'auto', marginRight: 20, marginTop: 10, fontSize: 20}}>
                 {uncheck()} Dragging, resizing, deleting columns and create custom ones <br/>
                 {uncheck()} Static position of tables <br/>
                 {uncheck()} Display contacts by selected order <br/>
@@ -115,8 +115,8 @@ function About() {
                 </Modal.Footer>
             </Modal>
             <div className='tech-stack'>
-                <h3 style={{position: "absolute", bottom: 100, left: 30, fontSize: 50}}>Tech Stack:</h3>
-                <p style={{position: "absolute", bottom: 20, left: 20}}>
+                <h3 style={{position: "relative", top: -765, left: 30, fontSize: 50}}>Tech Stack:</h3>
+                <p style={{position: "relative", top: -770, left: 20}}>
                     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="70" height="70"/> </a>
                     <a href="https://www.python.org"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="70" height="70"/> </a>
                     <a href="https://reactjs.org/"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="70" height="70"/> </a>
@@ -129,15 +129,15 @@ function About() {
                     <a href="https://git-scm.com/"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="70" height="70"/> </a>
                 </p>
             </div>
-            <button className='btn btn-outline-dark' style={{position: 'absolute', bottom: 20, left: 1760, width: 65}} onClick={handleShow}>
+            <button className='btn btn-outline-dark' style={{position: 'relative', top: -800, left: 1760, width: 65}} onClick={handleShow}>
                 LICENSE
             </button>
             <Link to='/settings'>
-                <button className='btn btn-outline-dark' style={{position: 'absolute', bottom: 20, left: 1835, width: 65}}>
+                <button className='btn btn-outline-dark' style={{position: 'relative', top: -800, left: 1770, width: 65}}>
                     Settings
                 </button>
             </Link>
-        </>
+        </div>
     );
 }
 

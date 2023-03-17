@@ -8,11 +8,11 @@ import Settings from './components/Settings';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
-    const [data, setData] = React.useState([]);
+    const [data, setData] = useState([]);
     const [isAuthenticated, setIsAuthenticated] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
-    React.useEffect(() => {
+    useEffect(() => {
         fetch('http://127.0.0.1:8000/contact/')
             .then((response) => response.json())
             .then((data) => {
