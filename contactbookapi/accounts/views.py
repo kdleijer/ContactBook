@@ -61,7 +61,7 @@ def logoutUser(request):
 
 @login_required(login_url='login')
 def home(request):
-    return redirect('http://localhost:3000/home/')
+    return redirect('http://localhost:3000/list/') #TODO: HOME PAGE NEEDS UI UPDATE...
 
 
 @api_view(['GET'])

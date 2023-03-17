@@ -1,3 +1,12 @@
+#form-title {
+	margin-top: 5px;
+}
+h3 {
+	font-size: 45px;
+}
+.form_container {
+	margin-top: 15px;
+}
 .signin_btn {
 	width: 100%;
 	margin-top: 0;
