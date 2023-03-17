@@ -9,6 +9,8 @@ import { Routes, Route } from 'react-router-dom';
 
 function App() {
     const [data, setData] = React.useState([]);
+    const [isAuthenticated, setIsAuthenticated] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     React.useEffect(() => {
         fetch('http://127.0.0.1:8000/contact/')
@@ -17,10 +19,6 @@ function App() {
                 setData(data);
             })
     }, []);
-
-    const [isAuthenticated, setIsAuthenticated] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-
     useEffect(() => {
         fetch('http://localhost:8000/accounts/auth/', {
             method: 'GET',
@@ -34,12 +32,9 @@ function App() {
         .catch(error => console.error(error))
         .finally(() => setIsLoading(false));
     }, []);
-
-    useEffect(() => {
-        if (isAuthenticated === false) {
-          window.location.replace('http://localhost:8000/accounts/login');
-        }
-    }, [isAuthenticated]);
+    if (isAuthenticated === false) {
+        window.location.replace('http://localhost:8000/accounts/login');
+    }
 
     if (isLoading) {
         return <h2 style={{marginLeft: 40 + '%'}}>Loading...</h2>;

@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from "./Navbar";
 import Dropdown from 'react-bootstrap/Dropdown';
+import { v4 } from 'uuid';
 
 class List extends React.Component{
     constructor(props){
@@ -363,12 +364,12 @@ class List extends React.Component{
                     </td>
                 ));
                 return (
-                    <tr key={contact.contact_id}>{inputFieldsElements}{this.renderButtons(contact)}</tr>
+                    <tr key={v4()}>{inputFieldsElements}{this.renderButtons(contact)}</tr>
                 );
             });
 
             return (
-                <div key={group}>
+                <div key={v4()}>
                     <div style={{ border:"solid", borderWidth: 2, borderColor:"#dce2e3", borderRadius: 5, minWidth: 1540, maxWidth: 1540,  right: 0,
                         minHeight: 155, paddingTop: 20, paddingRight: 20, marginLeft: "auto", marginRight: "auto", marginBottom: 30, boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.4)"}}>
                         {this.state.editingGroup === group ? (
