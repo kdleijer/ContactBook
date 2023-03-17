@@ -54,6 +54,14 @@ pip install -r requirements.txt
 npm install
 ```
 
+• Change SECRET_KEY in **contactbookapi** settings.
+
+• **contactbookapi** directory:
+
+```bash
+python manage.py migrate
+```
+
 </details> 
 
 <br>
@@ -62,14 +70,9 @@ npm install
 
 ## 🚀 Run:
 
-• Change SECRET_KEY in **contactbookapi** settings.
-
-
 • **contactbookapi** directory:
 
 ```bash
-python manage.py migrate
-
 python manage.py runserver
 ```
 
@@ -106,6 +109,8 @@ npm start
 
 - [X] **Render multiple tables with contact group specific data!**
 
+- [X] **Edit all contacts in table with editable header above table!**
+
 - [X] **Fetch data with REST API!**
 
 - [X] **Search contacts by selected value!**
@@ -118,7 +123,6 @@ npm start
 
 - [X] Refactored code for better maintainability
 
-- [X] Edit all contacts in table with editable header above table
 
 - [X] Loading screen
 </details>
@@ -144,5 +148,5 @@ npm start
 
 - [ ] Combine logging/registration with home page
 
-- [ ] Mobile website
+- [ ] Resizing website + mobile version
 </details>
