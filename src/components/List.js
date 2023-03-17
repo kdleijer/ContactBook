@@ -288,19 +288,17 @@ class List extends React.Component{
                         <div style={{ marginTop: -17.9, marginLeft: -0.5 }}>+</div>
                 </button>
                 <Dropdown style={{position: "absolute", top: 14, left: 1295}}>
-                    <Dropdown.Toggle variant="outline-info" id="dropdown-basic" style={{width: 20, height: 20, paddingTop: 0 }}>
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                            <Dropdown.Item onClick={() => this.setState({ searchOption: 'first_name'     })}>       First name         </Dropdown.Item>
-                            <Dropdown.Item onClick={() => this.setState({ searchOption: 'last_name'      })}>       Last name          </Dropdown.Item>
-                            <Dropdown.Item onClick={() => this.setState({ searchOption: 'email'          })}>       Email              </Dropdown.Item>
-                            <Dropdown.Item onClick={() => this.setState({ searchOption: 'work_phone'     })}>       Work phone         </Dropdown.Item>
-                            <Dropdown.Item onClick={() => this.setState({ searchOption: 'personal_phone' })}>       Personal phone     </Dropdown.Item>
-                            <Dropdown.Item onClick={() => this.setState({ searchOption: 'address'        })}>       Address            </Dropdown.Item>
-                            <Dropdown.Item onClick={() => this.setState({ searchOption: 'birthday'       })}>       Birthday           </Dropdown.Item>
-                            <Dropdown.Item onClick={() => this.setState({ searchOption: 'contact_group'  })}>       Contact group      </Dropdown.Item>
-                        </Dropdown.Menu>
+                    <Dropdown.Toggle variant="outline-info" id="dropdown-basic" style={{ width: 20, height: 20, paddingTop: 0 }}></Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item onClick={() => this.setState({ searchOption: 'first_name'     })}>       First name         </Dropdown.Item>
+                        <Dropdown.Item onClick={() => this.setState({ searchOption: 'last_name'      })}>       Last name          </Dropdown.Item>
+                        <Dropdown.Item onClick={() => this.setState({ searchOption: 'email'          })}>       Email              </Dropdown.Item>
+                        <Dropdown.Item onClick={() => this.setState({ searchOption: 'work_phone'     })}>       Work phone         </Dropdown.Item>
+                        <Dropdown.Item onClick={() => this.setState({ searchOption: 'personal_phone' })}>       Personal phone     </Dropdown.Item>
+                        <Dropdown.Item onClick={() => this.setState({ searchOption: 'address'        })}>       Address            </Dropdown.Item>
+                        <Dropdown.Item onClick={() => this.setState({ searchOption: 'birthday'       })}>       Birthday           </Dropdown.Item>
+                        <Dropdown.Item onClick={() => this.setState({ searchOption: 'contact_group'  })}>       Contact group      </Dropdown.Item>
+                    </Dropdown.Menu>
                 </Dropdown>
             </div>
         );
@@ -346,14 +344,14 @@ class List extends React.Component{
             );
             const rows = contactData.map(contact => {
                 const inputFields = [
-                    { id: "contact_id",      defaultValue: contact.contact_id,      width: 44,   maxLength: 4  },
+                    { id: "contact_id",      defaultValue: contact.contact_id,      width:  44,  maxLength:  4 },
                     { id: "first_name",      defaultValue: contact.first_name,      width: 128,  maxLength: 15 },
                     { id: "last_name",       defaultValue: contact.last_name,       width: 155,  maxLength: 25 },
                     { id: "email",           defaultValue: contact.email,           width: 243,  maxLength: 40 },
                     { id: "work_phone",      defaultValue: contact.work_phone,      width: 140,  maxLength: 15 },
                     { id: "personal_phone",  defaultValue: contact.personal_phone,  width: 139,  maxLength: 15 },
                     { id: "address",         defaultValue: contact.address,         width: 335,  maxLength: 50 },
-                    { id: "birthday",        defaultValue: contact.birthday,        width: 86,   maxLength: 10 }
+                    { id: "birthday",        defaultValue: contact.birthday,        width:  86,  maxLength: 10 }
                 ];
                 const inputFieldsElements = inputFields.map(field => (
                     <td key={`${field.id}-${contact.id}`} style={{padding: 7}}>
@@ -371,8 +369,8 @@ class List extends React.Component{
 
             return (
                 <div key={group}>
-                    <div style={{border:"solid", borderWidth: 2, borderColor:"#dce2e3", borderRadius: 5, minWidth: 1540, maxWidth: 1540,  right: 0,
-                        paddingTop: 20, paddingRight: 20, marginLeft: "auto", marginRight: "auto", marginBottom: 30, boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.4)"}}>
+                    <div style={{ border:"solid", borderWidth: 2, borderColor:"#dce2e3", borderRadius: 5, minWidth: 1540, maxWidth: 1540,  right: 0,
+                        minHeight: 155, paddingTop: 20, paddingRight: 20, marginLeft: "auto", marginRight: "auto", marginBottom: 30, boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.4)"}}>
                         {this.state.editingGroup === group ? (
                             <form style={{ position: "relative", top: -6, left: 78, fontSize: 35, marginBottom: -4.5, maxWidth: 700 }} onSubmit={this.handleSubmit}>
                                 <input type="text" value={this.state.contact_group} onChange={this.handleChange}
@@ -389,14 +387,14 @@ class List extends React.Component{
                             <table className="table table-bordered" style={{width: "100%", minWidth: 1470, maxWidth: 1460, marginLeft: 33 }}>
                                 <thead>
                                 <tr>
-                                    <th style={{ width: 48,  padding: 6, fontSize: 17 }}>     ID                 </th>
+                                    <th style={{ width:  48, padding: 6, fontSize: 17 }}>     ID                 </th>
                                     <th style={{ width: 124, padding: 6, fontSize: 17 }}>     First name         </th>
                                     <th style={{ width: 149, padding: 6, fontSize: 17 }}>     Last name          </th>
                                     <th style={{ width: 230, padding: 6, fontSize: 17 }}>     Email              </th>
                                     <th style={{ width: 135, padding: 6, fontSize: 17 }}>     Work phone         </th>
                                     <th style={{ width: 135, padding: 6, fontSize: 17 }}>     Personal phone     </th>
                                     <th style={{ width: 313, padding: 6, fontSize: 17 }}>     Address            </th>
-                                    <th style={{ width: 86,  padding: 6, fontSize: 17 }}>     Birthday           </th>
+                                    <th style={{ width:  86, padding: 6, fontSize: 17 }}>     Birthday           </th>
                                     <th style={{ width: 123, padding: 4, fontSize: 17 }}>
 
                                         <button style={{ marginLeft: 0 }} className="btn btn-outline-success"

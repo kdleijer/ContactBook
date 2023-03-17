@@ -4,7 +4,7 @@ html, body {
     max-width: 1920px;
 }
 
-@media screen and (max-width: 1579px) {
+@media screen and (max-width: 1919px) {
   html, body {
     overflow-x: auto;
   }
@@ -68,9 +68,11 @@ h1 {
     font-size: 150px;
 }
 h2 {
-    animation: slide-down 0.5s ease-out, bounce-slime 1s ease-in-out alternate, fade-in 0.8s ease-in;
-    font-size: 100px;
     margin-top: 15%;
+    font-size: 100px;
+}
+h2 {
+    animation: slide-down 0.5s ease-out, bounce-slime 1s ease-in-out alternate, fade-in 0.8s ease-in;
 }
 h6 {
     animation: fade-out-in 2s ease-in-out infinite;
@@ -134,3 +136,62 @@ h6 {
         opacity: 1;
     }
 }
+
+
+/* ABOUT */
+.line1 {
+    opacity: 0;
+    animation: fade-in 0.4s ease-in 1s;
+    animation-fill-mode: forwards;
+}
+.about-content1 {
+    opacity: 0;
+    animation: fade-in 0.4s ease-in 1.2s;
+    animation-fill-mode: forwards;
+}
+.about-content2 {
+    opacity: 0;
+    animation: fade-in 0.4s ease-in 1.7s;
+    animation-fill-mode: forwards;
+}
+.tech-stack {
+    opacity: 0;
+    animation: fade-in 0.4s ease-in 2s;
+    animation-fill-mode: forwards;
+}
+.linev {
+    opacity: 0;
+    animation: fade-in 0.4s ease-in 2.2s;
+    animation-fill-mode: forwards;
+}
+.about-header {
+    opacity: 0;
+    animation: fade-in 0.4s ease-in 2.4s;
+    animation-fill-mode: forwards;
+}
+.line2 {
+    opacity: 0;
+    animation: fade-in 0.4s ease-in 2.6s;
+    animation-fill-mode: forwards;
+}
+.about-content3 {
+    opacity: 0;
+    animation: fade-in 0.4s ease-in 2.8s;
+    animation-fill-mode: forwards;
+}
+.about-header1 {
+    opacity: 0;
+    animation: fade-in 0.4s ease-in 3.1s;
+    animation-fill-mode: forwards;
+}
+.line3 {
+    opacity: 0;
+    animation: fade-in 0.4s ease-in 3.3s;
+    animation-fill-mode: forwards;
+}
+.about-content4 {
+    opacity: 0;
+    animation: fade-in 0.4s ease-in 3.5s;
+    animation-fill-mode: forwards;
+}
+/* ABOUT */
