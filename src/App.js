@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './bootstrap.min.css';
 import './App.css';
 
-import Home from './components/Home';
 import List from './components/List';
 import About from './components/About';
 import Settings from './components/Settings';
@@ -49,8 +48,7 @@ function App() {
     return isAuthenticated && (
         <div className="container-fluid">
             <Routes>
-                <Route path="*" element={<Home/>}/>
-                <Route path="/home" element={<Home/>}/>
+                <Route path="*" element={<List/>}/>
                 <Route path="/list" element={<List/>}/>
                 <Route path="/about" element={<About/>}/>
                 <Route path="/settings" element={<Settings data={data} setData={setData}/>}/>

@@ -22,7 +22,7 @@ function Navbar() {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <NavbarBrand selected={selected} onClick={handleClick} />
+            <NavbarBrand onClick={handleClick} />
             <NavbarItems selected={selected} onClick={handleClick} />
         </nav>
     );
@@ -34,6 +34,7 @@ function NavbarBrand({selected, onClick}) {
               onClick={() => onClick("/home")}>SzymCode</Link>
     );
 }
+
 
 function NavbarItems({selected, onClick}) {
     const handleLogout = () => {
