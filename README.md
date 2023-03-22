@@ -54,7 +54,13 @@ pip install -r requirements.txt
 npm install
 ```
 
-• Change SECRET_KEY in **contactbookapi** settings.
+### **Make sure u have installed all modules!**
+
+• Change SECRET_KEY in **contactbookapi** settings or create .env file with following data:
+
+```bash
+SECRET_KEY = 'example_secret_key'
+```
 
 • **contactbookapi** directory:
 
