@@ -37,7 +37,7 @@ function App() {
     }
 
     if (isLoading) {
-        return <h2 style={{marginLeft: 40 + '%'}}>Loading...</h2>;
+        return <h2 className="bounce_header" style={{marginLeft: 40 + '%'}}>Loading...</h2>;
     }
 
     return isAuthenticated && (
