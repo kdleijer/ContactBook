@@ -24,8 +24,8 @@ function About() {
     return (
         <div style={{height: 950, overflowY: "hidden"}}>
             <Navbar/>
-            <h2 style={{marginLeft: '8%', marginTop: '-3%'}}>ContactBook</h2>
-            <div className='line1' style={{height: 1, width: '46%', background: 'black', marginLeft: 10, marginRight: 'auto'}}/>
+            <h2 className="bounce_header" style={{marginLeft: '8%', marginTop: '-3%'}}>ContactBook</h2>
+            <div className='line1'/>
             <p className='about-content1' style={{maxWidth: '45%', marginLeft: 20, marginTop: 10, fontSize: 20}}>
                 This website helps to storage contacts data and share it with others (in future). For now is
                 under construction, so it is full of bugs and missing many functionalities. The project was created for educational
@@ -43,30 +43,29 @@ function About() {
             <div className='linev' style={{width: 1, height: 820, background: 'black', marginLeft: 'auto', marginRight: 'auto', position: 'absolute', left: 960, top: 100}}/>
 
 
-            <h3 className='about-header' style={{position: 'relative', top: -700, marginLeft: '60%'}}>Solved problems</h3>
-            <div className='line2' style={{position: 'relative', top: -700, left: 1025, height: 1, width: '46%', background: 'black'}}/>
-            <p className='about-content3' style={{position: 'relative', top: -700, right: -20, maxWidth: '45%', marginLeft: 'auto', marginRight: 20, marginTop: 10, fontSize: 20}}>
+            <h3 className='about-header' style={{position: 'relative', top: -680, marginLeft: '60%'}}>Solved problems</h3>
+            <div className='line2' style={{position: 'relative', top: -680, left: 1025, height: 1, width: '46%', background: 'black'}}/>
+            <p className='about-content3' style={{position: 'relative', top: -680, right: -20, maxWidth: '45%', marginLeft: 'auto', marginRight: 20, marginTop: 10, fontSize: 20}}>
                 {check()} Full functionality of restrict routes in App.js with authentication from django API endpoint! <br/>
                 {check()} Implemented user login/registration from my own template project: <a href="https://github.com/SzymCode/RegistrationDjango">RegistrationDjango</a> <br/>
                 {check()} Contact groups! <br/>
                 {check()} Render multiple tables with contact group specific data! <br/>
+                {check()} Download data to JSON and PDF file <br/>
                 {check()} Edit all contacts in table with editable header above table <br/>
                 {check()} Fetch data with REST API! <br/>
                 {check()} Search contacts by selected value! <br/>
                 {check()} Specific tables headers <br/>
                 {check()} Scrollable tables with max height <br/>
-                {check()} Download data to JSON file <br/>
                 {check()} Refactored code for better maintainability <br/>
                 {check()} Loading screen <br/>
             </p>
 
-            <h3 className='about-header1' style={{position: 'relative', top: -680, marginLeft: '60%'}}>TODO</h3>
-            <div className='line3' style={{position: 'relative', top: -680, left: 1025, height: 1, width: '46%', background: 'black'}}/>
-            <p className='about-content4' style={{position: 'relative', top: -680, right: -44, maxWidth: '45%', marginLeft: 'auto', marginRight: 20, marginTop: 10, fontSize: 20}}>
+            <h3 className='about-header1' style={{position: 'relative', top: -660, marginLeft: '60%'}}>TODO</h3>
+            <div className='line3' style={{position: 'relative', top: -660, left: 1025, height: 1, width: '46%', background: 'black'}}/>
+            <p className='about-content4' style={{position: 'relative', top: -660, right: -44, maxWidth: '45%', marginLeft: 'auto', marginRight: 20, marginTop: 10, fontSize: 20}}>
                 {uncheck()} Dragging, resizing, deleting columns and create custom ones <br/>
                 {uncheck()} Static position of tables <br/>
                 {uncheck()} Display contacts by selected order <br/>
-                {uncheck()} Download contact data to PDF <br/>
                 {uncheck()} Settings page <br/>
                 {uncheck()} User specific data + share data with other users <br/>
                 {uncheck()} Better UI design + theme selection <br/>
@@ -115,8 +114,8 @@ function About() {
                 </Modal.Footer>
             </Modal>
             <div className='tech-stack'>
-                <h3 style={{position: "relative", top: -765, left: 30, fontSize: 50}}>Tech Stack:</h3>
-                <p style={{position: "relative", top: -770, left: 20}}>
+                <h3 style={{position: "relative", top: -740, left: 30, fontSize: 50}}>Tech Stack:</h3>
+                <p style={{position: "relative", top: -745, left: 20}}>
                     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="70" height="70"/> </a>
                     <a href="https://www.python.org"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="70" height="70"/> </a>
                     <a href="https://reactjs.org/"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="70" height="70"/> </a>

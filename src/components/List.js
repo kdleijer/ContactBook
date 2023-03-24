@@ -274,8 +274,8 @@ class List extends React.Component{
                     <Navbar/>
                     {this.renderSearch()}
                     <div className={"messages"}>
-                        <h2 style={{marginLeft: "auto"}}>No&nbsp;</h2> <div style={{ marginTop: '11.3%' }}>{this.displayContactsMessage()}</div>
-                        <h2 style={{marginRight: "auto"}}>matching the {this.state.searchOption}</h2>
+                        <h2 className="bounce_header" style={{marginLeft: "auto"}}>No&nbsp;</h2> <div style={{ marginTop: '11.3%' }}>{this.displayContactsMessage()}</div>
+                        <h2 className="bounce_header" style={{marginRight: "auto"}}>matching the {this.state.searchOption}</h2>
                     </div>
                 </div>
             );
@@ -332,7 +332,7 @@ class List extends React.Component{
                     {this.renderMenu()}
                     {this.state.showMessage ? (
                         <div className={"messages"} style={{marginLeft: '25%'}}>
-                            <h2>There are no&nbsp;</h2> <div style={{ marginTop: '10.1%'}}>{this.displayContactsMessage()}</div>
+                            <h2 className="bounce_header">There are no&nbsp;</h2> <div style={{ marginTop: '10.1%'}}>{this.displayContactsMessage()}</div>
                         </div>
                     ) : null}
                 </div>

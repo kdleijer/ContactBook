@@ -121,14 +121,13 @@ npm start
 
 - [X] **Search contacts by selected value!**
 
+- [X] Download data to JSON and PDF file
+
 - [X] Specific tables headers
 
 - [X] Scrollable tables with max height
 
-- [X] Download data to JSON file
-
 - [X] Refactored code for better maintainability
-
 
 - [X] Loading screen
 </details>
@@ -143,8 +142,6 @@ npm start
 - [ ] Static position of tables
 
 - [ ] Display contacts by selected order
-
-- [ ] Download contact data to PDF
 
 - [ ] Settings page 
 
