@@ -1,3 +1,7 @@
+.user_card {
+	position: absolute;
+	top: -120px;
+}
 #form-title {
 	margin-top: 5px;
 }

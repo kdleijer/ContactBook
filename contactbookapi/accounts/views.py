@@ -2,9 +2,31 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from .forms import CreateUserForm
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import User
+from django.http import HttpResponse
+
+def create_admin(request):
+    # Check if admin user already exists
+    if User.objects.filter(username='admin').exists():
+        return HttpResponse('Admin user already exists')
+
+    # Create new admin user
+    admin = User.objects.create_user('admin', 'admin@admin.pl', 'admin123')
+    admin.is_staff = True
+    admin.is_superuser = True
+    admin.save()
+
+    # Return success message
+    return HttpResponse('Admin user created successfully')
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_username(request):
+    username = request.user.username
+    return Response({'username': username})
 
 
 def registerPage(request):
