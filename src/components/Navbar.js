@@ -48,7 +48,7 @@ function NavbarItems({selected, onClick}) {
             credentials: 'include',
         })
             .then((response) => response.json())
-            .then((data) => setUsername(data.username));
+            .then((data) => setUsername(data.username)); // TODO: localStorage...
     }, []);
 
     const handleLogout = () => {

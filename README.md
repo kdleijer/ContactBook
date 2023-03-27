@@ -38,7 +38,7 @@ You can clone this repo and run it on your internal server. The project was crea
 ## 🛠️ Installation:
 
 • First make sure u have installed latest versions of [ReactJS, NodeJS,](https://www.tutorialspoint.com/reactjs/reactjs_environment_setup.htm) 
-[Python, Django.](https://www.geeksforgeeks.org/django-introduction-and-installation/)
+[Python, Django](https://www.geeksforgeeks.org/django-introduction-and-installation/).
 
 • Clone this repository or download latest release.
 
@@ -56,11 +56,7 @@ npm install
 
 ### **Make sure u have installed all modules!**
 
-• Change SECRET_KEY in **contactbookapi** settings or create .env file with following data:
-
-```bash
-SECRET_KEY = 'example_secret_key'
-```
+• Change SECRET_KEY in **contactbookapi** settings or read more about [python-decouple](https://dev.to/ashraf_zolkopli/decoupling-django-secret-key-65d).
 
 • **contactbookapi** directory:
 
@@ -94,11 +90,13 @@ npm start
 
 ## ❓ Usage:
 
-• **localhost:8000** - Django REST API
-
 • **localhost:8000/accounts/login** & **/register** - Django login and registration
 
 • **localhost:3000/home** - ContactBook main page
+
+• **localhost:8000** - Django REST API
+
+• **localhost:8000/admin** - Django admin panel
 
 <br>
 
@@ -136,6 +134,8 @@ npm start
 
 
 <details><summary> <h2> 🎯 TODO:  </summary>
+
+- [ ] **Reduce fetches, localStorage solutions etc...**
 
 - [ ] Dragging, resizing, deleting columns and create custom ones
 

@@ -26,6 +26,7 @@ class List extends React.Component{
             selectedForDeletion: null,
             selectedForEdit: null,
             disableDeleteButtons: false,
+            user: null,
         };
     }
 
@@ -57,15 +58,24 @@ class List extends React.Component{
     componentDidMount(){
         const savedContactGroup = localStorage.getItem('contact_group');
         if (savedContactGroup) {
-          this.setState({ contact_group: savedContactGroup });
+            this.setState({ contact_group: savedContactGroup });
         }
+        fetch('http://localhost:8000/accounts/username/', {
+            credentials: 'include'
+        })
+        .then(response => response.json())
+        .then(data => {
+            this.setState({user: data.username});
+            localStorage.setItem('user', this.state.user);
+            console.log(this.state.user)
+        })
 
         fetch('http://127.0.0.1:8000/contact/')
-            .then(response => response.json())
-            .then(data => {
-                if (data.length === 0) {
-                    this.setState({ contact_group: "New Group 1" });
-                    this.addContact();}})
+        .then(response => response.json())
+        .then(data => {
+            if (data.length === 0) {
+                this.setState({ contact_group: "New Group 1" });
+                this.addContact();}})
         this.fetchData();
     }
 /* LIFECYCLE METHOD */
@@ -150,6 +160,7 @@ class List extends React.Component{
 /* ADD CONTACT */
     addContact = () => {
         this.setState({
+            user: localStorage.getItem('user'),
             contact_id: '',
             first_name: '',
             last_name: '',
@@ -160,6 +171,7 @@ class List extends React.Component{
             birthday: ''
         }, () => {
             let data = {...this.state};
+
             fetch('http://127.0.0.1:8000/contact/', {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -169,6 +181,7 @@ class List extends React.Component{
             })
             .then(response => response.json())
             .then((data) => {
+                console.log(this.state.user)
                 this.fetchData();
                 localStorage.setItem('contact_group', this.state.contact_group);
                 this.setState({ selectedForEdit: data.id, selectedForDeletion: null });
@@ -214,8 +227,6 @@ class List extends React.Component{
     };
 /* EDIT GROUP NAME */
 
-
-//TODO: write downloadAsPDF function
 
 
 /* RENDER BUTTONS */
@@ -265,7 +276,7 @@ class List extends React.Component{
         }
         if (this.state.data.length === 0) {
             return (
-                    <Navbar/>
+                <Navbar/>
             );
         }
         if (this.matchedContacts.length === 0) {
@@ -382,7 +393,6 @@ class List extends React.Component{
                                 this.setState({ contact_group: group, editingGroup: group, oldGroup: group }); }}>{group}
                             </h3>
                         ) }
-
 
                         <div style={{ maxHeight: 350, overflow: "scroll", marginBottom: 50 }} className="contactGroup">
                             <table className="table table-bordered" style={{width: "100%", minWidth: 1470, maxWidth: 1460, marginLeft: 33 }}>

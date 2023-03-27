@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Contact(models.Model):
+	user = models.CharField(max_length=30, blank=True)
 	contact_group = models.CharField(max_length=30, blank=True)
 	contact_id = models.CharField(max_length=4, blank=True)
 	first_name = models.CharField(max_length=15, blank=True)
