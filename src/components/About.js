@@ -128,11 +128,11 @@ function About() {
                     <a href="https://git-scm.com/"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="70" height="70"/> </a>
                 </p>
             </div>
-            <button className='btn btn-outline-dark' style={{position: 'relative', top: -800, left: 1760, width: 65}} onClick={handleShow}>
+            <button className='btn btn-outline-dark' style={{position: 'relative', top: -770, left: 1760, width: 65}} onClick={handleShow}>
                 LICENSE
             </button>
             <Link to='/settings'>
-                <button className='btn btn-outline-dark' style={{position: 'relative', top: -800, left: 1770, width: 65}}>
+                <button className='btn btn-outline-dark' style={{position: 'relative', top: -770, left: 1770, width: 65}}>
                     Settings
                 </button>
             </Link>

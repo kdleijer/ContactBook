@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 function NavItem({path, selected, onClick, children}) {
@@ -37,6 +37,20 @@ function NavbarBrand({selected, onClick}) {
 
 
 function NavbarItems({selected, onClick}) {
+    const [username, setUsername] = useState(null);
+
+    useEffect(() => {
+        fetch('http://localhost:8000/accounts/username/', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            credentials: 'include',
+        })
+            .then((response) => response.json())
+            .then((data) => setUsername(data.username));
+    }, []);
+
     const handleLogout = () => {
         window.location.href = 'http://localhost:8000/accounts/logout';
     };
@@ -47,9 +61,11 @@ function NavbarItems({selected, onClick}) {
                 <NavItem path="/list" selected={selected} onClick={onClick}>My lists</NavItem>
                 <NavItem path="/settings" selected={selected} onClick={onClick}>Settings</NavItem>
             </ul>
-            <ul className="navbar-nav ml-auto" style={{position: "absolute", left: 95.5 + '%'}}>
-                <NavItem selected={selected} onClick={handleLogout} >Logout</NavItem>
+            <ul className="navbar-nav ml-auto" >
+                <p style={{color: 'white', marginTop: 8, marginBottom: 0, marginRight: 5}}>Welcome, {username}!</p>
+                <NavItem selected={selected} onClick={handleLogout}>Logout</NavItem>
             </ul>
+
         </div>
     );
 }

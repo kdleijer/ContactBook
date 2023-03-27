@@ -15,8 +15,6 @@ function Settings(props) {
     function downloadAsPDF() {
         const doc = new jsPDF();
         const data = props.data;
-
-        // Define columns for the table
         const columns = [
             {header: 'Contact group', dataKey: 'contact_group'},
             {header: 'First Name', dataKey: 'first_name'},
@@ -27,8 +25,6 @@ function Settings(props) {
             {header: 'Address', dataKey: 'address'},
             {header: 'Birthday', dataKey: 'birthday'},
         ];
-
-        // Define rows for the table
         const rows = data.map((contact) => {
             return {
                 contact_group: contact.contact_group,
@@ -42,7 +38,6 @@ function Settings(props) {
             };
         });
 
-        // Create the table
         doc.autoTable({
             startY: 50,
             columns,
@@ -52,7 +47,6 @@ function Settings(props) {
         doc.setFontSize(50);
         doc.text('Contact List', 55, 25);
 
-        // Download the PDF file
         doc.save('contacts.pdf');
     }
 /* DOWNLOAD DATA */
