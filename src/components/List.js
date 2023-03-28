@@ -34,25 +34,27 @@ class List extends React.Component{
 /* BLUE "CONTACTS" TEXT */
     displayContactsMessage () {
         return (
-            <p className={"linkList"} onClick={() => window.location.reload()}>contacts&nbsp;</p>
+            <p className={"linkList"} onClick={() => this.addContact()}>contacts&nbsp;</p>
         );
     }
 /* BLUE "CONTACTS" TEXT */
 
 
 /* INITIAL FETCH DATA */
-    fetchData(){
+    fetchData() {
         fetch('http://127.0.0.1:8000/contact/')
         .then(response=>response.json())
-        .then((data)=>{
+        .then(data => {
             this.setState({
                 data:data
             });
-        });
+            if (data.length === 0) {
+                this.setState({ contact_group: "New Group 1" });
+            }
+        })
     }
 /* INITIAL FETCH DATA */
 
-/* TODO: Move fetchData and componentDidMount to App.js */
 
 /* LIFECYCLE METHOD */
     componentDidMount(){
@@ -60,22 +62,6 @@ class List extends React.Component{
         if (savedContactGroup) {
             this.setState({ contact_group: savedContactGroup });
         }
-        fetch('http://localhost:8000/accounts/username/', {
-            credentials: 'include'
-        })
-        .then(response => response.json())
-        .then(data => {
-            this.setState({user: data.username});
-            localStorage.setItem('user', this.state.user);
-            console.log(this.state.user)
-        })
-
-        fetch('http://127.0.0.1:8000/contact/')
-        .then(response => response.json())
-        .then(data => {
-            if (data.length === 0) {
-                this.setState({ contact_group: "New Group 1" });
-                this.addContact();}})
         this.fetchData();
     }
 /* LIFECYCLE METHOD */
@@ -267,6 +253,23 @@ class List extends React.Component{
                        width: 600, outline: 'none', paddingLeft: 10, margin: "auto", display: "flex"}}/>
         )
     }
+    renderDropdown() {
+        return (
+            <Dropdown style={{position: "absolute", top: 14, left: 1295}}>
+                <Dropdown.Toggle variant="outline-info" id="dropdown-basic" style={{ width: 20, height: 20, paddingTop: 0 }}></Dropdown.Toggle>
+                <Dropdown.Menu>
+                    <Dropdown.Item onClick={() => this.setState({ searchOption: 'first_name'     })}>       First name         </Dropdown.Item>
+                    <Dropdown.Item onClick={() => this.setState({ searchOption: 'last_name'      })}>       Last name          </Dropdown.Item>
+                    <Dropdown.Item onClick={() => this.setState({ searchOption: 'email'          })}>       Email              </Dropdown.Item>
+                    <Dropdown.Item onClick={() => this.setState({ searchOption: 'work_phone'     })}>       Work phone         </Dropdown.Item>
+                    <Dropdown.Item onClick={() => this.setState({ searchOption: 'personal_phone' })}>       Personal phone     </Dropdown.Item>
+                    <Dropdown.Item onClick={() => this.setState({ searchOption: 'address'        })}>       Address            </Dropdown.Item>
+                    <Dropdown.Item onClick={() => this.setState({ searchOption: 'birthday'       })}>       Birthday           </Dropdown.Item>
+                    <Dropdown.Item onClick={() => this.setState({ searchOption: 'contact_group'  })}>       Contact group      </Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
+        )
+    }
     renderMenu() {
         const uniqueContactGroups = [...new Set(this.state.data.map(contact => contact.contact_group))];
         let newGroupName = `New Group ${uniqueContactGroups.length}`;
@@ -284,6 +287,7 @@ class List extends React.Component{
                 <div>
                     <Navbar/>
                     {this.renderSearch()}
+                    {this.renderDropdown()}
                     <div className={"messages"}>
                         <h2 className="bounce_header" style={{marginLeft: "auto"}}>No&nbsp;</h2> <div style={{ marginTop: '11.3%' }}>{this.displayContactsMessage()}</div>
                         <h2 className="bounce_header" style={{marginRight: "auto"}}>matching the {this.state.searchOption}</h2>
@@ -295,23 +299,11 @@ class List extends React.Component{
             <div>
                 <Navbar/>
                 {this.renderSearch()}
+                {this.renderDropdown()}
                 <button onClick={() => {this.addContact();this.setState({contact_group: newGroupName});}} className="btn btn-outline-success"
                         style={{ position: "absolute", left: 205, top: 150, width: 35, height: 35, borderRadius: 5, padding: 0, fontSize: 40}}>
                         <div style={{ marginTop: -17.9, marginLeft: -0.5 }}>+</div>
                 </button>
-                <Dropdown style={{position: "absolute", top: 14, left: 1295}}>
-                    <Dropdown.Toggle variant="outline-info" id="dropdown-basic" style={{ width: 20, height: 20, paddingTop: 0 }}></Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        <Dropdown.Item onClick={() => this.setState({ searchOption: 'first_name'     })}>       First name         </Dropdown.Item>
-                        <Dropdown.Item onClick={() => this.setState({ searchOption: 'last_name'      })}>       Last name          </Dropdown.Item>
-                        <Dropdown.Item onClick={() => this.setState({ searchOption: 'email'          })}>       Email              </Dropdown.Item>
-                        <Dropdown.Item onClick={() => this.setState({ searchOption: 'work_phone'     })}>       Work phone         </Dropdown.Item>
-                        <Dropdown.Item onClick={() => this.setState({ searchOption: 'personal_phone' })}>       Personal phone     </Dropdown.Item>
-                        <Dropdown.Item onClick={() => this.setState({ searchOption: 'address'        })}>       Address            </Dropdown.Item>
-                        <Dropdown.Item onClick={() => this.setState({ searchOption: 'birthday'       })}>       Birthday           </Dropdown.Item>
-                        <Dropdown.Item onClick={() => this.setState({ searchOption: 'contact_group'  })}>       Contact group      </Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
             </div>
         );
     }

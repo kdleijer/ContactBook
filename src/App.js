@@ -8,17 +8,8 @@ import Settings from './components/Settings';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
-    const [data, setData] = useState([]);
     const [isAuthenticated, setIsAuthenticated] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        fetch('http://127.0.0.1:8000/contact/')
-            .then((response) => response.json())
-            .then((data) => {
-                setData(data);
-            })
-    }, []);
     useEffect(() => {
         fetch('http://localhost:8000/accounts/auth/', {
             method: 'GET',
@@ -46,7 +37,7 @@ function App() {
                 <Route path="*" element={<List/>}/>
                 <Route path="/list" element={<List/>}/>
                 <Route path="/about" element={<About/>}/>
-                <Route path="/settings" element={<Settings data={data} setData={setData}/>}/>
+                <Route path="/settings" element={<Settings/>}/>
             </Routes>
         </div>
     );

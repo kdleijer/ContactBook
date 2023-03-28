@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { saveAs } from "file-saver";
 import Navbar from "./Navbar";
@@ -6,15 +6,22 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
 function Settings(props) {
+    const [data, setData] = useState();
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/contact/')
+            .then((response) => response.json())
+            .then((data) => {
+                setData(data);
+            })
+    }, []);
 /* DOWNLOAD DATA */
     function downloadAsJSON () {
-        const jsonData = JSON.stringify(props.data);
+        const jsonData = JSON.stringify(data);
         const blob = new Blob([jsonData], { type: "application/json" });
         saveAs(blob, "contacts.json");
     }
     function downloadAsPDF() {
         const doc = new jsPDF();
-        const data = props.data;
         const columns = [
             {header: 'Contact group', dataKey: 'contact_group'},
             {header: 'First Name', dataKey: 'first_name'},
