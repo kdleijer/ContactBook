@@ -109,17 +109,17 @@ npm start
 
 - [X] **Implemented user login/registration from my own template project: [RegistrationDjango](https://github.com/SzymCode/RegistrationDjango)!**
 
-- [X] **Contact groups!**
-
-- [X] **Render multiple tables with contact group specific data!**
-
-- [X] **Edit all contacts in table with editable header above table!**
+- [X] **User specific data and contact groups!**
 
 - [X] **Fetch data with REST API!**
 
-- [X] **Search contacts by selected value!**
+- [X] Render multiple tables with contact group specific data
 
-- [X] Download data to JSON and PDF file
+- [X] Edit all contacts in table with editable header above table
+
+- [X] Search contacts by selected value
+
+- [X] Download data to JSON or PDF file
 
 - [X] Specific tables headers
 
@@ -135,6 +135,8 @@ npm start
 
 <details><summary> <h2> 🎯 TODO:  </summary>
 
+- [ ] **Share data with other users**
+
 - [ ] **Reduce fetches, localStorage solutions etc...**
 
 - [ ] Dragging, resizing, deleting columns and create custom ones
@@ -144,8 +146,6 @@ npm start
 - [ ] Display contacts by selected order
 
 - [ ] Settings page 
-
-- [ ] User specific data + share data with other users
 
 - [ ] Better UI design + theme selection
 
