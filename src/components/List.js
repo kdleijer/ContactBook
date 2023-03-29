@@ -26,7 +26,6 @@ class List extends React.Component{
             selectedForDeletion: null,
             selectedForEdit: null,
             disableDeleteButtons: false,
-            user: null,
         };
     }
 
@@ -42,16 +41,18 @@ class List extends React.Component{
 
 /* INITIAL FETCH DATA */
     fetchData() {
+        const user = localStorage.getItem('user');
         fetch('http://127.0.0.1:8000/contact/')
-        .then(response=>response.json())
-        .then(data => {
-            this.setState({
-                data:data
+            .then(response => response.json())
+            .then(data => {
+                const filteredData = data.filter(item => item.user === user);
+                this.setState({
+                    data: filteredData
+                });
+                if (filteredData.length === 0) {
+                    this.setState({contact_group: "New Group 1"});
+                }
             });
-            if (data.length === 0) {
-                this.setState({ contact_group: "New Group 1" });
-            }
-        })
     }
 /* INITIAL FETCH DATA */
 

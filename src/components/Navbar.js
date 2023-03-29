@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 function NavItem({path, selected, onClick, children}) {
@@ -37,20 +37,7 @@ function NavbarBrand({selected, onClick}) {
 
 
 function NavbarItems({selected, onClick}) {
-    const [username, setUsername] = useState(null);
-
-    useEffect(() => {
-        fetch('http://localhost:8000/accounts/username/', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            credentials: 'include',
-        })
-            .then((response) => response.json())
-            .then((data) => setUsername(data.username)); // TODO: localStorage...
-    }, []);
-
+    const username = localStorage.getItem('user');
     const handleLogout = () => {
         window.location.href = 'http://localhost:8000/accounts/logout';
     };
@@ -65,7 +52,6 @@ function NavbarItems({selected, onClick}) {
                 <p style={{color: 'white', marginTop: 8, marginBottom: 0, marginRight: 5}}>Welcome, {username}!</p>
                 <NavItem selected={selected} onClick={handleLogout}>Logout</NavItem>
             </ul>
-
         </div>
     );
 }
