@@ -8,22 +8,6 @@ import Settings from './components/Settings';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
-    const [username, setUsername] = useState(localStorage.getItem('username'));
-
-    useEffect(() => {
-        fetch('http://localhost:8000/accounts/username/', {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            credentials: 'include',
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                localStorage.setItem('user', data.username);
-                setUsername(data.username);
-            });
-    }, [username]);
     const [isAuthenticated, setIsAuthenticated] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
@@ -36,7 +20,17 @@ function App() {
         .then(data => {
             setIsAuthenticated(data.authenticated);
         })
-        .catch(error => console.error(error))
+        fetch('http://localhost:8000/accounts/username/', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            credentials: 'include',
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            localStorage.setItem('user', data.username);
+        })
         .finally(() => setIsLoading(false));
     }, []);
     if (isAuthenticated === false) {
