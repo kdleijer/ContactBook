@@ -42,14 +42,13 @@ class List extends React.Component{
 /* INITIAL FETCH DATA */
     fetchData() {
         const user = localStorage.getItem('user');
-        fetch('http://127.0.0.1:8000/contact/') //TODO: FETCH ONLY LOGGED USER DATA ?user={user} DOESNT WORK PROBABLY CHANGE /CONTACT VIEW?
+        fetch(`http://127.0.0.1:8000/contact/?user=${user}`)
             .then(response => response.json())
             .then(data => {
-                const filteredData = data.filter(item => item.user === user);
                 this.setState({
-                    data: filteredData
+                    data: data
                 });
-                if (filteredData.length === 0) {
+                if (data.length === 0) {
                     this.setState({contact_group: "New Group 1"});
                 }
             });
