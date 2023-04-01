@@ -16,10 +16,10 @@ function App() {
             mode: 'cors',
             credentials: 'include'
         })
-        .then(response => response.json())
-        .then(data => {
-            setIsAuthenticated(data.authenticated);
-        })
+            .then(response => response.json())
+            .then(data => {
+                setIsAuthenticated(data.authenticated);
+            })
         fetch('http://localhost:8000/accounts/username/', {
             headers: {
                 'Content-Type': 'application/json',
@@ -27,11 +27,11 @@ function App() {
             },
             credentials: 'include',
         })
-        .then((response) => response.json())
-        .then((data) => {
-            localStorage.setItem('user', data.username);
-        })
-        .finally(() => setIsLoading(false));
+            .then((response) => response.json())
+            .then((data) => {
+                localStorage.setItem('user', data.username);
+            })
+            .finally(() => setIsLoading(false));
     }, []);
     if (isAuthenticated === false) {
         window.location.replace('http://localhost:8000/accounts/login');

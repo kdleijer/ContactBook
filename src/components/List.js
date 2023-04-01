@@ -42,7 +42,7 @@ class List extends React.Component{
 /* INITIAL FETCH DATA */
     fetchData() {
         const user = localStorage.getItem('user');
-        fetch('http://127.0.0.1:8000/contact/')
+        fetch('http://127.0.0.1:8000/contact/') //TODO: FETCH ONLY LOGGED USER DATA ?user={user} DOESNT WORK PROBABLY CHANGE /CONTACT VIEW?
             .then(response => response.json())
             .then(data => {
                 const filteredData = data.filter(item => item.user === user);
@@ -166,13 +166,13 @@ class List extends React.Component{
                     'Content-type': 'application/json; charset=UTF-8',
                 },
             })
-            .then(response => response.json())
-            .then((data) => {
-                console.log(this.state.user)
-                this.fetchData();
-                localStorage.setItem('contact_group', this.state.contact_group);
-                this.setState({ selectedForEdit: data.id, selectedForDeletion: null });
-            });
+                .then(response => response.json())
+                .then((data) => {
+                    console.log(this.state.user)
+                    this.fetchData();
+                    localStorage.setItem('contact_group', this.state.contact_group);
+                    this.setState({selectedForEdit: data.id, selectedForDeletion: null});
+                });
         });
     }
 /* ADD CONTACT */
@@ -200,7 +200,8 @@ class List extends React.Component{
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(updatedContact),})
+                    body: JSON.stringify(updatedContact),
+                })
                     .then(response => response)
                     .then((data) => {
                         if (data) {

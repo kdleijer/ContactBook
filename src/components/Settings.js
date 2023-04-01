@@ -5,18 +5,20 @@ import Navbar from "./Navbar";
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
-function Settings(props) {
+function Settings() {
     const [data, setData] = useState();
+    const user = localStorage.getItem('user');
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/contact/')
+        fetch('http://127.0.0.1:8000/contact/') //TODO: FETCH ONLY LOGGED USER DATA ?user={user} DOESNT WORK PROBABLY CHANGE /CONTACT VIEW?
             .then((response) => response.json())
             .then((data) => {
-                setData(data);
+                const filteredData = data.filter(item => item.user === user);
+                setData(filteredData);
             })
-    }, []);
+    }, [user]);
 /* DOWNLOAD DATA */
     function downloadAsJSON () {
-        const jsonData = JSON.stringify(data);
+        const jsonData = JSON.stringify(data, null, 1);
         const blob = new Blob([jsonData], { type: "application/json" });
         saveAs(blob, "contacts.json");
     }
