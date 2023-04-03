@@ -3,6 +3,12 @@ html, body {
     min-width: 1920px;
     max-width: 1920px;
 }
+html {
+    height: 100%;
+}
+body {
+    background: transparent;
+}
 
 @media screen and (max-width: 1919px) {
   html, body {
@@ -69,10 +75,13 @@ h1 {
 }
 .line1 {
     height: 1px;
-    width: 46%;
+    width: 48.5%;
     background: black;
-    margin-left: 10px;
+    margin-left: 14px;
     margin-right: auto;
+}
+.line1, .line2, .line3 {
+    width: 48.5%;
 }
 .bounce_header {
     margin-top: 15%;
@@ -141,62 +150,3 @@ h6 {
         opacity: 1;
     }
 }
-
-
-/* ABOUT */
-.line1 {
-    opacity: 0;
-    animation: fade-in 0.4s ease-in 1s;
-    animation-fill-mode: forwards;
-}
-.about-content1 {
-    opacity: 0;
-    animation: fade-in 0.4s ease-in 1.2s;
-    animation-fill-mode: forwards;
-}
-.about-content2 {
-    opacity: 0;
-    animation: fade-in 0.4s ease-in 1.4s;
-    animation-fill-mode: forwards;
-}
-.tech-stack {
-    opacity: 0;
-    animation: fade-in 0.4s ease-in 1.6s;
-    animation-fill-mode: forwards;
-}
-.linev {
-    opacity: 0;
-    animation: fade-in 0.4s ease-in 1.9s;
-    animation-fill-mode: forwards;
-}
-.about-header {
-    opacity: 0;
-    animation: fade-in 0.4s ease-in 2.1s;
-    animation-fill-mode: forwards;
-}
-.line2 {
-    opacity: 0;
-    animation: fade-in 0.4s ease-in 2.2s;
-    animation-fill-mode: forwards;
-}
-.about-content3 {
-    opacity: 0;
-    animation: fade-in 0.4s ease-in 2.4s;
-    animation-fill-mode: forwards;
-}
-.about-header1 {
-    opacity: 0;
-    animation: fade-in 0.4s ease-in 2.6s;
-    animation-fill-mode: forwards;
-}
-.line3 {
-    opacity: 0;
-    animation: fade-in 0.4s ease-in 2.8s;
-    animation-fill-mode: forwards;
-}
-.about-content4 {
-    opacity: 0;
-    animation: fade-in 0.4s ease-in 2.9s;
-    animation-fill-mode: forwards;
-}
-/* ABOUT */
