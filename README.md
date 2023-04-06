@@ -18,8 +18,7 @@
 
 # ContactBook
 
-This website helps to storage contacts data, share it with others and download contact lists to JSON or PDF file.
-You can clone this repo and run it on your internal server. The project was created for educational purposes and to demonstrate my coding skills to my future recruiters.
+This website helps to storage contacts data, share it with others and download contact lists to JSON or PDF file. It's fully connected with database, you can clone this repo and run it on your internal server. Deploy in future. The project was created for educational purposes and to demonstrate my coding skills to my future recruiters.
 <br>
 **I highly encourage you to contributions!**
 
@@ -151,5 +150,5 @@ npm start
 
 - [ ] Combine logging/registration with home page
 
-- [ ] Resizing website + mobile version
+- [ ] Resizing website (now its for 1920x1080) + mobile version
 </details>

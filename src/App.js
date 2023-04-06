@@ -38,16 +38,18 @@ function App() {
     }
 
     if (isLoading) {
-        return <h2 className="bounce_header" style={{marginLeft: 40 + '%'}}>Loading...</h2>;
+        return <h2 className="bounce_header" style={{ marginLeft: 40 + '%' }}>
+            Loading...
+        </h2>;
     }
 
     return isAuthenticated && (
         <div className="container-fluid">
             <Routes>
-                <Route path="*" element={<List/>}/>
-                <Route path="/list" element={<List/>}/>
-                <Route path="/about" element={<About/>}/>
-                <Route path="/settings" element={<Settings/>}/>
+                <Route path="*"           element={ <List/>     }/>
+                <Route path="/list"       element={ <List/>     }/>
+                <Route path="/about"      element={ <About/>    }/>
+                <Route path="/settings"   element={ <Settings/> }/>
             </Routes>
         </div>
     );

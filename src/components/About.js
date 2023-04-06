@@ -17,21 +17,24 @@ function About() {
     }
     function uncheck(){
         return (
-            <input className='form-check-input' type='checkbox' disabled style={{position: 'relative', top: -0.5, marginRight: 3}}/>
+            <input className='form-check-input' type='checkbox' disabled style={{ position: 'relative', top: -0.5, marginRight: 3 }}/>
         )
     }
 
     return (
-        <div style={{height: 950, overflowY: "hidden"}}>
+        <div style={{ height: 950, overflowY: "hidden" }}>
             <Navbar/>
-            <h2 className="bounce_header" style={{marginLeft: '8%', marginTop: '-3%'}}>ContactBook</h2>
+            <h2 className="bounce_header" style={{ marginLeft: '8%', marginTop: '-3%' }}>
+                ContactBook
+            </h2>
             <div className='line1'/>
-            <p className='about-content1' style={{maxWidth: '45%', marginLeft: 20, marginTop: 10, fontSize: 20}}>
+            <p className='about-content1' style={{ maxWidth: '45%', marginLeft: 20, marginTop: 10, fontSize: 20 }}>
                 This website helps to storage contacts data and share it with others (in future). For now is
                 under construction, so it is full of bugs and missing many functionalities. The project was created for educational
-                purposes and to demonstrate my coding skills to my future recruiters.<br/><b>I highly encourage you to contributions!</b>
+                purposes and to demonstrate my coding skills to my future recruiters.
+                <br/><b>I highly encourage you to contributions!</b>
             </p>
-            <p className='about-content2' style={{maxWidth: '46%', marginLeft: 20, marginTop: 10, fontSize: 20}}>
+            <p className='about-content2' style={{ maxWidth: '46%', marginLeft: 20, marginTop: 10, fontSize: 20 }}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
                 laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
                 non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
@@ -40,14 +43,16 @@ function About() {
                 non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam,
                 nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
             </p>
-            <div className='linev' style={{width: 1, height: 880, background: 'black', marginLeft: 'auto', marginRight: 'auto', position: 'absolute', left: 960, top: 70}}/>
+            <div className='linev' style={{ width: 1, height: 880, background: 'black', marginLeft: 'auto', marginRight: 'auto', position: 'absolute', left: 960, top: 70 }}/>
 
 
-            <h3 className='about-header' style={{position: 'relative', top: -680, marginLeft: '60%'}}>Solved problems</h3>
-            <div className='line2' style={{position: 'relative', top: -680, left: 975, height: 1, background: 'black'}}/>
-            <p className='about-content3' style={{position: 'relative', top: -680, right: 10, maxWidth: '45%', marginLeft: 'auto', marginRight: 20, marginTop: 10, fontSize: 20}}>
+            <h3 className='about-header' style={{ position: 'relative', top: -680, marginLeft: '60%' }}>
+                Solved problems
+            </h3>
+            <div className='line2' style={{ position: 'relative', top: -680, left: 975, height: 1, background: 'black' }}/>
+            <p className='about-content3' style={{ position: 'relative', top: -680, right: 10, maxWidth: '45%', marginLeft: 'auto', marginRight: 20, marginTop: 10, fontSize: 20 }}>
                 {check()} Full functionality of restrict routes in App.js with authentication from django API endpoint! <br/>
-                {check()} Implemented user login/registration from my own template project: <a href="https://github.com/SzymCode/RegistrationDjango">RegistrationDjango</a>! <br/>
+                {check()} Implemented user login/registration from my own template project: <a href="https://github.com/SzymCode/RegistrationDjango"> RegistrationDjango</a>! <br/>
                 {check()} User specific data and contact groups! <br/>
                 {check()} Render multiple tables with contact group specific data! <br/>
                 {check()} Fetch data with REST API! <br/>
@@ -60,9 +65,11 @@ function About() {
                 {check()} Loading screen <br/>
             </p>
 
-            <h3 className='about-header1' style={{position: 'relative', top: -660, marginLeft: '60%'}}>TODO</h3>
-            <div className='line3' style={{position: 'relative', top: -660, left: 975, height: 1, background: 'black'}}/>
-            <p className='about-content4' style={{position: 'relative', top: -660, right: -14, maxWidth: '45%', marginLeft: 'auto', marginRight: 20, marginTop: 10, fontSize: 20}}>
+            <h3 className='about-header1' style={{ position: 'relative', top: -660, marginLeft: '60%' }}>
+                TODO
+            </h3>
+            <div className='line3'        style={{ position: 'relative', top: -660, left: 975, height: 1, background: 'black' }}/>
+            <p className='about-content4' style={{ position: 'relative', top: -660, right: -14, maxWidth: '45%', marginLeft: 'auto', marginRight: 20, marginTop: 10, fontSize: 20 }}>
                 {uncheck()} Dragging, resizing, deleting columns and create custom ones <br/>
                 {uncheck()} Static position of tables <br/>
                 {uncheck()} Display contacts by selected order <br/>
@@ -72,12 +79,14 @@ function About() {
                 {uncheck()} Combine logging/registration with home page <br/>
                 {uncheck()} Resizing website + mobile version <br/>
             </p>
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={ show } onHide={ handleClose }>
                 <Modal.Header>
-                    <Modal.Title>LICENSE</Modal.Title>
+                    <Modal.Title>
+                        LICENSE
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p style={{fontSize: 12}}>
+                    <p style={{ fontSize: 12 }}>
                         BSD 3-Clause License
                         Copyright (c) 2023, SzymCode
 
@@ -114,8 +123,10 @@ function About() {
                 </Modal.Footer>
             </Modal>
             <div className='tech-stack'>
-                <h3 style={{position: "relative", top: -740, left: 30, fontSize: 50}}>Tech Stack:</h3>
-                <p style={{position: "relative", top: -745, left: 20}}>
+                <h3 style={{ position: "relative", top: -740, left: 30, fontSize: 50 }}>
+                    Tech Stack:
+                </h3>
+                <p style={{ position: "relative", top: -745, left: 20 }}>
                     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="70" height="70"/> </a>
                     <a href="https://www.python.org"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="70" height="70"/> </a>
                     <a href="https://reactjs.org/"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="70" height="70"/> </a>
@@ -129,11 +140,11 @@ function About() {
                     <a href="https://git-scm.com/"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="70" height="70"/> </a>
                 </p>
             </div>
-            <button className='btn btn-outline-dark' style={{position: 'relative', top: -770, left: 1760, width: 65}} onClick={handleShow}>
+            <button className='btn btn-outline-dark'     style={{ position: 'relative', top: -770, left: 1760, width: 65 }} onClick={ handleShow }>
                 LICENSE
             </button>
             <Link to='/settings'>
-                <button className='btn btn-outline-dark' style={{position: 'relative', top: -770, left: 1770, width: 65}}>
+                <button className='btn btn-outline-dark' style={{ position: 'relative', top: -770, left: 1770, width: 65 }}>
                     Settings
                 </button>
             </Link>

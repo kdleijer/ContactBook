@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-function NavItem({path, selected, onClick, children}) {
+function NavItem({ path, selected, onClick, children }) {
     return (
         <li className="nav-item">
-            <Link className={`nav-link ${selected === path ? "active" : ""}`} to={path}
-                  onClick={() => onClick(path)}>
-                {children}
+            <Link className={ `nav-link ${ selected === path ? "active" : "" }` } to={ path }
+                  onClick={ () => onClick(path) }>
+                { children }
             </Link>
         </li>
     );
@@ -22,21 +22,22 @@ function Navbar() {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <NavbarBrand onClick={handleClick} />
-            <NavbarItems selected={selected} onClick={handleClick} />
+            <NavbarBrand onClick={ handleClick } />
+            <NavbarItems selected={ selected } onClick={ handleClick } />
         </nav>
     );
 }
 
-function NavbarBrand({selected, onClick}) {
+function NavbarBrand({ selected, onClick }) {
     return (
-        <Link className={`navbar-brand ${selected === "/home" ? "active" : ""}`} to="/home"
-              onClick={() => onClick("/home")}>SzymCode</Link>
+        <Link className={ `navbar-brand ${ selected === "/home" ? "active" : "" }` } to="/home" onClick={ () => onClick("/home") }>
+            SzymCode
+        </Link>
     );
 }
 
 
-function NavbarItems({selected, onClick}) {
+function NavbarItems({ selected, onClick }) {
     const username = localStorage.getItem('user');
     const handleLogout = () => {
         window.location.href = 'http://localhost:8000/accounts/logout';
@@ -45,12 +46,20 @@ function NavbarItems({selected, onClick}) {
     return (
         <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
-                <NavItem path="/list" selected={selected} onClick={onClick}>My lists</NavItem>
-                <NavItem path="/settings" selected={selected} onClick={onClick}>Settings</NavItem>
+                <NavItem path="/list" selected={ selected } onClick={ onClick }>
+                    My lists
+                </NavItem>
+                <NavItem path="/settings" selected={ selected } onClick={ onClick }>
+                    Settings
+                </NavItem>
             </ul>
             <ul className="navbar-nav ml-auto" >
-                <p style={{color: 'white', marginTop: 8, marginBottom: 0, marginRight: 5}}>Welcome, {username}!</p>
-                <NavItem selected={selected} onClick={handleLogout}>Logout</NavItem>
+                <p style={{ color: 'white', marginTop: 8, marginBottom: 0, marginRight: 5 }}>
+                    Welcome, { username }!
+                </p>
+                <NavItem selected={ selected } onClick={ handleLogout }>
+                    Logout
+                </NavItem>
             </ul>
         </div>
     );

@@ -9,6 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 
+
 def create_admin(request):
     # Check if admin user already exists
     if User.objects.filter(username='admin').exists():
@@ -22,6 +23,8 @@ def create_admin(request):
 
     # Return success message
     return HttpResponse('Admin user created successfully')
+
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_username(request):
@@ -29,7 +32,7 @@ def get_username(request):
     return Response({'username': username})
 
 
-def registerPage(request):
+def register_page(request):
     if request.user.is_authenticated:
         return redirect('home')
 
@@ -57,7 +60,7 @@ def login_user(request, username, password):
     return False
 
 
-def loginPage(request):
+def login_page(request):
     if request.user.is_authenticated:
         return redirect('home')
 
@@ -76,7 +79,7 @@ def loginPage(request):
     return render(request, 'login.html', {})
 
 
-def logoutUser(request):
+def logout_user(request):
     logout(request)
     return redirect('login')
 

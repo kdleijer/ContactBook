@@ -31,9 +31,11 @@ class List extends React.Component{
 
 
 /* BLUE "CONTACTS" TEXT */
-    displayContactsMessage () {
+    displayContactsMessage() {
         return (
-            <p className={"linkList"} onClick={() => this.addContact()}>contacts&nbsp;</p>
+            <p className={ "linkList" } onClick={ () => this.addContact() }>
+                contacts&nbsp;
+            </p>
         );
     }
 /* BLUE "CONTACTS" TEXT */
@@ -42,14 +44,14 @@ class List extends React.Component{
 /* INITIAL FETCH DATA */
     fetchData() {
         const user = localStorage.getItem('user');
-        fetch(`http://127.0.0.1:8000/contact/?user=${user}`)
+        fetch(`http://127.0.0.1:8000/contact/?user=${ user }`)
             .then(response => response.json())
             .then(data => {
                 this.setState({
                     data: data
                 });
                 if (data.length === 0) {
-                    this.setState({contact_group: "New Group 1"});
+                    this.setState({ contact_group: "New Group 1" });
                 }
             });
     }
@@ -144,7 +146,7 @@ class List extends React.Component{
 
 
 /* ADD CONTACT */
-    addContact = () => {
+    addContact() {
         this.setState({
             user: localStorage.getItem('user'),
             contact_id: '',
@@ -156,7 +158,7 @@ class List extends React.Component{
             address: '',
             birthday: ''
         }, () => {
-            let data = {...this.state};
+            let data = { ...this.state };
 
             fetch('http://127.0.0.1:8000/contact/', {
                 method: 'POST',
@@ -170,7 +172,7 @@ class List extends React.Component{
                     console.log(this.state.user)
                     this.fetchData();
                     localStorage.setItem('contact_group', this.state.contact_group);
-                    this.setState({selectedForEdit: data.id, selectedForDeletion: null});
+                    this.setState({ selectedForEdit: data.id, selectedForDeletion: null });
                 });
         });
     }
@@ -178,7 +180,7 @@ class List extends React.Component{
 
 
 /* EDIT GROUP NAME */
-    handleEdit = () => {
+    handleEdit() {
         this.setState({
             isEditing: true
         });
@@ -188,7 +190,7 @@ class List extends React.Component{
           contact_group: event.target.value
         });
     };
-    handleSubmit = () => {
+    handleSubmit() {
         this.state.data.forEach((contact) => {
             if (contact.contact_group === this.state.oldGroup) {
                 let updatedContact = {
@@ -218,28 +220,34 @@ class List extends React.Component{
 
 /* RENDER BUTTONS */
     renderButtons(contact) {
-        const buttonStyles = {padding: 4}
+        const buttonStyles = { padding: 2, marginLeft: 2, }
         const editButton = (
-            <button style={{marginLeft: 0}} className="btn btn-outline-info" onClick={() => this.editData(contact.id)}>
-                {this.state.selectedForEdit === contact.id ? "Save" : "Edit"}
+            <button className="btn btn-outline-info" onClick={ () => this.editData(contact.id) }>
+                { this.state.selectedForEdit === contact.id ? "Save" : "Edit" }
             </button>
         );
         const cancelButton = (
-            <button className="btn btn-outline-dark" style={{ marginLeft: this.state.selectedForEdit === contact.id ? 4 : 0 }}
-                onClick={() => this.cancel(contact.id)}>Cancel
+            <button className="btn btn-outline-dark" onClick={ () => this.cancel(contact.id) } style={{ marginLeft: 0 }}>
+                Cancel
             </button>
         );
         const deleteButton = (
-            <button className="btn btn-outline-danger" style={{ marginLeft: 4, opacity: this.state.disableDeleteButtons ? 0.2 : 1 }}
-                disabled={!!this.state.disableDeleteButtons} onClick={() => this.deleteData(contact.id)}>
-                {this.state.selectedForDeletion === contact.id ? "Sure?" : "Delete"}
+            <button className="btn btn-outline-danger" style={{ opacity: this.state.disableDeleteButtons ? 0.2 : 1, marginLeft: 0 }}
+                disabled={ !!this.state.disableDeleteButtons } onClick={ () => this.deleteData(contact.id) }>
+                { this.state.selectedForDeletion === contact.id ? "Sure?" : "Delete" }
             </button>
         );
         let buttonGroup;
-        if (this.state.selectedForEdit === contact.id) { buttonGroup = <>{editButton}{cancelButton}</>; }
-        else if (this.state.selectedForDeletion === contact.id) { buttonGroup = <>{cancelButton}{deleteButton}</>; }
-        else { buttonGroup = <>{editButton}{deleteButton}</>; }
-        return <td style={buttonStyles}>{ buttonGroup }</td>;
+        if ( this.state.selectedForEdit === contact.id ) {
+            buttonGroup = <div style={ buttonStyles }>   { editButton }   { cancelButton }   </div>;
+        }
+        else if (this.state.selectedForDeletion === contact.id) {
+            buttonGroup = <div style={ buttonStyles }>   { cancelButton } { deleteButton }   </div>;
+        }
+        else {
+            buttonGroup = <div style={ buttonStyles }>   { editButton }   { deleteButton }   </div>;
+        }
+        return <td style={ buttonStyles }>{ buttonGroup }</td>;
     }
 /* RENDER BUTTONS */
 
@@ -248,32 +256,30 @@ class List extends React.Component{
 /* RENDER MENU */
     renderSearch(){
         return (
-            <input type="search" value={this.state.searchQuery}  placeholder={`Search by ${this.state.searchOption}`}
-                   onChange={e => this.setState({searchQuery: e.target.value})}
-                   style={{ position: "absolute", top: 10, left: 680, borderRadius: 8, borderWidth: 0, height: 35,
-                       width: 600, outline: 'none', paddingLeft: 10, margin: "auto", display: "flex"}}/>
+            <input type="search" value={ this.state.searchQuery } placeholder={ `Search by ${ this.state.searchOption }` } onChange={ e => this.setState({ searchQuery: e.target.value }) }
+                   style={{ position: "absolute", top: 10, left: 680, borderRadius: 8, borderWidth: 0, height: 35, width: 600, outline: 'none', paddingLeft: 10, margin: "auto", display: "flex" }}/>
         )
     }
     renderDropdown() {
         return (
-            <Dropdown style={{position: "absolute", top: 14, left: 1295}}>
-                <Dropdown.Toggle variant="outline-info" id="dropdown-basic" style={{ width: 20, height: 20, paddingTop: 0 }}></Dropdown.Toggle>
+            <Dropdown style={{ position: "absolute", top: 14, left: 1295 }}>
+                <Dropdown.Toggle variant="outline-info" id="dropdown-basic" style={{ width: 20, height: 20, paddingTop: 0 }}/>
                 <Dropdown.Menu>
-                    <Dropdown.Item onClick={() => this.setState({ searchOption: 'first_name'     })}>       First name         </Dropdown.Item>
-                    <Dropdown.Item onClick={() => this.setState({ searchOption: 'last_name'      })}>       Last name          </Dropdown.Item>
-                    <Dropdown.Item onClick={() => this.setState({ searchOption: 'email'          })}>       Email              </Dropdown.Item>
-                    <Dropdown.Item onClick={() => this.setState({ searchOption: 'work_phone'     })}>       Work phone         </Dropdown.Item>
-                    <Dropdown.Item onClick={() => this.setState({ searchOption: 'personal_phone' })}>       Personal phone     </Dropdown.Item>
-                    <Dropdown.Item onClick={() => this.setState({ searchOption: 'address'        })}>       Address            </Dropdown.Item>
-                    <Dropdown.Item onClick={() => this.setState({ searchOption: 'birthday'       })}>       Birthday           </Dropdown.Item>
-                    <Dropdown.Item onClick={() => this.setState({ searchOption: 'contact_group'  })}>       Contact group      </Dropdown.Item>
+                    <Dropdown.Item onClick={ () => this.setState({ searchOption: 'first_name'     }) }>       First name         </Dropdown.Item>
+                    <Dropdown.Item onClick={ () => this.setState({ searchOption: 'last_name'      }) }>       Last name          </Dropdown.Item>
+                    <Dropdown.Item onClick={ () => this.setState({ searchOption: 'email'          }) }>       Email              </Dropdown.Item>
+                    <Dropdown.Item onClick={ () => this.setState({ searchOption: 'work_phone'     }) }>       Work phone         </Dropdown.Item>
+                    <Dropdown.Item onClick={ () => this.setState({ searchOption: 'personal_phone' }) }>       Personal phone     </Dropdown.Item>
+                    <Dropdown.Item onClick={ () => this.setState({ searchOption: 'address'        }) }>       Address            </Dropdown.Item>
+                    <Dropdown.Item onClick={ () => this.setState({ searchOption: 'birthday'       }) }>       Birthday           </Dropdown.Item>
+                    <Dropdown.Item onClick={ () => this.setState({ searchOption: 'contact_group'  }) }>       Contact group      </Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
         )
     }
     renderMenu() {
         const uniqueContactGroups = [...new Set(this.state.data.map(contact => contact.contact_group))];
-        let newGroupName = `New Group ${uniqueContactGroups.length}`;
+        let newGroupName = `New Group ${ uniqueContactGroups.length }`;
         while (uniqueContactGroups.includes(newGroupName)) {
             const number = parseInt(newGroupName.slice(-1), 10);
             newGroupName = newGroupName.slice(0, -1) + (number + 1);
@@ -287,11 +293,12 @@ class List extends React.Component{
             return (
                 <div>
                     <Navbar/>
-                    {this.renderSearch()}
-                    {this.renderDropdown()}
-                    <div className={"messages"}>
-                        <h2 className="bounce_header" style={{marginLeft: "auto"}}>No&nbsp;</h2> <div style={{ marginTop: '11.3%' }}>{this.displayContactsMessage()}</div>
-                        <h2 className="bounce_header" style={{marginRight: "auto"}}>matching the {this.state.searchOption}</h2>
+                    { this.renderSearch()   }
+                    { this.renderDropdown() }
+                    <div className={ "messages" }>
+                        <h2 className="bounce_header" style={{ marginLeft: "auto" }}> No&nbsp; </h2>
+                        <div style={{ marginTop: '11.3%' }}> { this.displayContactsMessage() } </div>
+                        <h2 className="bounce_header" style={{ marginRight: "auto" }}> matching the { this.state.searchOption } </h2>
                     </div>
                 </div>
             );
@@ -299,11 +306,11 @@ class List extends React.Component{
         return (
             <div>
                 <Navbar/>
-                {this.renderSearch()}
-                {this.renderDropdown()}
-                <button onClick={() => {this.addContact();this.setState({contact_group: newGroupName});}} className="btn btn-outline-success"
-                        style={{ position: "absolute", left: 205, top: 150, width: 35, height: 35, borderRadius: 5, padding: 0, fontSize: 40}}>
-                        <div style={{ marginTop: -17.9, marginLeft: -0.5 }}>+</div>
+                { this.renderSearch()   }
+                { this.renderDropdown() }
+                <button onClick={ () => { this.addContact(); this.setState({ contact_group: newGroupName });} } className="btn btn-outline-success"
+                        style={{ position: "absolute", left: 205, top: 150, width: 35, height: 35, borderRadius: 5, padding: 0, fontSize: 40 }}>
+                        <div style={{ marginTop: -17.9, marginLeft: -0.5 }}> + </div>
                 </button>
             </div>
         );
@@ -313,7 +320,7 @@ class List extends React.Component{
 
 /* RENDER TABLES */
     render() {
-        const {data, searchQuery} = this.state;
+        const { data, searchQuery } = this.state;
         const groups = data.reduce((acc, contact) => {
             if (!acc[contact.contact_group]) {
                 acc[contact.contact_group] = [];
@@ -333,12 +340,17 @@ class List extends React.Component{
             }, 500);
             return (
                 <div>
-                    {this.renderMenu()}
-                    {this.state.showMessage ? (
-                        <div className={"messages"} style={{marginLeft: '25%'}}>
-                            <h2 className="bounce_header">There are no&nbsp;</h2> <div style={{ marginTop: '10.1%'}}>{this.displayContactsMessage()}</div>
+                    { this.renderMenu() }
+                    { this.state.showMessage ? (
+                        <div className={ "messages" } style={{ marginLeft: '25%' }}>
+                            <h2 className="bounce_header">
+                                There are no&nbsp;
+                            </h2>
+                            <div style={{ marginTop: '10.1%' }}>
+                                { this.displayContactsMessage() }
+                            </div>
                         </div>
-                    ) : null}
+                    ) : null }
                 </div>
             );
         }
@@ -359,36 +371,36 @@ class List extends React.Component{
                     { id: "birthday",        defaultValue: contact.birthday,        width:  86,  maxLength: 10 }
                 ];
                 const inputFieldsElements = inputFields.map(field => (
-                    <td key={`${field.id}-${contact.id}`} style={{padding: 7}}>
-                        {this.state.selectedForEdit === contact.id ? (
-                            <input type="text" id={`${field.id}-${contact.id}`} defaultValue={field.defaultValue}
-                                   style={{width: field.width, marginTop: -4, marginLeft: -4, marginBottom: -4,
-                                       ...field.style}} maxLength={field.maxLength} />
-                        ) : ( <div className="contactFields">{field.defaultValue}</div> )}
+                    <td key={ `${ field.id }-${ contact.id }` } style={{ padding: 7 }}>
+                        { this.state.selectedForEdit === contact.id ? (
+                            <input type="text" id={ `${ field.id }-${ contact.id }` } defaultValue={ field.defaultValue }
+                                   style={{ width: field.width, marginTop: -4, marginLeft: -4, marginBottom: -4,
+                                       ...field.style }} maxLength={ field.maxLength } />
+                        ) : ( <div className="contactFields">{ field.defaultValue }</div> ) }
                     </td>
                 ));
                 return (
-                    <tr key={v4()}>{inputFieldsElements}{this.renderButtons(contact)}</tr>
+                    <tr key={ v4() }> { inputFieldsElements } { this.renderButtons(contact) } </tr>
                 );
             });
 
             return (
-                <div key={v4()}>
+                <div key={ v4() }>
                     <div style={{ border:"solid", borderWidth: 2, borderColor:"#dce2e3", borderRadius: 5, minWidth: 1540, maxWidth: 1540,  right: 0,
-                        minHeight: 155, paddingTop: 20, paddingRight: 20, marginLeft: "auto", marginRight: "auto", marginBottom: 30, boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.4)"}}>
-                        {this.state.editingGroup === group ? (
-                            <form style={{ position: "relative", top: -6, left: 78, fontSize: 35, marginBottom: -4.5, maxWidth: 700 }} onSubmit={this.handleSubmit}>
-                                <input type="text" value={this.state.contact_group} onChange={this.handleChange}
-                                    style={{ fontWeight: 500, outline: "none", borderWidth: 0 }} autoFocus onBlur={() => this.setState({ editingGroup: null })} />
+                        minHeight: 155, paddingTop: 20, paddingRight: 20, marginLeft: "auto", marginRight: "auto", marginBottom: 30, boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.4)" }}>
+                        { this.state.editingGroup === group ? (
+                            <form style={{ position: "relative", top: -6, left: 78, fontSize: 35, marginBottom: -4.5, maxWidth: 700 }} onSubmit={ this.handleSubmit }>
+                                <input type="text" value={ this.state.contact_group } onChange={ this.handleChange }
+                                    style={{ fontWeight: 500, outline: "none", borderWidth: 0 }} autoFocus onBlur={ () => this.setState({ editingGroup: null }) }/>
                             </form>
                         ) : (
-                            <h3 style={{ position: "relative", top: 0, left: 80, fontSize: 35, maxWidth: 700 }} onClick={() => { this.handleEdit();
-                                this.setState({ contact_group: group, editingGroup: group, oldGroup: group }); }}>{group}
+                            <h3 style={{ position: "relative", top: 0, left: 80, fontSize: 35, maxWidth: 700 }} onClick={ () => { this.handleEdit(); this.setState({ contact_group: group, editingGroup: group, oldGroup: group }); } }>
+                                { group }
                             </h3>
                         ) }
 
                         <div style={{ maxHeight: 350, overflow: "scroll", marginBottom: 50 }} className="contactGroup">
-                            <table className="table table-bordered" style={{width: "100%", minWidth: 1470, maxWidth: 1460, marginLeft: 33 }}>
+                            <table className="table table-bordered" style={{ width: "100%", minWidth: 1470, maxWidth: 1460, marginLeft: 33 }}>
                                 <thead>
                                 <tr>
                                     <th style={{ width:  48, padding: 6, fontSize: 17 }}>     ID                 </th>
@@ -401,18 +413,18 @@ class List extends React.Component{
                                     <th style={{ width:  86, padding: 6, fontSize: 17 }}>     Birthday           </th>
                                     <th style={{ width: 123, padding: 4, fontSize: 17 }}>
 
-                                        <button style={{ marginLeft: 0 }} className="btn btn-outline-success"
-                                            onClick={() => { this.addContact();this.setState({ contact_group: group }); }}>Add
+                                        <button style={{ marginLeft: 0 }} className="btn btn-outline-success" onClick={ () => { this.addContact(); this.setState({ contact_group: group }); } }>
+                                            Add
                                         </button>
 
-                                        <button style={{ marginLeft: 4 }} className="btn btn-outline-dark"
-                                            onClick={() => { this.setState({ disableDeleteButtons: !this.state.disableDeleteButtons }); }}><s>Delete</s>
+                                        <button style={{ marginLeft: 4 }} className="btn btn-outline-dark"    onClick={ () => { this.setState({ disableDeleteButtons: !this.state.disableDeleteButtons }); } }>
+                                            <s>Delete</s>
                                         </button>
 
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody>{rows}</tbody>
+                                <tbody>{ rows }</tbody>
                             </table>
                         </div>
                     </div>
@@ -421,8 +433,8 @@ class List extends React.Component{
         });
         return (
             <div>
-                {this.renderMenu()}
-                {tables}
+                { this.renderMenu() }
+                { tables            }
             </div>
         );
     }
