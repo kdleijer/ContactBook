@@ -3,6 +3,15 @@ import Navbar from "./Navbar";
 import {Link} from "react-router-dom";
 import { Modal } from 'react-bootstrap';
 
+
+function TechStackLogo({ name, logoUrl, linkName, width = 70, height = 70 }) {
+    return (
+        <Link to={`//${linkName}`} style={{ marginRight: 5 }}>
+            <img src={logoUrl} alt={name} style={{ width: `${width}px`, height: `${height}px` }}/>
+        </Link>
+    );
+}
+
 function About() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -52,7 +61,7 @@ function About() {
             <div className='line2' style={{ position: 'relative', top: -680, left: 975, height: 1, background: 'black' }}/>
             <p className='about-content3' style={{ position: 'relative', top: -680, right: 10, maxWidth: '45%', marginLeft: 'auto', marginRight: 20, marginTop: 10, fontSize: 20 }}>
                 {check()} Full functionality of restrict routes in App.js with authentication from django API endpoint! <br/>
-                {check()} Implemented user login/registration from my own template project: <a href="https://github.com/SzymCode/RegistrationDjango"> RegistrationDjango</a>! <br/>
+                {check()} Implemented user login/registration from my own template project: <Link to="https://github.com/SzymCode/RegistrationDjango"> RegistrationDjango</Link>! <br/>
                 {check()} User specific data and contact groups! <br/>
                 {check()} Render multiple tables with contact group specific data! <br/>
                 {check()} Fetch data with REST API! <br/>
@@ -127,17 +136,17 @@ function About() {
                     Tech Stack:
                 </h3>
                 <p style={{ position: "relative", top: -745, left: 20 }}>
-                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="70" height="70"/> </a>
-                    <a href="https://www.python.org"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="70" height="70"/> </a>
-                    <a href="https://reactjs.org/"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="70" height="70"/> </a>
-                    <a href="https://www.djangoproject.com/"> <img src="https://cdn.worldvectorlogo.com/logos/django.svg" alt="django" width="70" height="70"/> </a>
-                    <a href="https://www.django-rest-framework.org/"> <img src="https://inlab.fib.upc.edu/sites/default/files/styles/large/public/field/image/django-rest-framework.jpg" alt="djangorest" width="90" height="70"/> </a>
-                    <a href="https://www.w3.org/html/"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="70" height="70"/> </a>
-                    <a href="https://www.w3schools.com/css/"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="70" height="70"/> </a>
-                    <a href="https://getbootstrap.com"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="70" height="70"/> </a>
-                    <a href="https://www.sqlite.org/"> <img src="https://www.vectorlogo.zone/logos/sqlite/sqlite-icon.svg" alt="sqlite" width="70" height="70"/> </a>
-                    <a href="https://nodejs.org"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="70" height="70"/> </a>
-                    <a href="https://git-scm.com/"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="70" height="70"/> </a>
+                    <TechStackLogo linkName="developer.mozilla.org/en-US/docs/Web/JavaScript"       logoUrl="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" />
+                    <TechStackLogo linkName="python.org"                                            logoUrl="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" />
+                    <TechStackLogo linkName="reactjs.org"                                           logoUrl="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" />
+                    <TechStackLogo linkName="djangoproject.com"                                     logoUrl="https://cdn.worldvectorlogo.com/logos/django.svg" />
+                    <TechStackLogo linkName="django-rest-framework.org"                             logoUrl="https://inlab.fib.upc.edu/sites/default/files/styles/large/public/field/image/django-rest-framework.jpg"  width={90} />
+                    <TechStackLogo linkName="w3schools.com/html"                                    logoUrl="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" />
+                    <TechStackLogo linkName="w3schools.com/css"                                     logoUrl="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" />
+                    <TechStackLogo linkName="getbootstrap.com"                                      logoUrl="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" />
+                    <TechStackLogo linkName="sqlite.com"                                            logoUrl="https://www.vectorlogo.zone/logos/sqlite/sqlite-icon.svg" />
+                    <TechStackLogo linkName="nodejs.org"                                            logoUrl="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" />
+                    <TechStackLogo linkName="git-scm.com"                                           logoUrl="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" />
                 </p>
             </div>
             <button className='btn btn-outline-dark'     style={{ position: 'relative', top: -770, left: 1760, width: 65 }} onClick={ handleShow }>

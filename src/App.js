@@ -11,7 +11,7 @@ function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        fetch('http://localhost:8000/accounts/auth/', {
+        fetch(`http://localhost:8000/accounts/auth/`, {
             method: 'GET',
             mode: 'cors',
             credentials: 'include'
@@ -20,7 +20,7 @@ function App() {
             .then(data => {
                 setIsAuthenticated(data.authenticated);
             })
-        fetch('http://localhost:8000/accounts/username/', {
+        fetch(`http://localhost:8000/accounts/username/`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
@@ -34,7 +34,7 @@ function App() {
             .finally(() => setIsLoading(false));
     }, []);
     if (isAuthenticated === false) {
-        window.location.replace('http://localhost:8000/accounts/login');
+        window.location.replace(`http://localhost:8000/accounts/login`);
     }
 
     if (isLoading) {

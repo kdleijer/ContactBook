@@ -5,6 +5,14 @@ import Navbar from "./Navbar";
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
+
+function DownloadButton({ onClickHandler, text, style }) {
+  return (
+    <button className={["downloads", "btn", "btn-outline-dark"].join(" ")} onClick={onClickHandler} style={style}>
+      {text}
+    </button>
+  );
+}
 function Settings() {
     const [data, setData] = useState();
     const user = localStorage.getItem('user');
@@ -43,19 +51,9 @@ function Settings() {
                 personal_phone:   contact.personal_phone,
                 address:          contact.address,
                 birthday:         contact.birthday,
-            };
-        });
-
-        doc.autoTable({
-            startY: 50,
-            columns,
-            body: rows,
-            margin: { top: 40 },
-        });
-        doc.setFontSize(50);
-        doc.text('Contact List', 55, 25);
-
-        doc.save('contacts.pdf');
+            };});
+        doc.autoTable({ startY: 50, columns, body: rows, margin: { top: 40 } });
+        doc.setFontSize(50).text('Contact List', 55, 25).save('contacts.pdf');
     }
 /* DOWNLOAD DATA */
     return (
@@ -75,12 +73,8 @@ function Settings() {
             <p style={{ fontSize: 30, position: "absolute", top: 160, left: 25 }}>
                 Download all contacts to:
             </p>
-            <button className={ ["downloads", "btn", "btn-outline-dark"].join(" ") } onClick={ downloadAsJSON } style={{ width: 120, left: 545, top: 170 }}>
-                Download JSON
-            </button>
-            <button className={ ["downloads", "btn", "btn-outline-dark"].join(" ") } onClick={ downloadAsPDF }  style={{ width: 120, left: 405, top: 170 }}>
-                Download PDF
-            </button>
+            <DownloadButton onClickHandler={ downloadAsJSON } text="Download JSON" style={{ width: 120, left: 545, top: 170 }}/>
+            <DownloadButton onClickHandler={ downloadAsPDF  } text="Download PDF"  style={{ width: 120, left: 405, top: 170 }}/>
         </>
     );
 }

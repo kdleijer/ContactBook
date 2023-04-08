@@ -40,7 +40,7 @@ function NavbarBrand({ selected, onClick }) {
 function NavbarItems({ selected, onClick }) {
     const username = localStorage.getItem('user');
     const handleLogout = () => {
-        window.location.href = 'http://localhost:8000/accounts/logout';
+        window.location.href = `http://localhost:8000/accounts/logout`;
     };
 
     return (

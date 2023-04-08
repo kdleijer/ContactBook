@@ -44,7 +44,7 @@ class List extends React.Component{
 /* INITIAL FETCH DATA */
     fetchData() {
         const user = localStorage.getItem('user');
-        fetch(`http://127.0.0.1:8000/contact/?user=${ user }`)
+        fetch(`http://127.0.0.1:8000/contact/?user=${user}`)
             .then(response => response.json())
             .then(data => {
                 this.setState({
@@ -72,7 +72,7 @@ class List extends React.Component{
 /* DELETE CONTACT */
     deleteData(id){
         if (this.state.selectedForDeletion === id) {
-            fetch('http://127.0.0.1:8000/contact/' + id + '/', {
+            fetch(`http://127.0.0.1:8000/contact/` + id + '/', {
                 method: 'DELETE',
                 body: JSON.stringify(this.state),
             })
@@ -119,7 +119,7 @@ class List extends React.Component{
     }
 
     updateContact(id, updatedContact) {
-        fetch('http://127.0.0.1:8000/contact/' + id + '/', {
+        fetch(`http://127.0.0.1:8000/contact/` + id + '/', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -160,7 +160,7 @@ class List extends React.Component{
         }, () => {
             let data = { ...this.state };
 
-            fetch('http://127.0.0.1:8000/contact/', {
+            fetch(`http://127.0.0.1:8000/contact/`, {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
@@ -380,7 +380,7 @@ class List extends React.Component{
                     </td>
                 ));
                 return (
-                    <tr key={ v4() }> { inputFieldsElements } { this.renderButtons(contact) } </tr>
+                    <tr key={v4()}>{ inputFieldsElements }{ this.renderButtons(contact) }</tr>
                 );
             });
 
