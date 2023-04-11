@@ -35,10 +35,50 @@ div::-webkit-scrollbar {
 }
 .downloads {
     position: absolute;
-    top: 70px;
-    right: 12px;
+    width: 120px;
+    top: 170px;
 }
-
+.downloads-header {
+    font-size: 60px;
+    position: absolute;
+    top: 75px;
+    left: 25px;
+}
+.download-to-p {
+    font-size: 30px;
+    position: absolute;
+    top: 160px;
+    left: 25px;
+}
+.license {
+    font-size: 12px;
+}
+.license-button {
+    left: 1760px;
+}
+.settings-button {
+    left: 1840px;
+}
+.about-button {
+    position: absolute;
+    top: 915px;
+    left: 1840px;
+}
+.license-button, .settings-button {
+    position: absolute;
+    top: 915px;
+}
+.tech-stack-header {
+    position: relative;
+    top: -700px;
+    left: 30px;
+    font-size: 50px;
+}
+.tech-stack-logo {
+    position: relative;
+    top: -705px;
+    left: 20px;
+}
 /* TABLE */
 .table-bordered {
     width: 98%;
@@ -74,6 +114,9 @@ h1 {
     font-size: 150px;
 }
 .line1 {
+    opacity: 1;
+    position: absolute;
+    top: 200px;
     height: 1px;
     width: 48.5%;
     background: black;

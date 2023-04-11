@@ -7,7 +7,7 @@ import About from './components/About';
 import Settings from './components/Settings';
 import { Routes, Route } from 'react-router-dom';
 
-function App() {
+function Authentication() {
     const [isAuthenticated, setIsAuthenticated] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
@@ -17,9 +17,7 @@ function App() {
             credentials: 'include'
         })
             .then(response => response.json())
-            .then(data => {
-                setIsAuthenticated(data.authenticated);
-            })
+            .then(data => { setIsAuthenticated(data.authenticated); })
         fetch(`http://localhost:8000/accounts/username/`, {
             headers: {
                 'Content-Type': 'application/json',
@@ -28,28 +26,30 @@ function App() {
             credentials: 'include',
         })
             .then((response) => response.json())
-            .then((data) => {
-                localStorage.setItem('user', data.username);
-            })
+            .then((data) => { localStorage.setItem('user', data.username); })
             .finally(() => setIsLoading(false));
     }, []);
+    return { isAuthenticated, isLoading };
+}
+
+function App() {
+    const { isAuthenticated, isLoading } = Authentication();
+
     if (isAuthenticated === false) {
         window.location.replace(`http://localhost:8000/accounts/login`);
     }
 
     if (isLoading) {
-        return <h2 className="bounce_header" style={{ marginLeft: 40 + '%' }}>
-            Loading...
-        </h2>;
+        return <h2 className="bounce_header" style={{ marginLeft: 38 + '%' }}>Loading...</h2>;
     }
 
     return isAuthenticated && (
         <div className="container-fluid">
             <Routes>
-                <Route path="*"           element={ <List/>     }/>
-                <Route path="/list"       element={ <List/>     }/>
-                <Route path="/about"      element={ <About/>    }/>
-                <Route path="/settings"   element={ <Settings/> }/>
+                <Route path="*"           element={ <List/>     } />
+                <Route path="/list"       element={ <List/>     } />
+                <Route path="/about"      element={ <About/>    } />
+                <Route path="/settings"   element={ <Settings/> } />
             </Routes>
         </div>
     );

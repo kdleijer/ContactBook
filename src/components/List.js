@@ -27,6 +27,7 @@ class List extends React.Component{
             selectedForEdit: null,
             disableDeleteButtons: false,
         };
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
 
@@ -159,7 +160,6 @@ class List extends React.Component{
             birthday: ''
         }, () => {
             let data = { ...this.state };
-
             fetch(`http://127.0.0.1:8000/contact/`, {
                 method: 'POST',
                 body: JSON.stringify(data),
@@ -169,7 +169,6 @@ class List extends React.Component{
             })
                 .then(response => response.json())
                 .then((data) => {
-                    console.log(this.state.user)
                     this.fetchData();
                     localStorage.setItem('contact_group', this.state.contact_group);
                     this.setState({ selectedForEdit: data.id, selectedForDeletion: null });
@@ -220,7 +219,7 @@ class List extends React.Component{
 
 /* RENDER BUTTONS */
     renderButtons(contact) {
-        const buttonStyles = { padding: 2, marginLeft: 2, }
+        const buttonStyles = { padding: 2, marginLeft: 2 }
         const editButton = (
             <button className="btn btn-outline-info" onClick={ () => this.editData(contact.id) }>
                 { this.state.selectedForEdit === contact.id ? "Save" : "Edit" }
@@ -232,26 +231,27 @@ class List extends React.Component{
             </button>
         );
         const deleteButton = (
-            <button className="btn btn-outline-danger" style={{ opacity: this.state.disableDeleteButtons ? 0.2 : 1, marginLeft: 0 }}
-                disabled={ !!this.state.disableDeleteButtons } onClick={ () => this.deleteData(contact.id) }>
+            <button className="btn btn-outline-danger" style={{ opacity: this.state.disableDeleteButtons ? 0.2 : 1, marginLeft: 0 }} disabled={ !!this.state.disableDeleteButtons } onClick={ () => this.deleteData(contact.id) }>
                 { this.state.selectedForDeletion === contact.id ? "Sure?" : "Delete" }
             </button>
         );
         let buttonGroup;
-        if ( this.state.selectedForEdit === contact.id ) {
-            buttonGroup = <div style={ buttonStyles }>   { editButton }   { cancelButton }   </div>;
-        }
-        else if (this.state.selectedForDeletion === contact.id) {
-            buttonGroup = <div style={ buttonStyles }>   { cancelButton } { deleteButton }   </div>;
-        }
-        else {
-            buttonGroup = <div style={ buttonStyles }>   { editButton }   { deleteButton }   </div>;
-        }
+        if ( this.state.selectedForEdit === contact.id )            { buttonGroup = <div style={ buttonStyles }>   { editButton }   { cancelButton }   </div>; }
+        else if (this.state.selectedForDeletion === contact.id)     { buttonGroup = <div style={ buttonStyles }>   { cancelButton } { deleteButton }   </div>; }
+        else                                                        { buttonGroup = <div style={ buttonStyles }>   { editButton }   { deleteButton }   </div>; }
         return <td style={ buttonStyles }>{ buttonGroup }</td>;
     }
 /* RENDER BUTTONS */
 
-
+    renderMessage() {
+        return (
+            <div className={ "messages" }>
+                <h2 className="bounce_header" style={{ marginLeft: "auto" }}> No&nbsp; </h2>
+                <div style={{ marginTop: '11.3%' }}> { this.displayContactsMessage() } </div>
+                <h2 className="bounce_header" style={{ marginRight: "auto" }}> matching the { this.state.searchOption } </h2>
+            </div>
+        )
+    }
 
 /* RENDER MENU */
     renderSearch(){
@@ -284,33 +284,21 @@ class List extends React.Component{
             const number = parseInt(newGroupName.slice(-1), 10);
             newGroupName = newGroupName.slice(0, -1) + (number + 1);
         }
-        if (this.state.data.length === 0) {
-            return (
-                <Navbar/>
-            );
-        }
         if (this.matchedContacts.length === 0) {
+            if (this.state.data.length === 0) { return <Navbar/> }
             return (
                 <div>
                     <Navbar/>
-                    { this.renderSearch()   }
-                    { this.renderDropdown() }
-                    <div className={ "messages" }>
-                        <h2 className="bounce_header" style={{ marginLeft: "auto" }}> No&nbsp; </h2>
-                        <div style={{ marginTop: '11.3%' }}> { this.displayContactsMessage() } </div>
-                        <h2 className="bounce_header" style={{ marginRight: "auto" }}> matching the { this.state.searchOption } </h2>
-                    </div>
+                    { this.renderSearch() } { this.renderDropdown() } { this.renderMessage() }
                 </div>
             );
         }
         return (
             <div>
                 <Navbar/>
-                { this.renderSearch()   }
-                { this.renderDropdown() }
-                <button onClick={ () => { this.addContact(); this.setState({ contact_group: newGroupName });} } className="btn btn-outline-success"
-                        style={{ position: "absolute", left: 205, top: 150, width: 35, height: 35, borderRadius: 5, padding: 0, fontSize: 40 }}>
-                        <div style={{ marginTop: -17.9, marginLeft: -0.5 }}> + </div>
+                { this.renderSearch() } { this.renderDropdown() }
+                <button onClick={ () => { this.addContact(); this.setState({ contact_group: newGroupName });} } className="btn btn-outline-success" style={{ position: "absolute", left: 205, top: 150, width: 35, height: 35, borderRadius: 5, padding: 0, fontSize: 40 }}>
+                    <div style={{ marginTop: -17.9, marginLeft: -0.5 }}> + </div>
                 </button>
             </div>
         );
@@ -343,12 +331,7 @@ class List extends React.Component{
                     { this.renderMenu() }
                     { this.state.showMessage ? (
                         <div className={ "messages" } style={{ marginLeft: '25%' }}>
-                            <h2 className="bounce_header">
-                                There are no&nbsp;
-                            </h2>
-                            <div style={{ marginTop: '10.1%' }}>
-                                { this.displayContactsMessage() }
-                            </div>
+                            <h2 className="bounce_header">There are no&nbsp;</h2><div style={{ marginTop: '10.1%' }}>{ this.displayContactsMessage() }</div>
                         </div>
                     ) : null }
                 </div>
@@ -361,14 +344,14 @@ class List extends React.Component{
             );
             const rows = contactData.map(contact => {
                 const inputFields = [
-                    { id: "contact_id",      defaultValue: contact.contact_id,      width:  44,  maxLength:  4 },
-                    { id: "first_name",      defaultValue: contact.first_name,      width: 128,  maxLength: 15 },
-                    { id: "last_name",       defaultValue: contact.last_name,       width: 155,  maxLength: 25 },
-                    { id: "email",           defaultValue: contact.email,           width: 243,  maxLength: 40 },
-                    { id: "work_phone",      defaultValue: contact.work_phone,      width: 140,  maxLength: 15 },
-                    { id: "personal_phone",  defaultValue: contact.personal_phone,  width: 139,  maxLength: 15 },
-                    { id: "address",         defaultValue: contact.address,         width: 335,  maxLength: 50 },
-                    { id: "birthday",        defaultValue: contact.birthday,        width:  86,  maxLength: 10 }
+                    {  id: "contact_id",      defaultValue: contact.contact_id,      width:  44,  maxLength:  4  },
+                    {  id: "first_name",      defaultValue: contact.first_name,      width: 128,  maxLength: 15  },
+                    {  id: "last_name",       defaultValue: contact.last_name,       width: 155,  maxLength: 25  },
+                    {  id: "email",           defaultValue: contact.email,           width: 243,  maxLength: 40  },
+                    {  id: "work_phone",      defaultValue: contact.work_phone,      width: 140,  maxLength: 15  },
+                    {  id: "personal_phone",  defaultValue: contact.personal_phone,  width: 139,  maxLength: 15  },
+                    {  id: "address",         defaultValue: contact.address,         width: 335,  maxLength: 50  },
+                    {  id: "birthday",        defaultValue: contact.birthday,        width:  86,  maxLength: 10  }
                 ];
                 const inputFieldsElements = inputFields.map(field => (
                     <td key={ `${ field.id }-${ contact.id }` } style={{ padding: 7 }}>

@@ -46,20 +46,14 @@ function NavbarItems({ selected, onClick }) {
     return (
         <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
-                <NavItem path="/list" selected={ selected } onClick={ onClick }>
-                    My lists
-                </NavItem>
-                <NavItem path="/settings" selected={ selected } onClick={ onClick }>
-                    Settings
-                </NavItem>
+                <NavItem path="/list" selected={ selected } onClick={ onClick }>My lists</NavItem>
+                <NavItem path="/settings" selected={ selected } onClick={ onClick }>Settings</NavItem>
             </ul>
             <ul className="navbar-nav ml-auto" >
                 <p style={{ color: 'white', marginTop: 8, marginBottom: 0, marginRight: 5 }}>
                     Welcome, { username }!
                 </p>
-                <NavItem selected={ selected } onClick={ handleLogout }>
-                    Logout
-                </NavItem>
+                <NavItem selected={ selected } onClick={ handleLogout }>Logout</NavItem>
             </ul>
         </div>
     );
