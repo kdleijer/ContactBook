@@ -30,23 +30,83 @@ div::-webkit-scrollbar {
     min-width: 1920px;
     margin-bottom: 80px;
 }
+
+/* ABSOLUTE POSITION */
+.downloads, .downloads-header, .download-to-p, .about-button, .license-button, .settings-button, .search-bar, .new-group-button,
+.dropdown, .line1, .linev
+{
+    position: absolute;
+}
+/* ABSOLUTE POSITION */
+
+
+/* RELATIVE POSITION */
+.table-group-header, .edit-group-form, .about-header, .about-header1, .about-content3, .about-content4, .form-check-input,
+.tech-stack-header, .tech-stack-logo, .line2, .line3
+{
+    position: relative;
+}
+/* RELATIVE POSITION */
+
+
 .active{
     color: lightgray !important;
 }
+.table-bordered {
+    width: 100%;
+    min-width: 1470px;
+    max-width: 1460px;
+    margin-left: 33px;
+}
+.table-group-header {
+    top: 0;
+    left: 80px;
+    font-size: 35px;
+    max-width: 700px;
+}
+.contact-group-block {
+    border: 2px solid #dce2e3;
+    border-radius: 5px;
+    min-width: 1540px;
+    max-width: 1540px;
+    right: 0;
+    min-height: 155px;
+    padding-top: 20px;
+    padding-right: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+.contactGroup {
+    max-height: 350px;
+    overflow: scroll;
+    margin-bottom: 50px;
+}
+.edit-group-form {
+    top: -6px;
+    left: 78px;
+    font-size: 35px;
+    margin-bottom: -4.5px;
+    max-width: 700px;
+}
+.edit-group-input {
+    font-weight: 500;
+    outline: none;
+    border-width: 0;
+}
+
 .downloads {
-    position: absolute;
     width: 120px;
     top: 170px;
 }
 .downloads-header {
     font-size: 60px;
-    position: absolute;
     top: 75px;
     left: 25px;
 }
 .download-to-p {
     font-size: 30px;
-    position: absolute;
     top: 160px;
     left: 25px;
 }
@@ -60,22 +120,60 @@ div::-webkit-scrollbar {
     left: 1840px;
 }
 .about-button {
-    position: absolute;
     top: 915px;
     left: 1840px;
 }
+.about-header {
+    top: -680px;
+    margin-left: 58%;
+}
+.about-header1 {
+    top: -650px;
+    margin-left: 58%;
+}
+.about-content1 {
+    max-width: 45%;
+    margin-left: 20px;
+    margin-top: 10px;
+    font-size: 20px;
+}
+.about-content2 {
+    max-width: 46%;
+    margin-left: 20px;
+    margin-top: 10px;
+    font-size: 20px;
+}
+.about-content3 {
+    top: -680px;
+    right: 10px;
+    max-width: 45%;
+    margin-left: auto;
+    margin-right: 20px;
+    margin-top: 10px;
+    font-size: 20px;
+}
+.about-content4 {
+    top: -650px;
+    right: -14px;
+    max-width: 45%;
+    margin-left: auto;
+    margin-right: 20px;
+    margin-top: 10px;
+    font-size: 20px;
+}
+.form-check-input {
+    top: -0.5px;
+    margin-right: 3px;
+}
 .license-button, .settings-button {
-    position: absolute;
     top: 915px;
 }
 .tech-stack-header {
-    position: relative;
     top: -700px;
     left: 30px;
     font-size: 50px;
 }
 .tech-stack-logo {
-    position: relative;
     top: -705px;
     left: 20px;
 }
@@ -104,10 +202,40 @@ th {
     width: 60px;
     height: 30px;
 }
-/* TABLE */
-
-
-/* HOME */
+.search-bar {
+    top: 10px;
+    left: 680px;
+    border-radius: 8px;
+    border-width: 0;
+    height: 35px;
+    width: 600px;
+    outline: none;
+    padding-left: 10px;
+    margin: auto;
+    display: flex;
+}
+.dropdown {
+    top: 14px;
+    left: 1295px;
+}
+.dropdown-toggle {
+    width: 20px;
+    height: 20px;
+    padding-top: 0;
+}
+.new-group-button {
+    left: 205px;
+    top: 150px;
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    padding: 0;
+    font-size: 40px;
+}
+.new-group-button-text {
+    margin-top: -17.9px;
+    margin-left: -0.5px;
+}
 h1 {
     font-weight: bold;
     margin: 50px 0 0 25%;
@@ -115,16 +243,32 @@ h1 {
 }
 .line1 {
     opacity: 1;
-    position: absolute;
     top: 200px;
-    height: 1px;
     width: 48.5%;
-    background: black;
     margin-left: 14px;
     margin-right: auto;
 }
+.line2 {
+    top: -680px;
+    left: 975px;
+}
+.line3 {
+    top: -650px;
+    left: 975px;
+}
 .line1, .line2, .line3 {
     width: 48.5%;
+    height: 1px;
+    background: black;
+}
+.linev {
+    width: 1px;
+    height: 880px;
+    background: black;
+    margin-left: auto;
+    margin-right: auto;
+    left: 960px;
+    top: 70px;
 }
 .bounce_header {
     margin-top: 15%;
@@ -145,7 +289,12 @@ h6 {
 .messages {
     display: flex;
 }
-
+.hello-user {
+    color: white;
+    margin-top: 8px;
+    margin-bottom: 0;
+    margin-right: 5px;
+}
 /* HOME */
 
 

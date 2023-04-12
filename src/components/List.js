@@ -163,9 +163,7 @@ class List extends React.Component{
             fetch(`http://127.0.0.1:8000/contact/`, {
                 method: 'POST',
                 body: JSON.stringify(data),
-                headers: {
-                    'Content-type': 'application/json; charset=UTF-8',
-                },
+                headers: { 'Content-type': 'application/json; charset=UTF-8' },
             })
                 .then(response => response.json())
                 .then((data) => {
@@ -256,14 +254,13 @@ class List extends React.Component{
 /* RENDER MENU */
     renderSearch(){
         return (
-            <input type="search" value={ this.state.searchQuery } placeholder={ `Search by ${ this.state.searchOption }` } onChange={ e => this.setState({ searchQuery: e.target.value }) }
-                   style={{ position: "absolute", top: 10, left: 680, borderRadius: 8, borderWidth: 0, height: 35, width: 600, outline: 'none', paddingLeft: 10, margin: "auto", display: "flex" }}/>
+            <input type="search" className="search-bar" value={ this.state.searchQuery } placeholder={ `Search by ${ this.state.searchOption }` } onChange={ e => this.setState({ searchQuery: e.target.value }) } />
         )
     }
     renderDropdown() {
         return (
-            <Dropdown style={{ position: "absolute", top: 14, left: 1295 }}>
-                <Dropdown.Toggle variant="outline-info" id="dropdown-basic" style={{ width: 20, height: 20, paddingTop: 0 }}/>
+            <Dropdown className="dropdown">
+                <Dropdown.Toggle variant="outline-info" id="dropdown-basic"/>
                 <Dropdown.Menu>
                     <Dropdown.Item onClick={ () => this.setState({ searchOption: 'first_name'     }) }>       First name         </Dropdown.Item>
                     <Dropdown.Item onClick={ () => this.setState({ searchOption: 'last_name'      }) }>       Last name          </Dropdown.Item>
@@ -297,8 +294,8 @@ class List extends React.Component{
             <div>
                 <Navbar/>
                 { this.renderSearch() } { this.renderDropdown() }
-                <button onClick={ () => { this.addContact(); this.setState({ contact_group: newGroupName });} } className="btn btn-outline-success" style={{ position: "absolute", left: 205, top: 150, width: 35, height: 35, borderRadius: 5, padding: 0, fontSize: 40 }}>
-                    <div style={{ marginTop: -17.9, marginLeft: -0.5 }}> + </div>
+                <button onClick={ () => { this.addContact(); this.setState({ contact_group: newGroupName });} } className="btn btn-outline-success new-group-button">
+                    <div className="new-group-button-text"> + </div>
                 </button>
             </div>
         );
@@ -369,21 +366,19 @@ class List extends React.Component{
 
             return (
                 <div key={ v4() }>
-                    <div style={{ border:"solid", borderWidth: 2, borderColor:"#dce2e3", borderRadius: 5, minWidth: 1540, maxWidth: 1540,  right: 0,
-                        minHeight: 155, paddingTop: 20, paddingRight: 20, marginLeft: "auto", marginRight: "auto", marginBottom: 30, boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.4)" }}>
+                    <div className="contact-group-block">
                         { this.state.editingGroup === group ? (
-                            <form style={{ position: "relative", top: -6, left: 78, fontSize: 35, marginBottom: -4.5, maxWidth: 700 }} onSubmit={ this.handleSubmit }>
-                                <input type="text" value={ this.state.contact_group } onChange={ this.handleChange }
-                                    style={{ fontWeight: 500, outline: "none", borderWidth: 0 }} autoFocus onBlur={ () => this.setState({ editingGroup: null }) }/>
+                            <form className="edit-group-form" onSubmit={ this.handleSubmit }>
+                                <input type="text" className="edit-group-input" value={ this.state.contact_group } onChange={ this.handleChange } autoFocus onBlur={ () => this.setState({ editingGroup: null }) }/>
                             </form>
                         ) : (
-                            <h3 style={{ position: "relative", top: 0, left: 80, fontSize: 35, maxWidth: 700 }} onClick={ () => { this.handleEdit(); this.setState({ contact_group: group, editingGroup: group, oldGroup: group }); } }>
+                            <h3 className="table-group-header" onClick={ () => { this.handleEdit(); this.setState({ contact_group: group, editingGroup: group, oldGroup: group }); } }>
                                 { group }
                             </h3>
                         ) }
 
-                        <div style={{ maxHeight: 350, overflow: "scroll", marginBottom: 50 }} className="contactGroup">
-                            <table className="table table-bordered" style={{ width: "100%", minWidth: 1470, maxWidth: 1460, marginLeft: 33 }}>
+                        <div className="contactGroup">
+                            <table className="table table-bordered">
                                 <thead>
                                 <tr>
                                     <th style={{ width:  48, padding: 6, fontSize: 17 }}>     ID                 </th>

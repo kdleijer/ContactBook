@@ -5,7 +5,7 @@ import { Modal } from 'react-bootstrap';
 
 export function Button (props) {
     return (
-        <button onClick={props.onClick} className={`btn btn-outline-dark ${props.className}`} style={{width: 65}}>
+        <button onClick={props.onClick} className={`btn btn-outline-dark ${props.className}`} style={{ width: 65 }}>
             {props.text}
         </button>
     )
@@ -74,11 +74,11 @@ function check() {
 function renderCheck() {
     return (
         <>
-            <h3 className='about-header' style={{ position: 'relative', top: -680, marginLeft: '58%' }}>
+            <h3 className='about-header'>
                 Solved problems
             </h3>
-            <div className='line2' style={{ position: 'relative', top: -680, left: 975, height: 1, background: 'black' }}/>
-            <div className='about-content3' style={{ position: 'relative', top: -680, right: 10, maxWidth: '45%', marginLeft: 'auto', marginRight: 20, marginTop: 10, fontSize: 20 }}>
+            <div className='line2'/>
+            <div className='about-content3'>
                 {check()} Full functionality of restrict routes in App.js with authentication from django API endpoint! <br/>
                 {check()} Implemented user login/registration from my own template project: <Link to="https://github.com/SzymCode/RegistrationDjango"> RegistrationDjango</Link>! <br/>
                 {check()} User specific data and contact groups! <br/>
@@ -99,18 +99,18 @@ function renderCheck() {
 
 function uncheck() {
     return (
-        <input className='form-check-input' type='checkbox' disabled style={{ position: 'relative', top: -0.5, marginRight: 3 }}/>
+        <input className='form-check-input' type='checkbox'/>
     )
 }
 
 function renderUncheck() {
     return (
         <>
-            <h3 className='about-header1' style={{ position: 'relative', top: -650, marginLeft: '58%' }}>
+            <h3 className='about-header1'>
                 TODO
             </h3>
-            <div className='line3'        style={{ position: 'relative', top: -650, left: 975, height: 1, background: 'black' }}/>
-            <div className='about-content4' style={{ position: 'relative', top: -650, right: -14, maxWidth: '45%', marginLeft: 'auto', marginRight: 20, marginTop: 10, fontSize: 20 }}>
+            <div className='line3'/>
+            <div className='about-content4'>
                 {uncheck()} Dragging, resizing, deleting columns and create custom ones <br/>
                 {uncheck()} Static position of tables <br/>
                 {uncheck()} Display contacts by selected order <br/>
@@ -131,14 +131,14 @@ function AboutContent() {
                 ContactBook
             </h2>
             <div className='line1'/>
-            <p className='about-content1' style={{ maxWidth: '45%', marginLeft: 20, marginTop: 10, fontSize: 20 }}>
+            <p className='about-content1'>
                 This website helps to storage contacts data and share it with others (in future). For now is under construction, so it is full of bugs and missing many functionalities. The project was created for educational purposes and to demonstrate my coding skills to my future recruiters.
                 <br/><b>I highly encourage you to contributions!</b>
             </p>
-            <p className='about-content2' style={{ maxWidth: '46%', marginLeft: 20, marginTop: 10, fontSize: 20 }}>
+            <p className='about-content2'>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
             </p>
-            <div className='linev' style={{ width: 1, height: 880, background: 'black', marginLeft: 'auto', marginRight: 'auto', position: 'absolute', left: 960, top: 70 }}/>
+            <div className='linev'/>
             { renderCheck() } { renderUncheck() }
         </div>
     )

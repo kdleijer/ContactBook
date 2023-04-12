@@ -50,7 +50,7 @@ function NavbarItems({ selected, onClick }) {
                 <NavItem path="/settings" selected={ selected } onClick={ onClick }>Settings</NavItem>
             </ul>
             <ul className="navbar-nav ml-auto" >
-                <p style={{ color: 'white', marginTop: 8, marginBottom: 0, marginRight: 5 }}>
+                <p className="hello-user">
                     Welcome, { username }!
                 </p>
                 <NavItem selected={ selected } onClick={ handleLogout }>Logout</NavItem>
