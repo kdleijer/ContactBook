@@ -1,12 +1,13 @@
 from django.urls import path
-from accounts import views
-from .views import check_authentication, get_username, create_admin
+
+from accounts.views import (check_authentication, create_admin, get_username,
+                            home, login_page, logout_user, register_page)
 
 urlpatterns = [
-    path('register/', views.register_page, name="register"),
-    path('login/', views.login_page, name="login"),
-    path('logout/', views.logout_user, name="logout"),
-    path('', views.home, name="home"),
+    path('register/', register_page, name="register"),
+    path('login/', login_page, name="login"),
+    path('logout/', logout_user, name="logout"),
+    path('', home, name="home"),
     path('auth/', check_authentication, name='check_authentication'),
     path('username/', get_username, name='username'),
     path('create_admin/', create_admin, name='create_admin'),
