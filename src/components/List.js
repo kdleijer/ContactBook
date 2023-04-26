@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from "./Navbar";
-import { Dropdown} from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import { v4 } from 'uuid';
 
 class List extends React.Component{
@@ -74,7 +74,7 @@ class List extends React.Component{
 /* DELETE CONTACT */
     deleteData(id){
         if (this.state.selectedForDeletion === id) {
-            fetch(`http://127.0.0.1:8000/contact/` + id + '/', {
+            fetch(`${process.env.REACT_APP_BASE_PATH}/contact/` + id + '/', {
                 method: 'DELETE',
                 body: JSON.stringify(this.state),
             })
@@ -121,7 +121,7 @@ class List extends React.Component{
     }
 
     updateContact(id, updatedContact) {
-        fetch(`http://127.0.0.1:8000/contact/` + id + '/', {
+        fetch(`${process.env.REACT_APP_BASE_PATH}/contact/` + id + '/', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -153,7 +153,7 @@ class List extends React.Component{
             birthday: ''
         }, () => {
             let data = { ...this.state };
-            fetch(`http://127.0.0.1:8000/contact/`, {
+            fetch(`${process.env.REACT_APP_BASE_PATH}/contact/`, {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: { 'Content-type': 'application/json; charset=UTF-8' },
@@ -186,7 +186,7 @@ class List extends React.Component{
                 let updatedContact = {
                     contact_group: this.state.contact_group,
                 };
-                fetch(`http://127.0.0.1:8000/contact/${contact.id}/`, {
+                fetch(`${process.env.REACT_APP_BASE_PATH}/contact/${contact.id}/`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'

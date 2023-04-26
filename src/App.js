@@ -11,14 +11,14 @@ function Authentication() {
     const [isAuthenticated, setIsAuthenticated] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        fetch(`http://localhost:8000/accounts/auth/`, {
+        fetch(`${process.env.REACT_APP_BASE_PATH}/accounts/auth/`, {
             method: 'GET',
             mode: 'cors',
             credentials: 'include'
         })
             .then(response => response.json())
             .then(data => { setIsAuthenticated(data.authenticated); })
-        fetch(`http://localhost:8000/accounts/username/`, {
+        fetch(`${process.env.REACT_APP_BASE_PATH}/accounts/username/`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
@@ -36,7 +36,7 @@ function App() {
     const { isAuthenticated, isLoading } = Authentication();
 
     if (isAuthenticated === false) {
-        window.location.replace(`http://localhost:8000/accounts/login`);
+        window.location.replace(`${process.env.REACT_APP_BASE_PATH}/accounts/login`);
     }
 
     if (isLoading) {
