@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from "./Navbar";
-import Dropdown from 'react-bootstrap/Dropdown';
+import { Dropdown} from 'react-bootstrap';
 import { v4 } from 'uuid';
 
 class List extends React.Component{
@@ -26,6 +26,7 @@ class List extends React.Component{
             selectedForDeletion: null,
             selectedForEdit: null,
             disableDeleteButtons: false,
+            show: true,
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -138,14 +139,6 @@ class List extends React.Component{
 /* EDIT CONTACT */
 
 
-/* CANCEL EDIT/DELETE */
-    cancel = () => {
-        this.setState({ selectedForEdit: null });
-        this.setState({ selectedForDeletion: null });
-    };
-/* CANCEL EDIT/DELETE */
-
-
 /* ADD CONTACT */
     addContact() {
         this.setState({
@@ -214,33 +207,22 @@ class List extends React.Component{
 /* EDIT GROUP NAME */
 
 
-
-/* RENDER BUTTONS */
-    renderButtons(contact) {
-        const buttonStyles = { padding: 2, marginLeft: 2 }
-        const editButton = (
-            <button className="btn btn-outline-info" onClick={ () => this.editData(contact.id) }>
-                { this.state.selectedForEdit === contact.id ? "Save" : "Edit" }
-            </button>
+    renderContactOptionsButton(contact) {
+        return (
+            <td>
+                <Dropdown className="contact-dropdown">
+                    <Dropdown.Toggle variant="outline-dark"/>
+                    <Dropdown.Menu>
+                        <div style={{ display: 'flex', flexDirection: 'row' }}>
+                            <Dropdown.Item onClick={ () => this.editData(contact.id)  }>{ this.state.selectedForEdit === contact.id ? "Save" : "Edit" }</Dropdown.Item>
+                            <Dropdown.Item>Share</Dropdown.Item>
+                            <Dropdown.Item onClick={ () => {this.setState({ selectedForDeletion: contact.id }, () => {this.deleteData(contact.id);});}} style={{color: "red"}}>Delete</Dropdown.Item>
+                        </div>
+                    </Dropdown.Menu>
+                </Dropdown>
+            </td>
         );
-        const cancelButton = (
-            <button className="btn btn-outline-dark" onClick={ () => this.cancel(contact.id) } style={{ marginLeft: 0 }}>
-                Cancel
-            </button>
-        );
-        const deleteButton = (
-            <button className="btn btn-outline-danger" style={{ opacity: this.state.disableDeleteButtons ? 0.2 : 1, marginLeft: 0 }} disabled={ !!this.state.disableDeleteButtons } onClick={ () => this.deleteData(contact.id) }>
-                { this.state.selectedForDeletion === contact.id ? "Sure?" : "Delete" }
-            </button>
-        );
-        let buttonGroup;
-        if ( this.state.selectedForEdit === contact.id )            { buttonGroup = <div style={ buttonStyles }>   { editButton }   { cancelButton }   </div>; }
-        else if (this.state.selectedForDeletion === contact.id)     { buttonGroup = <div style={ buttonStyles }>   { cancelButton } { deleteButton }   </div>; }
-        else                                                        { buttonGroup = <div style={ buttonStyles }>   { editButton }   { deleteButton }   </div>; }
-        return <td style={ buttonStyles }>{ buttonGroup }</td>;
     }
-/* RENDER BUTTONS */
-
     renderMessage() {
         return (
             <div className={ "messages" }>
@@ -259,7 +241,7 @@ class List extends React.Component{
     }
     renderDropdown() {
         return (
-            <Dropdown className="dropdown">
+            <Dropdown className="main-dropdown">
                 <Dropdown.Toggle variant="outline-info" id="dropdown-basic"/>
                 <Dropdown.Menu>
                     <Dropdown.Item onClick={ () => this.setState({ searchOption: 'first_name'     }) }>       First name         </Dropdown.Item>
@@ -341,26 +323,26 @@ class List extends React.Component{
             );
             const rows = contactData.map(contact => {
                 const inputFields = [
-                    {  id: "contact_id",      defaultValue: contact.contact_id,      width:  44,  maxLength:  4  },
-                    {  id: "first_name",      defaultValue: contact.first_name,      width: 128,  maxLength: 15  },
-                    {  id: "last_name",       defaultValue: contact.last_name,       width: 155,  maxLength: 25  },
-                    {  id: "email",           defaultValue: contact.email,           width: 243,  maxLength: 40  },
-                    {  id: "work_phone",      defaultValue: contact.work_phone,      width: 140,  maxLength: 15  },
-                    {  id: "personal_phone",  defaultValue: contact.personal_phone,  width: 139,  maxLength: 15  },
-                    {  id: "address",         defaultValue: contact.address,         width: 335,  maxLength: 50  },
-                    {  id: "birthday",        defaultValue: contact.birthday,        width:  86,  maxLength: 10  }
+                    {  id: "contact_id",      defaultValue: contact.contact_id,      width: 44.5,  maxLength:  4  },
+                    {  id: "first_name",      defaultValue: contact.first_name,      width:  130,  maxLength: 15  },
+                    {  id: "last_name",       defaultValue: contact.last_name,       width:  159,  maxLength: 25  },
+                    {  id: "email",           defaultValue: contact.email,           width:  270,  maxLength: 40  },
+                    {  id: "work_phone",      defaultValue: contact.work_phone,      width:  143,  maxLength: 15  },
+                    {  id: "personal_phone",  defaultValue: contact.personal_phone,  width:  143,  maxLength: 15  },
+                    {  id: "address",         defaultValue: contact.address,         width:  402,  maxLength: 60  },
+                    {  id: "birthday",        defaultValue: contact.birthday,        width:   88,  maxLength: 10  }
                 ];
                 const inputFieldsElements = inputFields.map(field => (
-                    <td key={ `${ field.id }-${ contact.id }` } style={{ padding: 7 }}>
+                    <td key={ `${ field.id }-${ contact.id }` } style={{ padding: 6, paddingTop: 5, paddingBottom:0  }}>
                         { this.state.selectedForEdit === contact.id ? (
                             <input type="text" id={ `${ field.id }-${ contact.id }` } defaultValue={ field.defaultValue }
-                                   style={{ width: field.width, marginTop: -4, marginLeft: -4, marginBottom: -4,
-                                       ...field.style }} maxLength={ field.maxLength } />
+                                   style={{ width: field.width, marginTop: -3, marginLeft: -4, height: 32,
+                                       ...field.style }} maxLength={ field.maxLength } onChange={this.search}/>
                         ) : ( <div className="contactFields">{ field.defaultValue }</div> ) }
                     </td>
                 ));
                 return (
-                    <tr key={v4()}>{ inputFieldsElements }{ this.renderButtons(contact) }</tr>
+                    <tr key={v4()}>{ inputFieldsElements }{ this.renderContactOptionsButton(contact) }</tr>
                 );
             });
 
@@ -381,24 +363,19 @@ class List extends React.Component{
                             <table className="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th style={{ width:  48, padding: 6, fontSize: 17 }}>     ID                 </th>
-                                    <th style={{ width: 124, padding: 6, fontSize: 17 }}>     First name         </th>
-                                    <th style={{ width: 149, padding: 6, fontSize: 17 }}>     Last name          </th>
-                                    <th style={{ width: 230, padding: 6, fontSize: 17 }}>     Email              </th>
-                                    <th style={{ width: 135, padding: 6, fontSize: 17 }}>     Work phone         </th>
-                                    <th style={{ width: 135, padding: 6, fontSize: 17 }}>     Personal phone     </th>
-                                    <th style={{ width: 313, padding: 6, fontSize: 17 }}>     Address            </th>
-                                    <th style={{ width:  86, padding: 6, fontSize: 17 }}>     Birthday           </th>
-                                    <th style={{ width: 123, padding: 4, fontSize: 17 }}>
+                                    <th style={{ width:  42, padding: 6, fontSize: 17 }}>     ID                 </th>
+                                    <th style={{ width: 112, padding: 6, fontSize: 17 }}>     First name         </th>
+                                    <th style={{ width: 136, padding: 6, fontSize: 17 }}>     Last name          </th>
+                                    <th style={{ width: 227, padding: 6, fontSize: 17 }}>     Email              </th>
+                                    <th style={{ width: 123, padding: 6, fontSize: 17 }}>     Work phone         </th>
+                                    <th style={{ width: 123, padding: 6, fontSize: 17 }}>     Personal phone     </th>
+                                    <th style={{ width: 336, padding: 6, fontSize: 17 }}>     Address            </th>
+                                    <th style={{ width:  77, padding: 6, fontSize: 17 }}>     Birthday           </th>
 
-                                        <button style={{ marginLeft: 0 }} className="btn btn-outline-success" onClick={ () => { this.addContact(); this.setState({ contact_group: group }); } }>
-                                            Add
+                                    <th style={{ width:  33, padding: 4, fontSize: 17, zIndex: 1 }}>
+                                        <button  style={{ marginLeft: 0, width: 30, height: 30 }} className="btn btn-outline-success" onClick={ () => { this.addContact(); this.setState({ contact_group: group }); } }>
+                                            <div style={{ fontSize: 35, marginTop: -20, marginLeft: -2.5 }}> + </div>
                                         </button>
-
-                                        <button style={{ marginLeft: 4 }} className="btn btn-outline-dark"    onClick={ () => { this.setState({ disableDeleteButtons: !this.state.disableDeleteButtons }); } }>
-                                            <s>Delete</s>
-                                        </button>
-
                                     </th>
                                 </tr>
                                 </thead>

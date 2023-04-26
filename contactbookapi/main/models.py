@@ -10,7 +10,7 @@ class Contact(models.Model):
 	email = models.CharField(max_length=40, blank=True)
 	work_phone = models.CharField(max_length=15, blank=True)
 	personal_phone = models.CharField(max_length=15, blank=True)
-	address = models.CharField(max_length=50, blank=True)
+	address = models.CharField(max_length=60, blank=True)
 	birthday = models.CharField(max_length=10, blank=True)
 
 	def __str__(self):

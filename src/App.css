@@ -28,7 +28,7 @@ div::-webkit-scrollbar {
 }
 .navbar {
     min-width: 1920px;
-    margin-bottom: 80px;
+    margin-bottom: 75px;
 }
 
 /* ABSOLUTE POSITION */
@@ -42,7 +42,7 @@ div::-webkit-scrollbar {
 
 /* RELATIVE POSITION */
 .table-group-header, .edit-group-form, .about-header, .about-header1, .about-content3, .about-content4, .form-check-input,
-.tech-stack-header, .tech-stack-logo, .line2, .line3
+.tech-stack-header, .tech-stack-logo, .line2, .line3, .contact-dropdown
 {
     position: relative;
 }
@@ -95,7 +95,6 @@ div::-webkit-scrollbar {
     outline: none;
     border-width: 0;
 }
-
 .downloads {
     width: 120px;
     top: 170px;
@@ -191,7 +190,13 @@ th {
     position: sticky;
     top: 0;
 }
+.contact-dropdown1 {
+    position: absolute;
+    top: 200px;
+    left: 200px;
+}
 .contactFields {
+    margin-top: 2px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -214,9 +219,16 @@ th {
     margin: auto;
     display: flex;
 }
-.dropdown {
+.main-dropdown {
     top: 14px;
     left: 1295px;
+}
+.contact-dropdown {
+    top: -3px;
+    margin: -3px 0 -9px -1px;
+}
+.dropdown-menu {
+    padding: 0;
 }
 .dropdown-toggle {
     width: 20px;
