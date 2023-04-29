@@ -1,6 +1,7 @@
 from rest_framework import viewsets
-from .serializers import ContactSerializer
-from .models import Contact
+
+from main.models import Contact
+from main.serializers import ContactSerializer
 
 
 class ContactViewSet(viewsets.ModelViewSet):

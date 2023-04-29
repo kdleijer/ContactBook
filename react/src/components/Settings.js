@@ -15,19 +15,19 @@ function Button({ className, onClickHandler, text, style }) {
         </button>
     );
 }
-function downloadData (data, type) {
+function DownloadData (data, type) {
     if (type === 'JSON') {
-        downloadAsJSON(data);
+        DownloadAsJSON(data);
     } else if (type === 'PDF') {
-        downloadAsPDF(data);
+        DownloadAsPDF(data);
     }
 }
-function downloadAsJSON (data) {
+function DownloadAsJSON (data) {
     const jsonData = JSON.stringify(data, null, 1);
     const blob = new Blob([jsonData], {type: "application/json"});
     saveAs(blob, "contacts.json");
 }
-function downloadAsPDF(data) {
+function DownloadAsPDF(data) {
     const doc = new jsPDF();
     const columns = [
         {  header: 'Contact group',    dataKey: 'contact_group'   },
@@ -62,7 +62,7 @@ function Settings() {
         window.location.reload()
     }
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/contact/?user=${user}`)
+        fetch(`${process.env.REACT_APP_BASE_PATH}/contact/?user=${user}`)
             .then((response) => response.json())
             .then((data) => {
                 setData(data);
@@ -75,8 +75,8 @@ function Settings() {
             <h2 className="downloads-header">DOWNLOADS</h2>
             <div className='line1'  style={{ top: 150 }}/>
             <p className="download-to-p">Download all contacts to:</p>
-            <Button onClickHandler={ () => downloadData(data, 'JSON') } text="Download JSON" className="downloads" style={{ width: 120, left: 540 }} />
-            <Button onClickHandler={ () => downloadData(data, 'PDF')  } text="Download PDF"  className="downloads" style={{ width: 120, left: 400 }} />
+            <Button onClickHandler={ () => DownloadData(data, 'JSON') } text="Download JSON" className="downloads" style={{ width: 120, left: 540 }} />
+            <Button onClickHandler={ () => DownloadData(data, 'PDF')  } text="Download PDF"  className="downloads" style={{ width: 120, left: 400 }} />
         </>
     );
 }

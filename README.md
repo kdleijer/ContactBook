@@ -41,13 +41,13 @@ This website helps to storage contacts data, share it with others and download c
 
 • Clone this repository or download latest release.
 
-• Install modules from requirements.txt in **contactbookapi** directory.
+• Install modules from requirements.txt in **django** directory.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-• Install modules using npm install in **contactbook** directory.
+• Install modules using npm install in **react** directory.
 
 ```bash
 npm install
@@ -57,7 +57,7 @@ npm install
 
 • Change SECRET_KEY in **contactbookapi** settings or read more about [python-decouple](https://dev.to/ashraf_zolkopli/decoupling-django-secret-key-65d).
 
-• **contactbookapi** directory:
+• **django** directory:
 
 ```bash
 python manage.py migrate
@@ -71,13 +71,13 @@ python manage.py migrate
 
 ## 🚀 Run:
 
-• **contactbookapi** directory:
+• **django** directory:
 
 ```bash
 python manage.py runserver
 ```
 
-• **contactbook** directory:
+• **react** directory:
 
 ```bash
 npm start
